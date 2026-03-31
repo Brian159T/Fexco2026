@@ -1484,6 +1484,10 @@ body::after {
     height: 220px;
   }
   .location-block { grid-template-columns:1fr; }
+  .map-placeholder {
+    min-height: 280px;
+    height: 280px;
+  }
   .karting-inner { grid-template-columns:1fr; }
   .sorteo-grid { grid-template-columns:1fr; gap:1.5rem; }
   .news-section-wrap { padding: 2.5rem 1rem 0; }
@@ -1602,12 +1606,13 @@ body::after {
 
     <div class="location-block">
       <div class="map-placeholder">
-        <div class="map-pin">
-          <span class="map-pin-icon">📍</span>
-          <div class="map-pin-text">STAND B-14<br>QUANTUM EV</div>
-          <div style="font-family:'Share Tech Mono',monospace; font-size:0.6rem; color:var(--text-dim); margin-top:0.5rem;">RECINTO FERIAL COCHABAMBA</div>
-        </div>
-      </div>
+  <img 
+    src="./assets/images/Mapa del Stand de Quantum 2026.svg" 
+    alt="Stand B-14 Quantum EV — Recinto Ferial Cochabamba"
+    style="width:100%; height:100%; object-fit:contain; display:block; position:absolute; inset:0; padding:0; box-sizing:border-box;"
+    onerror="this.style.display='none'"
+  >
+</div>
       <div class="location-info">
         <div class="info-card">
           <div class="info-card-label"><i class="fa-solid fa-location-dot"></i> STAND</div>
@@ -1895,109 +1900,121 @@ body::after {
     <div class="section-label"><i class="fa-solid fa-calendar-check"></i> RESERVAS EXCLUSIVAS</div>
     <div class="section-title">RESERVAS<br><span style="color:var(--green)">2026</span></div>
 
-    <div class="reservas-section">
-      <div class="reservas-carousel-wrap">
-        <div class="reservas-track" id="reservasTrack">
+   <div class="reservas-section">
+  <div class="reservas-carousel-wrap">
+    <div class="reservas-track" id="reservasTrack">
 
-          <!-- SLIDE 1 -->
-          <div class="reservas-slide">
-            <div class="reservas-img-wrap">
-              <div class="reservas-img-placeholder">
-                <span class="r-icon">⚡</span>
-                <span class="r-img-label">IMAGEN · RESERVA 01</span>
-              </div>
-            </div>
-            <div class="reservas-content">
-              <div class="reservas-slide-tag"><i class="fa-solid fa-bolt"></i> PAQUETE PREMIUM</div>
-              <div class="reservas-slide-title">Test Drive<br><span>EV Exclusivo</span></div>
-              <div class="reservas-slide-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</div>
-              <div class="reservas-slide-meta">
-                <span class="reservas-meta-pill green"><i class="fa-solid fa-calendar"></i> MAYO 2026</span>
-                <span class="reservas-meta-pill yellow"><i class="fa-solid fa-tag"></i> PRECIO ESPECIAL</span>
-              </div>
-              <button class="reservas-slide-cta" onclick="switchTab('karting')"><i class="fa-solid fa-ticket"></i> RESERVAR AHORA</button>
-            </div>
-          </div>
-
-          <!-- SLIDE 2 -->
-          <div class="reservas-slide">
-            <div class="reservas-img-wrap">
-              <div class="reservas-img-placeholder">
-                <span class="r-icon">🏁</span>
-                <span class="r-img-label">IMAGEN · RESERVA 02</span>
-              </div>
-            </div>
-            <div class="reservas-content">
-              <div class="reservas-slide-tag"><i class="fa-solid fa-flag-checkered"></i> KARTING EV</div>
-              <div class="reservas-slide-title">Sesión de<br><span>Karting Eléctrico</span></div>
-              <div class="reservas-slide-text">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</div>
-              <div class="reservas-slide-meta">
-                <span class="reservas-meta-pill green"><i class="fa-solid fa-users"></i> GRUPOS 4+</span>
-                <span class="reservas-meta-pill yellow"><i class="fa-solid fa-clock"></i> 8 MIN / SESIÓN</span>
-              </div>
-              <button class="reservas-slide-cta" onclick="switchTab('karting')"><i class="fa-solid fa-ticket"></i> RESERVAR AHORA</button>
-            </div>
-          </div>
-
-          <!-- SLIDE 3 -->
-          <div class="reservas-slide">
-            <div class="reservas-img-wrap">
-              <div class="reservas-img-placeholder">
-                <span class="r-icon">🔋</span>
-                <span class="r-img-label">IMAGEN · RESERVA 03</span>
-              </div>
-            </div>
-            <div class="reservas-content">
-              <div class="reservas-slide-tag"><i class="fa-solid fa-charging-station"></i> DIAGNÓSTICO</div>
-              <div class="reservas-slide-title">Diagnóstico<br><span>Batería EV</span></div>
-              <div class="reservas-slide-text">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus nulla vestibulum lorem.</div>
-              <div class="reservas-slide-meta">
-                <span class="reservas-meta-pill green"><i class="fa-solid fa-shield-check"></i> GARANTIZADO</span>
-                <span class="reservas-meta-pill yellow"><i class="fa-solid fa-percent"></i> -28% FERIA</span>
-              </div>
-              <button class="reservas-slide-cta" onclick="openQRModal()"><i class="fa-solid fa-qrcode"></i> VER PRECIO</button>
-            </div>
-          </div>
-
-          <!-- SLIDE 4 -->
-          <div class="reservas-slide">
-            <div class="reservas-img-wrap">
-              <div class="reservas-img-placeholder">
-                <span class="r-icon">🏆</span>
-                <span class="r-img-label">IMAGEN · RESERVA 04</span>
-              </div>
-            </div>
-            <div class="reservas-content">
-              <div class="reservas-slide-tag"><i class="fa-solid fa-trophy"></i> VIP PACK</div>
-              <div class="reservas-slide-title">Pack VIP<br><span>All-In EV</span></div>
-              <div class="reservas-slide-text">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.</div>
-              <div class="reservas-slide-meta">
-                <span class="reservas-meta-pill green"><i class="fa-solid fa-star"></i> EXCLUSIVO</span>
-                <span class="reservas-meta-pill yellow"><i class="fa-solid fa-bolt"></i> 2 CARRERAS</span>
-              </div>
-              <button class="reservas-slide-cta" onclick="switchTab('karting')"><i class="fa-solid fa-ticket"></i> RESERVAR VIP</button>
-            </div>
-          </div>
-
-        </div><!-- /reservasTrack -->
-
-        <!-- Controles -->
-        <div class="reservas-controls">
-          <div class="reservas-dots" id="reservasDots">
-            <button class="reservas-dot active" onclick="goToReservasSlide(0)"></button>
-            <button class="reservas-dot" onclick="goToReservasSlide(1)"></button>
-            <button class="reservas-dot" onclick="goToReservasSlide(2)"></button>
-            <button class="reservas-dot" onclick="goToReservasSlide(3)"></button>
-          </div>
-          <span class="reservas-counter-label" id="reservasCounter">01 / 04</span>
-          <div class="reservas-nav-btns">
-            <button class="reservas-nav-btn" onclick="prevReservasSlide()"><i class="fa-solid fa-chevron-left"></i></button>
-            <button class="reservas-nav-btn" onclick="nextReservasSlide()"><i class="fa-solid fa-chevron-right"></i></button>
+      <!-- SLIDE 1 -->
+      <div class="reservas-slide">
+        <div class="reservas-img-wrap">
+          <img src="./assets/images/Reserva1 2025.jpeg" alt="Test Drive EV Exclusivo"
+            style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+          <div class="reservas-img-placeholder" style="display:none;">
+            <span class="r-icon">⚡</span>
+            <span class="r-img-label">IMAGEN · RESERVA 01</span>
           </div>
         </div>
+        <div class="reservas-content">
+          <div class="reservas-slide-tag"><i class="fa-solid fa-bolt"></i> PAQUETE PREMIUM</div>
+          <div class="reservas-slide-title">Test Drive<br><span>EV Exclusivo</span></div>
+          <div class="reservas-slide-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</div>
+          <div class="reservas-slide-meta">
+            <span class="reservas-meta-pill green"><i class="fa-solid fa-calendar"></i> MAYO 2026</span>
+            <span class="reservas-meta-pill yellow"><i class="fa-solid fa-tag"></i> PRECIO ESPECIAL</span>
+          </div>
+          <button class="reservas-slide-cta" onclick="switchTab('karting')"><i class="fa-solid fa-ticket"></i> RESERVAR AHORA</button>
+        </div>
+      </div>
 
+      <!-- SLIDE 2 -->
+      <div class="reservas-slide">
+        <div class="reservas-img-wrap">
+          <img src="./assets/images/Reserva2 2025.jpeg" alt="Sesión de Karting Eléctrico"
+            style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+          <div class="reservas-img-placeholder" style="display:none;">
+            <span class="r-icon">🏁</span>
+            <span class="r-img-label">IMAGEN · RESERVA 02</span>
+          </div>
+        </div>
+        <div class="reservas-content">
+          <div class="reservas-slide-tag"><i class="fa-solid fa-flag-checkered"></i> KARTING EV</div>
+          <div class="reservas-slide-title">Sesión de<br><span>Karting Eléctrico</span></div>
+          <div class="reservas-slide-text">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</div>
+          <div class="reservas-slide-meta">
+            <span class="reservas-meta-pill green"><i class="fa-solid fa-users"></i> GRUPOS 4+</span>
+            <span class="reservas-meta-pill yellow"><i class="fa-solid fa-clock"></i> 8 MIN / SESIÓN</span>
+          </div>
+          <button class="reservas-slide-cta" onclick="switchTab('karting')"><i class="fa-solid fa-ticket"></i> RESERVAR AHORA</button>
+        </div>
+      </div>
+
+      <!-- SLIDE 3 -->
+      <div class="reservas-slide">
+        <div class="reservas-img-wrap">
+          <img src="./assets/images/Reserva3 2025.jpeg" alt="Diagnóstico Batería EV"
+            style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+          <div class="reservas-img-placeholder" style="display:none;">
+            <span class="r-icon">🔋</span>
+            <span class="r-img-label">IMAGEN · RESERVA 03</span>
+          </div>
+        </div>
+        <div class="reservas-content">
+          <div class="reservas-slide-tag"><i class="fa-solid fa-charging-station"></i> DIAGNÓSTICO</div>
+          <div class="reservas-slide-title">Diagnóstico<br><span>Batería EV</span></div>
+          <div class="reservas-slide-text">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus nulla vestibulum lorem.</div>
+          <div class="reservas-slide-meta">
+            <span class="reservas-meta-pill green"><i class="fa-solid fa-shield-check"></i> GARANTIZADO</span>
+            <span class="reservas-meta-pill yellow"><i class="fa-solid fa-percent"></i> -28% FERIA</span>
+          </div>
+          <button class="reservas-slide-cta" onclick="openQRModal()"><i class="fa-solid fa-qrcode"></i> VER PRECIO</button>
+        </div>
+      </div>
+
+      <!-- SLIDE 4 -->
+      <div class="reservas-slide">
+        <div class="reservas-img-wrap">
+          <img src="./assets/images/Reserva4 2025.jpeg" alt="Pack VIP All-In EV"
+            style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+          <div class="reservas-img-placeholder" style="display:none;">
+            <span class="r-icon">🏆</span>
+            <span class="r-img-label">IMAGEN · RESERVA 04</span>
+          </div>
+        </div>
+        <div class="reservas-content">
+          <div class="reservas-slide-tag"><i class="fa-solid fa-trophy"></i> VIP PACK</div>
+          <div class="reservas-slide-title">Pack VIP<br><span>All-In EV</span></div>
+          <div class="reservas-slide-text">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.</div>
+          <div class="reservas-slide-meta">
+            <span class="reservas-meta-pill green"><i class="fa-solid fa-star"></i> EXCLUSIVO</span>
+            <span class="reservas-meta-pill yellow"><i class="fa-solid fa-bolt"></i> 2 CARRERAS</span>
+          </div>
+          <button class="reservas-slide-cta" onclick="switchTab('karting')"><i class="fa-solid fa-ticket"></i> RESERVAR VIP</button>
+        </div>
+      </div>
+
+    </div><!-- /reservasTrack -->
+
+    <!-- Controles -->
+    <div class="reservas-controls">
+      <div class="reservas-dots" id="reservasDots">
+        <button class="reservas-dot active" onclick="goToReservasSlide(0)"></button>
+        <button class="reservas-dot" onclick="goToReservasSlide(1)"></button>
+        <button class="reservas-dot" onclick="goToReservasSlide(2)"></button>
+        <button class="reservas-dot" onclick="goToReservasSlide(3)"></button>
+      </div>
+      <span class="reservas-counter-label" id="reservasCounter">01 / 04</span>
+      <div class="reservas-nav-btns">
+        <button class="reservas-nav-btn" onclick="prevReservasSlide()"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="reservas-nav-btn" onclick="nextReservasSlide()"><i class="fa-solid fa-chevron-right"></i></button>
       </div>
     </div>
+
+  </div>
+</div>
     <!-- FIN CARRUSEL RESERVAS 2026 -->
 
     <hr class="divider">
@@ -2119,134 +2136,94 @@ body::after {
       <div class="news-fade-r"></div>
 
       <div class="news-track" id="newsTrack">
+  <div class="news-inner">
 
-        <!-- ══ GRUPO A ══ -->
-        <div class="news-inner">
-          <div class="news-card">
-            <div class="news-card-img-wrap">
-              <img class="news-card-img" src="http://tuquantum.com/wp-content/uploads/2025/09/Reconocimiento-a-la-𝐌𝐞𝐣𝐨𝐫-𝐏𝐫𝐞𝐬𝐞𝐧𝐭𝐚𝐜𝐢o𝐧-𝐝𝐞𝐥-𝐒𝐞𝐜𝐭𝐨𝐫-𝐈𝐧𝐝𝐮𝐬𝐭𝐫𝐢𝐚𝐥-en-la-FEXCO-2025.jpg" alt="Reconocimiento a la 𝐌𝐞𝐣𝐨𝐫-𝐏𝐫𝐞𝐬𝐞𝐧𝐭𝐚𝐜𝐢o𝐧 𝐝𝐞𝐥 𝐒𝐞𝐜𝐭𝐨𝐫 𝐈𝐧𝐝𝐮𝐬𝐭𝐫𝐢𝐚𝐥" onerror="this.parentElement.style.background='#0b1a12'">
-            </div>
-            <div class="news-card-body">
-              <div class="news-card-tag">Reconocimiento a la 𝐌𝐞𝐣𝐨𝐫 𝐏𝐫𝐞𝐬𝐞𝐧𝐭𝐚𝐜𝐢o𝐧 𝐝𝐞𝐥 𝐒𝐞𝐜𝐭𝐨𝐫 𝐈𝐧𝐝𝐮𝐬𝐭𝐫𝐢𝐚𝐥</div>
-              <div class="news-card-title">Quantum brilla con luz propia</div>
-            </div>
-          </div>
-
-          <div class="news-card">
-            <div class="news-card-img-wrap">
-              <img class="news-card-img" src="URL_IMAGEN_2" alt="Microauto" onerror="this.parentElement.style.background='#0b1a12'">
-            </div>
-            <div class="news-card-body">
-              <div class="news-card-tag">TECNOLOGÍA EV</div>
-              <div class="news-card-title">La start-up boliviana Quantum sorprende con un microauto eléctrico</div>
-            </div>
-          </div>
-
-          <div class="news-card">
-            <div class="news-card-img-wrap">
-              <img class="news-card-img" src="URL_IMAGEN_3" alt="Litio" onerror="this.parentElement.style.background='#0b1a12'">
-            </div>
-            <div class="news-card-body">
-              <div class="news-card-tag">INDUSTRIA DEL LITIO</div>
-              <div class="news-card-title">Creador de Quantum, el eléctrico boliviano, analiza industria del litio</div>
-            </div>
-          </div>
-
-          <div class="news-card">
-            <div class="news-card-img-wrap">
-              <img class="news-card-img" src="URL_IMAGEN_4" alt="Movilidad" onerror="this.parentElement.style.background='#0b1a12'">
-            </div>
-            <div class="news-card-body">
-              <div class="news-card-tag">MOVILIDAD URBANA</div>
-              <div class="news-card-title">Quantum EV redefine la movilidad urbana sostenible en Bolivia</div>
-            </div>
-          </div>
-
-          <div class="news-card">
-            <div class="news-card-img-wrap">
-              <img class="news-card-img" src="URL_IMAGEN_5" alt="FEXXCO" onerror="this.parentElement.style.background='#0b1a12'">
-            </div>
-            <div class="news-card-body">
-              <div class="news-card-tag">FEXXCO 2026</div>
-              <div class="news-card-title">Quantum EV presenta su karting 100% eléctrico en FEXXCO 2026</div>
-            </div>
-          </div>
-
-          <div class="news-card">
-            <div class="news-card-img-wrap">
-              <img class="news-card-img" src="URL_IMAGEN_6" alt="Innovacion" onerror="this.parentElement.style.background='#0b1a12'">
-            </div>
-            <div class="news-card-body">
-              <div class="news-card-tag">INNOVACIÓN</div>
-              <div class="news-card-title">Bolivia avanza hacia la electromovilidad de la mano de Quantum</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ══ GRUPO B — copia exacta para loop seamless ══ -->
-        <div class="news-inner" aria-hidden="true">
-          <div class="news-card">
-            <div class="news-card-img-wrap">
-              <img class="news-card-img" src="URL_IMAGEN_1" alt="" onerror="this.parentElement.style.background='#0b1a12'">
-            </div>
-            <div class="news-card-body">
-              <div class="news-card-tag">WALL STREET JOURNAL</div>
-              <div class="news-card-title">Quantum brilla con luz propia: El Wall Street Journal tuvo en portada a la automotriz boliviana</div>
-            </div>
-          </div>
-
-          <div class="news-card">
-            <div class="news-card-img-wrap">
-              <img class="news-card-img" src="URL_IMAGEN_2" alt="" onerror="this.parentElement.style.background='#0b1a12'">
-            </div>
-            <div class="news-card-body">
-              <div class="news-card-tag">TECNOLOGÍA EV</div>
-              <div class="news-card-title">La start-up boliviana Quantum sorprende con un microauto eléctrico</div>
-            </div>
-          </div>
-
-          <div class="news-card">
-            <div class="news-card-img-wrap">
-              <img class="news-card-img" src="URL_IMAGEN_3" alt="" onerror="this.parentElement.style.background='#0b1a12'">
-            </div>
-            <div class="news-card-body">
-              <div class="news-card-tag">INDUSTRIA DEL LITIO</div>
-              <div class="news-card-title">Creador de Quantum, el eléctrico boliviano, analiza industria del litio</div>
-            </div>
-          </div>
-
-          <div class="news-card">
-            <div class="news-card-img-wrap">
-              <img class="news-card-img" src="URL_IMAGEN_4" alt="" onerror="this.parentElement.style.background='#0b1a12'">
-            </div>
-            <div class="news-card-body">
-              <div class="news-card-tag">MOVILIDAD URBANA</div>
-              <div class="news-card-title">Quantum EV redefine la movilidad urbana sostenible en Bolivia</div>
-            </div>
-          </div>
-
-          <div class="news-card">
-            <div class="news-card-img-wrap">
-              <img class="news-card-img" src="URL_IMAGEN_5" alt="" onerror="this.parentElement.style.background='#0b1a12'">
-            </div>
-            <div class="news-card-body">
-              <div class="news-card-tag">FEXXCO 2026</div>
-              <div class="news-card-title">Quantum EV presenta su karting 100% eléctrico en FEXXCO 2026</div>
-            </div>
-          </div>
-
-          <div class="news-card">
-            <div class="news-card-img-wrap">
-              <img class="news-card-img" src="URL_IMAGEN_6" alt="" onerror="this.parentElement.style.background='#0b1a12'">
-            </div>
-            <div class="news-card-body">
-              <div class="news-card-tag">INNOVACIÓN</div>
-              <div class="news-card-title">Bolivia avanza hacia la electromovilidad de la mano de Quantum</div>
-            </div>
-          </div>
-        </div>
-
+    <!-- ══ GRUPO A ══ -->
+    <div class="news-card">
+      <div class="news-card-img-wrap">
+        <img class="news-card-img" src="http://tuquantum.com/wp-content/uploads/2025/09/Reconocimiento-a-la-𝐌𝐞𝐣𝐨𝐫-𝐏𝐫𝐞𝐬𝐞𝐧𝐭𝐚𝐜𝐢o𝐧-𝐝𝐞𝐥-𝐒𝐞𝐜𝐭𝐨𝐫-𝐈𝐧𝐝𝐮𝐬𝐭𝐫𝐢𝐚𝐥-en-la-FEXCO-2025.jpg" alt="Reconocimiento" onerror="this.parentElement.style.background='#0b1a12'">
       </div>
+      <div class="news-card-body">
+        <div class="news-card-tag">Reconocimiento · Mejor Presentación Sector Industrial</div>
+        <div class="news-card-title">Quantum brilla con luz propia</div>
+      </div>
+    </div>
+
+    <div class="news-card">
+      <div class="news-card-img-wrap">
+        <img class="news-card-img" src="./assets/images/tienda.jpeg" alt="Microauto" onerror="this.parentElement.style.background='#0b1a12'">
+      </div>
+      <div class="news-card-body">
+        <div class="news-card-tag">TECNOLOGÍA EV</div>
+        <div class="news-card-title">La start-up boliviana Quantum sorprende con un microauto eléctrico</div>
+      </div>
+    </div>
+
+    <div class="news-card">
+      <div class="news-card-img-wrap">
+        <img class="news-card-img" src="./assets/images/Foto grupo.jpeg" alt="Litio" onerror="this.parentElement.style.background='#0b1a12'">
+      </div>
+      <div class="news-card-body">
+        <div class="news-card-tag">INDUSTRIA DEL LITIO</div>
+        <div class="news-card-title">Creador de Quantum, el eléctrico boliviano, analiza industria del litio</div>
+      </div>
+    </div>
+
+    <div class="news-card">
+      <div class="news-card-img-wrap">
+        <img class="news-card-img" src="./assets/images/Fotostand.jpeg" alt="Movilidad" onerror="this.parentElement.style.background='#0b1a12'">
+      </div>
+      <div class="news-card-body">
+        <div class="news-card-tag">MOVILIDAD URBANA</div>
+        <div class="news-card-title">Quantum EV redefine la movilidad urbana sostenible en Bolivia</div>
+      </div>
+    </div>
+
+    <!-- ══ GRUPO B — copia exacta para loop seamless ══ -->
+    <div class="news-card" aria-hidden="true">
+      <div class="news-card-img-wrap">
+        <img class="news-card-img" src="http://tuquantum.com/wp-content/uploads/2025/09/Reconocimiento-a-la-𝐌𝐞𝐣𝐨𝐫-𝐏𝐫𝐞𝐬𝐞𝐧𝐭𝐚𝐜𝐢o𝐧-𝐝𝐞𝐥-𝐒𝐞𝐜𝐭𝐨𝐫-𝐈𝐧𝐝𝐮𝐬𝐭𝐫𝐢𝐚𝐥-en-la-FEXCO-2025.jpg" alt="" onerror="this.parentElement.style.background='#0b1a12'">
+      </div>
+      <div class="news-card-body">
+        <div class="news-card-tag">Reconocimiento · Mejor Presentación Sector Industrial</div>
+        <div class="news-card-title">Quantum brilla con luz propia</div>
+      </div>
+    </div>
+
+    <div class="news-card" aria-hidden="true">
+      <div class="news-card-img-wrap">
+  <img class="news-card-img" src="./assets/images/tienda.jpeg" alt="" 
+    style="object-fit:cover; object-position:center top;"
+    onerror="this.parentElement.style.background='#0b1a12'">
+</div>
+      <div class="news-card-body">
+        <div class="news-card-tag">TECNOLOGÍA EV</div>
+        <div class="news-card-title">La start-up boliviana Quantum sorprende con un microauto eléctrico</div>
+      </div>
+    </div>
+
+    <div class="news-card" aria-hidden="true">
+      <div class="news-card-img-wrap">
+        <img class="news-card-img" src="./assets/images/Foto grupo.jpeg" alt="" onerror="this.parentElement.style.background='#0b1a12'">
+      </div>
+      <div class="news-card-body">
+        <div class="news-card-tag">INDUSTRIA DEL LITIO</div>
+        <div class="news-card-title">Creador de Quantum, el eléctrico boliviano, analiza industria del litio</div>
+      </div>
+    </div>
+
+    <div class="news-card" aria-hidden="true">
+      <div class="news-card-img-wrap">
+        <img class="news-card-img" src="./assets/images/Fotostand.jpeg" alt="" onerror="this.parentElement.style.background='#0b1a12'">
+      </div>
+      <div class="news-card-body">
+        <div class="news-card-tag">MOVILIDAD URBANA</div>
+        <div class="news-card-title">Quantum EV redefine la movilidad urbana sostenible en Bolivia</div>
+      </div>
+    </div>
+
+  </div>
+</div>
     </div>
   </div>
 
