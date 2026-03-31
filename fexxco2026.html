@@ -1,0 +1,2809 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FEXXCO 2026 — QUANTUM EV</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --green:      #2fb676;
+  --green-dim:  #28a567;
+  --green-glow: rgba(47, 182, 118, 0.3);
+  --red:        #ff3060;
+  --yellow:     #ffcc00;
+  --electric:   #00e5ff;
+  --dark:       #060a09;
+  --dark2:      #0b1210;
+  --dark3:      #0f1812;
+  --card:       rgba(10, 20, 14, 0.85);
+  --border:     rgba(47, 182, 118, 0.18);
+  --text:       #c8e6d0;
+  --text-dim:   #5a7a62;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--dark);
+  color: var(--text);
+  font-family: 'Exo 2', sans-serif;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 2px,
+    rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px
+  );
+}
+
+
+/* ══════════════════════════════════════
+   CATÁLOGO EV — 18 PRODUCTOS
+══════════════════════════════════════ */
+.ev-catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+
+.ev-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.ev-card:hover {
+  border-color: rgba(47, 182, 118, 0.45);
+  box-shadow: 0 0 28px rgba(47, 182, 118, 0.12);
+  transform: translateY(-4px);
+}
+
+/* Imagen */
+.ev-card-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #0a1a0e;
+}
+
+.ev-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+  filter: brightness(0.9) saturate(0.95);
+}
+
+.ev-card:hover .ev-card-img {
+  transform: scale(1.06);
+  filter: brightness(1) saturate(1.1);
+}
+
+/* Fallback cuando no hay imagen */
+.ev-card-img-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0a1a0e 0%, #061008 100%);
+  background-image:
+    radial-gradient(circle, rgba(47,182,118,0.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+  z-index: 0;
+}
+
+.ev-card-img-fallback span {
+  font-size: 3.5rem;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 0 12px rgba(47,182,118,0.35));
+  animation: evCardFloat 3s ease-in-out infinite;
+}
+
+@keyframes evCardFloat {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
+/* Cuando la imagen carga, ocultar fallback */
+.ev-card-img-wrap img:not([style*="display:none"]) ~ .ev-card-img-fallback {
+  display: none;
+}
+
+/* Badge */
+.ev-card-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.3rem 0.9rem;
+  z-index: 2;
+  clip-path: polygon(8px 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.ev-card-badge.hot {
+  background: var(--red);
+  color: #fff;
+}
+
+.ev-card-badge.offer {
+  background: var(--yellow);
+  color: #000;
+}
+
+/* Overlay degradado inferior sobre la imagen */
+.ev-card-img-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 40%;
+  background: linear-gradient(to top, rgba(6,10,9,0.7) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Cuerpo de la card */
+.ev-card-body {
+  padding: 1rem 1.1rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+  border-top: 1px solid var(--border);
+}
+
+.ev-card-name {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--green);
+  line-height: 1.2;
+}
+
+.ev-card-desc {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.8rem;
+  color: var(--text);
+  line-height: 1.5;
+  opacity: 0.85;
+}
+
+.ev-card-price {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.9rem;
+  color: var(--green);
+  margin-top: 0.3rem;
+}
+
+.ev-card-price s {
+  color: var(--text-dim);
+  font-size: 0.75rem;
+  margin-left: 0.3rem;
+}
+
+/* Línea decorativa superior al hover */
+.ev-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--green), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 3;
+}
+
+.ev-card:hover::before {
+  opacity: 1;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .ev-catalog-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .ev-catalog-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.7rem;
+  }
+  .ev-card-name { font-size: 0.62rem; }
+  .ev-card-desc { font-size: 0.72rem; }
+  .ev-card-price { font-size: 0.8rem; }
+  .ev-card-body { padding: 0.8rem; }
+}
+
+@media (max-width: 360px) {
+  .ev-catalog-grid { grid-template-columns: 1fr; }
+}
+
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 9998; pointer-events: none; opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.alert-bar {
+  background: var(--green);
+  color: #040d06;
+  padding: 0.55rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  z-index: 1001;
+}
+
+.alert-bar-inner {
+  display: inline-block;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  animation: marquee 35s linear infinite;
+  white-space: nowrap;
+}
+
+@keyframes marquee {
+  from { transform: translateX(100vw); }
+  to   { transform: translateX(-100%); }
+}
+
+#main-nav {
+  position: sticky; top: 0; z-index: 1000;
+  background: rgba(6, 10, 9, 0.97);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(20px);
+  display: flex; align-items: center;
+  padding: 0 2rem; gap: 0;
+}
+
+.logo-nav {
+  font-family: 'Orbitron', monospace; font-weight: 900; font-size: 1.1rem;
+  color: var(--green); letter-spacing: 0.15em;
+  padding: 1rem 2rem 1rem 0;
+  border-right: 1px solid var(--border); margin-right: 1.5rem;
+  white-space: nowrap; text-shadow: 0 0 20px var(--green);
+}
+
+.nav-tab {
+  font-family: 'Orbitron', monospace; font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.1em; color: var(--text-dim);
+  padding: 1.2rem 1.5rem; border: none; background: none;
+  cursor: pointer; position: relative; transition: color 0.3s; white-space: nowrap;
+}
+
+.nav-tab::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: var(--green); transform: scaleX(0); transition: transform 0.3s;
+}
+
+.nav-tab.active { color: var(--green); }
+.nav-tab.active::after { transform: scaleX(1); box-shadow: 0 0 10px var(--green); }
+.nav-tab:hover { color: var(--text); }
+
+.section { display: none; }
+.section.active { display: block; }
+
+#hero {
+  position: relative; height: 100vh; min-height: 600px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; background: var(--dark);
+}
+
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(47,182,118,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(0,229,255,0.04) 0%, transparent 60%),
+    linear-gradient(180deg, #060a09 0%, #091109 100%);
+}
+
+.hero-grid {
+  position: absolute; inset: 0; overflow: hidden;
+  background-image:
+    linear-gradient(rgba(47,182,118,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(47,182,118,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+  0%   { background-position: 0 0; }
+  100% { background-position: 60px 60px; }
+}
+
+.hero-particles { position: absolute; inset: 0; overflow: hidden; }
+
+.particle {
+  position: absolute; border-radius: 50%; background: var(--green);
+  animation: floatUp linear infinite; opacity: 0;
+}
+
+@keyframes floatUp {
+  0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.2; }
+  100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+}
+
+.hero-content {
+  position: relative; z-index: 10; text-align: center; padding: 2rem;
+}
+
+.hero-year {
+  font-family: 'Share Tech Mono', monospace; font-size: clamp(0.7rem, 2vw, 0.9rem);
+  color: var(--green); letter-spacing: 0.4em; margin-bottom: 1rem;
+  animation: blink 2s step-end infinite;
+}
+
+@keyframes blink { 50% { opacity: 0.3; } }
+
+.hero-title {
+  font-family: 'Orbitron', monospace; font-size: clamp(3rem, 10vw, 8rem); font-weight: 900;
+  line-height: 0.9; color: #fff;
+  text-shadow: 0 0 40px rgba(47,182,118,0.5), 0 0 80px rgba(47,182,118,0.2);
+  animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+  from { text-shadow: 0 0 40px rgba(47,182,118,0.3), 0 0 80px rgba(47,182,118,0.1); }
+  to   { text-shadow: 0 0 60px rgba(47,182,118,0.7), 0 0 120px rgba(47,182,118,0.3); }
+}
+
+.hero-title span { color: var(--green); }
+
+.hero-sub {
+  font-family: 'Exo 2', sans-serif; font-size: clamp(1rem, 3vw, 1.4rem);
+  font-weight: 300; letter-spacing: 0.3em; color: var(--text);
+  margin-top: 1rem; text-transform: uppercase;
+}
+
+.hero-cta {
+  margin-top: 3rem; display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;
+}
+
+.countdown-wrap {
+  display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 1rem;
+}
+
+.countdown-unit {
+  text-align: center; background: rgba(0,0,0,0.5);
+  border: 1px solid var(--border); padding: 1rem 1.2rem; min-width: 80px;
+}
+
+.countdown-num {
+  font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 900;
+  color: var(--green); display: block; text-shadow: 0 0 15px rgba(47,182,118,0.5);
+}
+
+.countdown-label {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.55rem;
+  letter-spacing: 0.2em; color: var(--text-dim); display: block; margin-top: 0.3rem;
+}
+
+.scroll-indicator {
+  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce { 50% { transform: translateX(-50%) translateY(8px); } }
+
+.scroll-indicator span {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.6rem;
+  letter-spacing: 0.3em; color: var(--text-dim);
+}
+
+.scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--green), transparent); }
+
+.btn-primary {
+  font-family: 'Orbitron', monospace; font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.15em; color: var(--dark); background: var(--green);
+  border: none; padding: 1rem 2.5rem; cursor: pointer;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  transition: all 0.3s; text-decoration: none; display: inline-block;
+}
+
+.btn-primary:hover {
+  background: #fff; box-shadow: 0 0 30px rgba(47,182,118,0.5); transform: translateY(-2px);
+}
+
+.btn-outline {
+  font-family: 'Orbitron', monospace; font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.15em; color: var(--green); background: transparent;
+  border: 1px solid var(--green); padding: 1rem 2.5rem; cursor: pointer;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  transition: all 0.3s; text-decoration: none; display: inline-block;
+}
+
+.btn-outline:hover {
+  background: rgba(47,182,118,0.1); box-shadow: 0 0 30px rgba(47,182,118,0.3); transform: translateY(-2px);
+}
+
+.info-content { padding: 4rem 2rem; max-width: 1400px; margin: 0 auto; }
+
+.section-label {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.7rem;
+  letter-spacing: 0.4em; color: var(--green); margin-bottom: 0.5rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+
+.section-label::before {
+  content: ''; display: inline-block; width: 30px; height: 1px; background: var(--green);
+}
+
+.section-title {
+  font-family: 'Orbitron', monospace; font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 900; color: #fff; margin-bottom: 3rem; line-height: 1.1;
+}
+
+.divider {
+  border: none; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--green), transparent);
+  margin: 3rem 0; opacity: 0.3;
+}
+
+.location-block {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 4rem;
+}
+
+@media (max-width: 768px) { .location-block { grid-template-columns: 1fr; } }
+
+.map-placeholder {
+  background: var(--card); border: 1px solid var(--border);
+  min-height: 300px; position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.map-placeholder::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(0deg, transparent, transparent 29px, rgba(47,182,118,0.05) 30px),
+    repeating-linear-gradient(90deg, transparent, transparent 29px, rgba(47,182,118,0.05) 30px);
+}
+
+.map-pin { position: relative; z-index: 2; text-align: center; }
+.map-pin-icon { font-size: 3rem; display: block; animation: pinPulse 2s ease-in-out infinite; }
+
+@keyframes pinPulse {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+.map-pin-text {
+  font-family: 'Orbitron', monospace; font-size: 0.8rem;
+  color: var(--green); letter-spacing: 0.1em; margin-top: 1rem;
+}
+
+.location-info { display: flex; flex-direction: column; gap: 1rem; }
+
+.info-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-left: 3px solid var(--green); padding: 1.5rem;
+  position: relative; overflow: hidden; transition: box-shadow 0.3s;
+}
+
+.info-card:hover { box-shadow: 0 0 20px rgba(47,182,118,0.1), inset 0 0 20px rgba(47,182,118,0.03); }
+.info-card-label { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; letter-spacing: 0.3em; color: var(--green); margin-bottom: 0.4rem; }
+.info-card-value { font-family: 'Exo 2', sans-serif; font-size: 1.1rem; font-weight: 600; color: #fff; }
+.info-card-sub   { font-size: 0.8rem; color: var(--text-dim); margin-top: 0.3rem; }
+
+.products-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem; margin-bottom: 4rem;
+}
+
+.product-card {
+  background: var(--card); border: 1px solid var(--border);
+  padding: 1.5rem; position: relative; overflow: hidden; transition: all 0.3s;
+}
+
+.product-card:hover {
+  border-color: rgba(47,182,118,0.4);
+  box-shadow: 0 0 30px rgba(47,182,118,0.1); transform: translateY(-3px);
+}
+
+.product-card.offer { border-color: rgba(255,204,0,0.3); }
+.product-card.offer::before {
+  content: 'OFERTA'; position: absolute; top: 0; right: 0;
+  background: var(--yellow); color: #000;
+  font-family: 'Orbitron', monospace; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.1em;
+  padding: 0.3rem 0.8rem;
+  clip-path: polygon(8px 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.product-card.hot { border-color: rgba(255,48,96,0.4); }
+.product-card.hot::before {
+  content: 'HOT ⚡'; position: absolute; top: 0; right: 0;
+  background: var(--red); color: #fff;
+  font-family: 'Orbitron', monospace; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.1em;
+  padding: 0.3rem 0.8rem;
+  clip-path: polygon(8px 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.product-name { font-family: 'Orbitron', monospace; font-size: 0.75rem; font-weight: 700; color: var(--green); letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+.product-counter { display: flex; align-items: baseline; gap: 0.3rem; margin: 0.8rem 0; }
+.counter-sold  { font-family: 'Orbitron', monospace; font-size: 2.5rem; font-weight: 900; color: #fff; line-height: 1; }
+.counter-slash { font-size: 1.5rem; color: var(--text-dim); }
+.counter-total { font-size: 1.5rem; color: var(--text-dim); font-family: 'Orbitron', monospace; }
+.counter-label { font-family: 'Share Tech Mono', monospace; font-size: 0.6rem; color: var(--text-dim); letter-spacing: 0.2em; }
+
+.progress-bar  { height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-top: 0.8rem; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 2px; background: var(--green); box-shadow: 0 0 8px var(--green); }
+.progress-fill.hot  { background: var(--red);    box-shadow: 0 0 8px var(--red); }
+.progress-fill.warn { background: var(--yellow); box-shadow: 0 0 8px var(--yellow); }
+
+.product-price { font-family: 'Share Tech Mono', monospace; font-size: 0.9rem; color: var(--green); margin-top: 0.8rem; }
+.product-price s { color: var(--text-dim); font-size: 0.75rem; }
+
+.corner-dec { position: absolute; width: 20px; height: 20px; border-color: var(--green); border-style: solid; opacity: 0.5; }
+.corner-dec.tl { top:0;    left:0;  border-width: 2px 0 0 2px; }
+.corner-dec.tr { top:0;    right:0; border-width: 2px 2px 0 0; }
+.corner-dec.bl { bottom:0; left:0;  border-width: 0 0 2px 2px; }
+.corner-dec.br { bottom:0; right:0; border-width: 0 2px 2px 0; }
+
+.karting-block {
+  background: var(--card); border: 1px solid var(--border);
+  padding: 3rem; margin-bottom: 4rem; position: relative; overflow: hidden;
+}
+
+.imagen img {
+  width: 100%;
+  height: 100%;
+  
+  border-radius: 10px; /* opcional, se ve más pro */
+}
+
+.imagen {
+  width: 100%;
+  height: 300px; /* puedes ajustar */
+  overflow: hidden;
+}
+
+.imagen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.karting-block::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, transparent, var(--green), transparent);
+}
+
+.karting-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr; /* imagen más pequeña */
+  gap: 3rem;
+  align-items: center;
+}
+@media (max-width: 768px) { .karting-inner { grid-template-columns: 1fr; } }
+
+.karting-visual {
+  background: rgba(47,182,118,0.04); border: 1px solid var(--border);
+  height: 280px; display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+
+.karting-visual::after {
+  content: '⚡🚗⚡'; font-size: 3.5rem;
+  animation: evDrive 3s ease-in-out infinite;
+}
+
+@keyframes evDrive {
+  0%,100% { transform: translateX(-20px); }
+  50%      { transform: translateX(20px); }
+}
+
+.ticket-price-display {
+  font-family: 'Orbitron', monospace; font-size: 3rem; font-weight: 900;
+  color: var(--green); text-shadow: 0 0 30px rgba(47,182,118,0.5); margin: 1rem 0;
+}
+
+.ticket-price-display small { font-size: 1rem; color: var(--text-dim); font-weight: 400; }
+.ticket-available { font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: var(--yellow); margin-bottom: 1.5rem; }
+
+.sorteo-block {
+  background: linear-gradient(135deg, rgba(47,182,118,0.05) 0%, rgba(47,182,118,0.02) 100%);
+  border: 1px solid rgba(47,182,118,0.25); padding: 3rem; margin-bottom: 0;
+  position: relative; overflow: hidden;
+}
+
+.sorteo-block::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at top right, rgba(47,182,118,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.sorteo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+@media (max-width: 768px) { .sorteo-grid { grid-template-columns: 1fr; } }
+
+.premios-list { list-style: none; margin-top: 1.5rem; }
+.premios-list li { display: flex; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--border); font-size: 0.95rem; }
+.premio-num { font-family: 'Orbitron', monospace; font-size: 1.2rem; font-weight: 900; color: var(--green); min-width: 2rem; }
+
+.sorteo-steps { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; }
+
+.step {
+  display: flex; align-items: flex-start; gap: 1rem;
+  background: rgba(0,0,0,0.3); border: 1px solid var(--border); padding: 1rem 1.2rem;
+}
+
+.step-num { font-family: 'Orbitron', monospace; font-size: 1.5rem; font-weight: 900; color: var(--green); line-height: 1; min-width: 2rem; }
+.step-text { font-size: 0.9rem; line-height: 1.5; }
+.step-text strong { color: #fff; }
+
+.video-block {
+  margin-bottom: 4rem;
+  margin-left: calc(-50vw + 50%);
+  width: 100vw;
+}
+
+.video-wrapper {
+  position: relative; background: #000;
+  aspect-ratio: 16/9;
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+  width: 100%;
+}
+
+.video-wrapper video { width: 100%; height: 100%; object-fit: cover; }
+.video-placeholder-inner { text-align: center; position: relative; z-index: 2; width: 100%; }
+
+.play-btn {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: rgba(47,182,118,0.1); border: 2px solid var(--green);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1rem; cursor: pointer; transition: all 0.3s;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(47,182,118,0.4); }
+  50%      { box-shadow: 0 0 0 20px rgba(47,182,118,0); }
+}
+
+.play-btn:hover { background: rgba(47,182,118,0.2); box-shadow: 0 0 40px rgba(47,182,118,0.4); }
+.play-btn span  { font-size: 2rem; margin-left: 5px; }
+.video-placeholder-text { font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; letter-spacing: 0.2em; color: var(--text-dim); }
+
+#tv-display { background: #000; min-height: 100vh; padding: 0; position: relative; }
+
+.tv-header {
+  background: rgba(0,0,0,0.92); border-bottom: 2px solid var(--green);
+  padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between;
+}
+
+.tv-logo { font-family: 'Orbitron', monospace; font-size: 1.2rem; font-weight: 900; color: var(--green); text-shadow: 0 0 20px var(--green); }
+.tv-clock { font-family: 'Share Tech Mono', monospace; font-size: 1.5rem; color: var(--green); }
+
+.tv-carousel { height: calc(100vh - 60px); position: relative; overflow: hidden; }
+.tv-slide { position: absolute; inset: 0; display: flex; opacity: 0; transition: opacity 0.8s ease; }
+.tv-slide.active { opacity: 1; }
+
+.tv-left {
+  flex: 1; background: var(--dark2);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 3rem; border-right: 2px solid var(--green); position: relative;
+}
+
+.tv-left::before {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 29px, rgba(47,182,118,0.04) 30px);
+  pointer-events: none;
+}
+
+.tv-product-label { font-family: 'Share Tech Mono', monospace; font-size: clamp(0.6rem, 1.5vw, 0.9rem); letter-spacing: 0.3em; color: var(--green); margin-bottom: 1rem; }
+.tv-product-name  { font-family: 'Orbitron', monospace; font-size: clamp(1.5rem, 4vw, 3.5rem); font-weight: 900; color: #fff; text-align: center; line-height: 1.1; margin-bottom: 2rem; }
+
+.tv-counter-display { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; }
+.tv-num   { font-family: 'Orbitron', monospace; font-size: clamp(4rem, 12vw, 9rem); font-weight: 900; line-height: 1; color: var(--green); text-shadow: 0 0 40px rgba(47,182,118,0.6); }
+.tv-slash { font-family: 'Orbitron', monospace; font-size: clamp(2rem, 6vw, 5rem); color: var(--text-dim); }
+.tv-total { font-family: 'Orbitron', monospace; font-size: clamp(2rem, 6vw, 5rem); color: var(--text-dim); }
+
+.tv-status-text { font-family: 'Exo 2', sans-serif; font-size: clamp(0.9rem, 2.5vw, 1.4rem); color: var(--text); text-align: center; margin-bottom: 2rem; }
+
+.tv-offer-badge {
+  font-family: 'Orbitron', monospace; font-size: clamp(0.8rem, 2vw, 1.2rem); font-weight: 700;
+  background: var(--yellow); color: #000; padding: 0.8rem 2rem; letter-spacing: 0.1em;
+  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+  animation: offerPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes offerPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(255,204,0,0.4); }
+  50%      { box-shadow: 0 0 0 15px rgba(255,204,0,0); }
+}
+
+.tv-progress-wrap { width: 100%; max-width: 400px; margin-top: 2rem; }
+.tv-progress-bar  { height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+.tv-progress-fill { height: 100%; border-radius: 4px; background: var(--green); box-shadow: 0 0 12px var(--green); }
+.tv-progress-labels { display: flex; justify-content: space-between; margin-top: 0.5rem; font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--text-dim); }
+
+.tv-right { flex: 1; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.tv-right-inner { position: relative; z-index: 2; text-align: center; padding: 2rem; }
+
+.tv-video-icon { font-size: clamp(6rem, 15vw, 12rem); display: block; animation: videoFloat 4s ease-in-out infinite; }
+
+@keyframes videoFloat {
+  0%,100% { transform: translateY(0) rotate(-3deg); }
+  50%      { transform: translateY(-15px) rotate(3deg); }
+}
+
+.tv-right-label { font-family: 'Orbitron', monospace; font-size: clamp(0.7rem, 2vw, 1.1rem); color: var(--green); letter-spacing: 0.2em; margin-top: 1rem; }
+
+.tv-urgency {
+  position: absolute; top: 2rem; right: 2rem;
+  font-family: 'Share Tech Mono', monospace; font-size: clamp(0.6rem, 1.5vw, 0.8rem);
+  letter-spacing: 0.2em; color: var(--red);
+  animation: blink 1s step-end infinite; text-transform: uppercase;
+}
+
+.tv-bg-effect { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at center, rgba(47,182,118,0.05) 0%, transparent 70%); }
+
+.tv-indicators { position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); display: flex; gap: 0.8rem; z-index: 10; }
+.tv-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text-dim); cursor: pointer; transition: all 0.3s; }
+.tv-dot.active { background: var(--green); box-shadow: 0 0 10px var(--green); transform: scale(1.3); }
+
+/* ══════════════════════════════════════
+   KARTING EV PAGE
+══════════════════════════════════════ */
+.karting-page { padding: 4rem 2rem; max-width: 1400px; margin: 0 auto; }
+
+.karting-subtabs { display: flex; margin-bottom: 3rem; border-bottom: 1px solid var(--border); }
+
+.subtab {
+  font-family: 'Orbitron', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em;
+  color: var(--text-dim); padding: 1rem 1.5rem; border: none; background: none;
+  cursor: pointer; position: relative; transition: color 0.3s;
+}
+
+.subtab.active { color: var(--green); }
+.subtab.active::after {
+  content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 2px;
+  background: var(--green); box-shadow: 0 0 10px var(--green);
+}
+
+.subtab-content { display: none; }
+.subtab-content.active { display: block; }
+
+.karting-hero-banner {
+  position: relative; overflow: hidden;
+  background: linear-gradient(135deg, rgba(47,182,118,0.08) 0%, rgba(0,0,0,0.9) 60%);
+  border: 1px solid var(--border);
+  padding: 3rem 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.karting-hero-banner::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, transparent, var(--green), var(--electric), transparent);
+}
+
+.khb-label {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.65rem;
+  letter-spacing: 0.4em; color: var(--green); margin-bottom: 0.6rem;
+}
+
+.khb-title {
+  font-family: 'Orbitron', monospace; font-size: clamp(1.6rem, 4vw, 2.8rem);
+  font-weight: 900; color: #fff; line-height: 1.05; margin-bottom: 1rem;
+}
+
+.khb-title span { color: var(--green); }
+
+.khb-meta {
+  display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 1rem;
+}
+
+.khb-badge {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.7rem;
+  letter-spacing: 0.15em; padding: 0.4rem 1rem;
+  border: 1px solid var(--border); color: var(--text-dim);
+  background: rgba(0,0,0,0.4);
+}
+
+.khb-badge.hot { border-color: var(--red); color: var(--red); }
+.khb-badge.green { border-color: var(--green); color: var(--green); }
+.khb-badge.yellow { border-color: var(--yellow); color: var(--yellow); }
+
+.stock-widget {
+  background: rgba(0,0,0,0.5); border: 1px solid var(--border);
+  padding: 1.5rem 2rem; margin-bottom: 2.5rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.stock-num-block { display: flex; align-items: baseline; gap: 0.5rem; }
+.stock-big { font-family: 'Orbitron', monospace; font-size: 4rem; font-weight: 900; color: var(--green); text-shadow: 0 0 25px rgba(47,182,118,0.5); line-height: 1; }
+.stock-slash { font-family: 'Orbitron', monospace; font-size: 2rem; color: var(--text-dim); }
+.stock-total { font-family: 'Orbitron', monospace; font-size: 2rem; color: var(--text-dim); }
+.stock-label-block { display: flex; flex-direction: column; gap: 0.3rem; }
+.stock-label { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; letter-spacing: 0.25em; color: var(--text-dim); }
+.stock-sublabel { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--yellow); letter-spacing: 0.15em; }
+.stock-bar-wrap { flex: 1; min-width: 160px; }
+.stock-bar { height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; margin-bottom: 0.4rem; }
+.stock-bar-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--green), var(--electric)); box-shadow: 0 0 10px var(--green); width: 44%; }
+.stock-pct { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: var(--text-dim); }
+
+.tiers-section { margin-bottom: 2.5rem; }
+.tiers-title {
+  font-family: 'Orbitron', monospace; font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.15em; color: var(--text-dim); margin-bottom: 1rem;
+  padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+}
+
+.price-tiers { display: flex; flex-direction: column; gap: 0.8rem; }
+
+.price-tier {
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(0,0,0,0.35); border: 1px solid var(--border);
+  padding: 1.2rem 1.5rem; transition: all 0.3s; gap: 1rem;
+}
+
+.price-tier:hover { border-color: rgba(47,182,118,0.35); box-shadow: 0 0 15px rgba(47,182,118,0.07); }
+.price-tier.featured { border-color: rgba(47,182,118,0.4); background: rgba(47,182,118,0.05); }
+
+.tier-icon { font-size: 1.4rem; flex-shrink: 0; }
+.tier-info { flex: 1; }
+.tier-name { font-family: 'Orbitron', monospace; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; }
+.tier-name.vip      { color: var(--yellow); }
+.tier-name.standard { color: var(--green); }
+.tier-name.group    { color: #00ccff; }
+.tier-desc  { font-size: 0.78rem; color: var(--text-dim); margin-top: 0.25rem; }
+
+.tier-price-block { text-align: right; flex-shrink: 0; }
+.tier-price { font-family: 'Orbitron', monospace; font-size: 1.3rem; font-weight: 900; color: #fff; }
+.tier-old   { font-size: 0.7rem; color: var(--text-dim); text-decoration: line-through; }
+.tier-save  { font-family: 'Share Tech Mono', monospace; font-size: 0.6rem; color: var(--yellow); letter-spacing: 0.1em; }
+
+.steps-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem; margin-bottom: 2.5rem;
+}
+
+.step-card { background: var(--card); border: 1px solid var(--border); padding: 2rem; position: relative; transition: all 0.3s; }
+.step-card:hover { border-color: rgba(47,182,118,0.4); box-shadow: 0 0 20px rgba(47,182,118,0.1); transform: translateY(-3px); }
+.step-card-num   { font-family: 'Orbitron', monospace; font-size: 3rem; font-weight: 900; color: rgba(47,182,118,0.15); line-height: 1; margin-bottom: 1rem; }
+.step-card-title { font-family: 'Orbitron', monospace; font-size: 0.8rem; font-weight: 700; color: var(--green); letter-spacing: 0.1em; margin-bottom: 0.8rem; }
+.step-card-text  { font-size: 0.9rem; line-height: 1.6; color: var(--text); }
+.step-card-icon  { font-size: 2rem; margin-bottom: 1rem; display: block; }
+
+.cta-compra {
+  background: linear-gradient(135deg, rgba(47,182,118,0.08) 0%, rgba(0,0,0,0.6) 100%);
+  border: 1px solid rgba(47,182,118,0.3); padding: 2rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+  flex-wrap: wrap; margin-bottom: 2.5rem; position: relative; overflow: hidden;
+}
+
+.cta-compra::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--green), transparent);
+}
+
+.cta-compra-price {
+  font-family: 'Orbitron', monospace; font-size: 2.5rem; font-weight: 900;
+  color: var(--green); text-shadow: 0 0 20px rgba(47,182,118,0.4);
+  display: flex; align-items: baseline; gap: 0.5rem;
+}
+.cta-compra-price small { font-size: 1rem; color: var(--text-dim); font-weight: 400; }
+.cta-compra-desc { font-size: 0.85rem; color: var(--text); margin-top: 0.3rem; }
+.cta-compra-desc s { color: var(--text-dim); }
+
+.btn-comprar-online {
+  font-family: 'Orbitron', monospace; font-size: 0.8rem; font-weight: 700;
+  letter-spacing: 0.12em; color: var(--dark); background: var(--green);
+  border: none; padding: 1.1rem 2.8rem; cursor: pointer;
+  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+  transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.6rem;
+  white-space: nowrap;
+}
+
+.btn-comprar-online:hover {
+  background: #fff; box-shadow: 0 0 35px rgba(47,182,118,0.6); transform: translateY(-2px);
+}
+
+/* ══════════════════════════════════════
+   CARRUSEL RESERVAS 2026
+══════════════════════════════════════ */
+.reservas-section {
+  margin-bottom: 4rem;
+  position: relative;
+}
+
+.reservas-carousel-wrap {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--card);
+}
+
+.reservas-track {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+.reservas-slide {
+  flex: 0 0 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 340px;
+}
+
+@media (max-width: 640px) {
+  .reservas-slide {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+}
+
+.reservas-img-wrap {
+  position: relative;
+  overflow: hidden;
+  min-height: 220px;
+}
+
+.reservas-img-wrap::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, transparent 60%, rgba(10,20,14,0.95) 100%);
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .reservas-img-wrap::after {
+    background: linear-gradient(to bottom, transparent 50%, rgba(10,20,14,0.95) 100%);
+  }
+}
+
+.reservas-img-placeholder {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 1rem;
+  position: relative;
+}
+
+.reservas-img-placeholder .r-icon {
+  font-size: clamp(3rem, 8vw, 5rem);
+  position: relative; z-index: 2;
+  filter: drop-shadow(0 0 20px rgba(47,182,118,0.4));
+}
+
+.reservas-img-placeholder .r-img-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.6rem; letter-spacing: 0.3em;
+  color: var(--text-dim); position: relative; z-index: 2;
+}
+
+/* Fondos distintos por slide */
+.reservas-slide:nth-child(1) .reservas-img-placeholder { background: linear-gradient(135deg, #0a1f10 0%, #061408 50%, #0b2212 100%); }
+.reservas-slide:nth-child(2) .reservas-img-placeholder { background: linear-gradient(135deg, #0d1a0f 0%, #061208 50%, #102014 100%); }
+.reservas-slide:nth-child(3) .reservas-img-placeholder { background: linear-gradient(135deg, #09180b 0%, #040e06 50%, #0c1c0e 100%); }
+.reservas-slide:nth-child(4) .reservas-img-placeholder { background: linear-gradient(135deg, #0b1e0d 0%, #071208 50%, #0e2010 100%); }
+
+/* Patrón de puntos decorativos */
+.reservas-img-placeholder::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(47,182,118,0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.reservas-content {
+  padding: 2rem 2rem 2rem 1.5rem;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative;
+}
+
+@media (max-width: 640px) {
+  .reservas-content {
+    padding: 1.5rem;
+  }
+}
+
+.reservas-content::before {
+  content: '';
+  position: absolute; left: 0; top: 15%; bottom: 15%;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, var(--green), transparent);
+}
+
+@media (max-width: 640px) {
+  .reservas-content::before {
+    top: 0; left: 15%; right: 15%;
+    width: auto; height: 2px;
+    background: linear-gradient(to right, transparent, var(--green), transparent);
+  }
+}
+
+.reservas-slide-tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.6rem; letter-spacing: 0.35em;
+  color: var(--green); margin-bottom: 0.6rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+
+.reservas-slide-tag::before {
+  content: '';
+  display: inline-block; width: 20px; height: 1px;
+  background: var(--green);
+}
+
+.reservas-slide-title {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  font-weight: 900; color: #fff; line-height: 1.15;
+  margin-bottom: 0.8rem;
+}
+
+.reservas-slide-title span { color: var(--green); }
+
+.reservas-slide-text {
+  font-size: 0.88rem; line-height: 1.7;
+  color: var(--text); margin-bottom: 1.2rem;
+}
+
+.reservas-slide-meta {
+  display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.2rem;
+}
+
+.reservas-meta-pill {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.6rem; letter-spacing: 0.15em;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  background: rgba(0,0,0,0.4);
+}
+
+.reservas-meta-pill.green { border-color: var(--green); color: var(--green); }
+.reservas-meta-pill.yellow { border-color: var(--yellow); color: var(--yellow); }
+
+.reservas-slide-cta {
+  font-family: 'Orbitron', monospace; font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.1em; color: var(--dark); background: var(--green);
+  border: none; padding: 0.7rem 1.6rem; cursor: pointer;
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.5rem;
+  align-self: flex-start;
+}
+
+.reservas-slide-cta:hover {
+  background: #fff; box-shadow: 0 0 20px rgba(47,182,118,0.5);
+}
+
+/* Controles carrusel */
+.reservas-controls {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: rgba(0,0,0,0.4);
+  border-top: 1px solid var(--border);
+}
+
+.reservas-dots {
+  display: flex; gap: 0.6rem; align-items: center;
+}
+
+.reservas-dot {
+  width: 28px; height: 3px;
+  background: var(--text-dim); border: none;
+  cursor: pointer; transition: all 0.3s;
+  padding: 0;
+}
+
+.reservas-dot.active {
+  background: var(--green);
+  box-shadow: 0 0 8px var(--green);
+  width: 40px;
+}
+
+.reservas-nav-btns {
+  display: flex; gap: 0.5rem;
+}
+
+.reservas-nav-btn {
+  font-family: 'Orbitron', monospace; font-size: 0.8rem;
+  width: 36px; height: 36px;
+  background: rgba(0,0,0,0.5); border: 1px solid var(--border);
+  color: var(--text-dim); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s;
+}
+
+.reservas-nav-btn:hover {
+  border-color: var(--green); color: var(--green);
+  box-shadow: 0 0 10px rgba(47,182,118,0.2);
+}
+
+.reservas-counter-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.15em;
+}
+
+/* ══════════════════════════════════════
+   MODAL QR
+══════════════════════════════════════ */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 9000;
+  background: rgba(0,0,0,0.88);
+  backdrop-filter: blur(8px);
+  display: flex; align-items: flex-start; justify-content: center;
+  padding: 1rem;
+  overflow-y: auto;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+
+.modal-box {
+  background: var(--dark2); border: 1px solid var(--border);
+  max-width: 400px; width: 100%; position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+.modal-overlay.open .modal-box { transform: translateY(0); }
+
+.modal-top-bar {
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--green), var(--electric), transparent);
+}
+
+.modal-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.9rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0;
+  background: var(--dark2); z-index: 1;
+}
+
+.modal-title {
+  font-family: 'Orbitron', monospace; font-size: 0.72rem; font-weight: 900;
+  letter-spacing: 0.1em; color: var(--green);
+}
+
+.modal-close {
+  background: none; border: 1px solid var(--border);
+  color: var(--text-dim); cursor: pointer; width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem; transition: all 0.2s;
+  font-family: 'Orbitron', monospace;
+}
+.modal-close:hover { border-color: var(--red); color: var(--red); }
+
+.modal-body { padding: 1.2rem 1.5rem; }
+
+.modal-qr-wrap {
+  display: flex; flex-direction: column; align-items: center; gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.modal-qr-frame {
+  background: #fff; padding: 0.9rem;
+  border: 3px solid var(--green);
+  box-shadow: 0 0 20px rgba(47,182,118,0.35), 0 0 50px rgba(47,182,118,0.1);
+  position: relative;
+}
+
+.modal-qr-frame::before,
+.modal-qr-frame::after {
+  content: ''; position: absolute; width: 18px; height: 18px;
+  border-color: var(--green); border-style: solid;
+}
+.modal-qr-frame::before { top: -6px; left: -6px; border-width: 3px 0 0 3px; }
+.modal-qr-frame::after  { bottom: -6px; right: -6px; border-width: 0 3px 3px 0; }
+
+.modal-qr-frame svg { display: block; width: 140px; height: 140px; }
+
+.modal-qr-label {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.6rem;
+  letter-spacing: 0.25em; color: var(--green); text-align: center;
+  animation: blink 2s step-end infinite;
+}
+
+.modal-price-row {
+  background: rgba(47,182,118,0.06); border: 1px solid rgba(47,182,118,0.2);
+  padding: 0.7rem 1rem; margin-bottom: 1rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+.modal-price-label {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.6rem;
+  letter-spacing: 0.15em; color: var(--text-dim);
+}
+
+.modal-price-val {
+  font-family: 'Orbitron', monospace; font-size: 1.1rem; font-weight: 900;
+  color: var(--green); text-shadow: 0 0 12px rgba(47,182,118,0.4);
+}
+
+.modal-steps {
+  display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem;
+}
+
+.modal-step {
+  display: flex; align-items: center; gap: 0.7rem;
+  font-size: 0.78rem; color: var(--text);
+}
+
+.modal-step-num {
+  font-family: 'Orbitron', monospace; font-size: 0.65rem; font-weight: 900;
+  color: var(--dark); background: var(--green);
+  width: 20px; height: 20px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.btn-whatsapp {
+  display: flex; align-items: center; justify-content: center; gap: 0.8rem;
+  width: 100%; padding: 1.1rem;
+  background: #25D366; border: none; cursor: pointer;
+  font-family: 'Orbitron', monospace; font-size: 0.8rem; font-weight: 700;
+  letter-spacing: 0.1em; color: #fff;
+  transition: all 0.3s;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  text-decoration: none;
+}
+
+.btn-whatsapp:hover {
+  background: #1ebe5d;
+  box-shadow: 0 0 30px rgba(37, 211, 102, 0.5);
+  transform: translateY(-2px);
+}
+
+.btn-whatsapp .fa-whatsapp { font-size: 1.3rem; }
+
+.modal-note {
+  font-family: 'Share Tech Mono', monospace; font-size: 0.58rem;
+  color: var(--text-dim); text-align: center; margin-top: 1rem;
+  letter-spacing: 0.1em; line-height: 1.7;
+}
+
+.photo-gallery {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem; margin-bottom: 3rem;
+}
+
+.gallery-item {
+  background: var(--card); border: 1px solid var(--border);
+  aspect-ratio: 16/10; display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden; cursor: pointer; transition: all 0.3s;
+}
+
+.gallery-item:hover { border-color: rgba(47,182,118,0.5); box-shadow: 0 0 20px rgba(47,182,118,0.15); transform: scale(1.02); }
+
+.gallery-item::before {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(47,182,118,0.02) 10px, rgba(47,182,118,0.02) 20px);
+}
+
+.gallery-label { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--text-dim); position: relative; z-index: 2; text-align: center; }
+.gallery-label span { font-size: 3rem; display: block; margin-bottom: 0.5rem; }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+
+.glitch { position: relative; }
+.glitch::before, .glitch::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; font-family: inherit; font-size: inherit; font-weight: inherit; }
+.glitch::before { color: #0ff; animation: glitch1 3s infinite; clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%); }
+.glitch::after  { color: #f0f; animation: glitch2 3s infinite; clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%); }
+
+@keyframes glitch1 {
+  0%,90%,100% { transform: none; opacity: 0; }
+  92% { transform: translateX(-3px); opacity: 0.8; }
+  94% { transform: translateX(3px);  opacity: 0.8; }
+  96% { transform: none; opacity: 0; }
+}
+
+@keyframes glitch2 {
+  0%,88%,100% { transform: none; opacity: 0; }
+  90% { transform: translateX(3px);  opacity: 0.8; }
+  92% { transform: translateX(-3px); opacity: 0.8; }
+  94% { transform: none; opacity: 0; }
+}
+
+/* ══════════════════════════════════════
+   CARRUSEL DE NOTICIAS
+══════════════════════════════════════ */
+.news-section-wrap {
+  padding: 4rem 2rem 0;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.news-carousel-outer {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--card);
+}
+
+.news-fade-l,
+.news-fade-r {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 100px;
+  z-index: 2;
+  pointer-events: none;
+}
+.news-fade-l { left: 0;  background: linear-gradient(to right, var(--dark2, #0b1210), transparent); }
+.news-fade-r { right: 0; background: linear-gradient(to left,  var(--dark2, #0b1210), transparent); }
+
+.news-track {
+  display: flex;
+  width: max-content;
+  animation: newsScroll 36s linear infinite;
+  gap: 0;
+  padding: 1.5rem 0;
+}
+
+.news-track:hover { animation-play-state: paused; }
+
+@keyframes newsScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.news-inner {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0 1.5rem;
+  flex-shrink: 0;
+}
+
+.news-card {
+  flex-shrink: 0;
+  width: 300px;
+  background: rgba(0,0,0,0.55);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+
+.news-card:hover {
+  border-color: rgba(47,182,118,0.5);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(47,182,118,0.15);
+}
+
+.news-card-img-wrap {
+  overflow: hidden;
+  position: relative;
+  height: 185px;
+}
+
+.news-card-img-wrap::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(6,10,9,0.88) 100%);
+  pointer-events: none;
+}
+
+.news-card-img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  filter: brightness(0.82) saturate(0.85);
+  transition: filter 0.4s, transform 0.5s;
+}
+
+.news-card:hover .news-card-img {
+  filter: brightness(1) saturate(1.1);
+  transform: scale(1.06);
+}
+
+.news-card-body {
+  padding: 1rem 1.2rem 1.3rem;
+}
+
+.news-card-tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.56rem;
+  letter-spacing: 0.3em;
+  color: var(--green);
+  margin-bottom: 0.5rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+
+.news-card-tag::before {
+  content: '';
+  display: inline-block;
+  width: 14px; height: 1px;
+  background: var(--green);
+  flex-shrink: 0;
+}
+
+.news-card-title {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.45;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 768px) {
+  #main-nav { flex-wrap: wrap; padding: 0 1rem; }
+  .logo-nav { width:100%; border-right:none; border-bottom:1px solid var(--border); margin-right:0; padding:0.8rem 0; font-size:0.95rem; text-align:center; }
+  .nav-tab { font-size:0.6rem; padding:0.8rem 0.9rem; flex:1; text-align:center; }
+}
+@media (max-width: 420px) {
+  .nav-tab { font-size:0.5rem; padding:0.7rem 0.4rem; letter-spacing:0.04em; }
+}
+@media (max-width: 768px) {
+  #hero { height:auto; min-height:100svh; padding:4rem 0 2rem; }
+  .hero-content { padding:1rem; }
+  .hero-year { font-size:0.58rem; letter-spacing:0.18em; }
+  .hero-sub { font-size:0.75rem; letter-spacing:0.12em; margin-top:0.5rem; }
+  .countdown-wrap { gap:0.4rem; margin-top:0.8rem; }
+  .countdown-unit { padding:0.6rem 0.7rem; min-width:55px; }
+  .countdown-num { font-size:1.3rem; }
+  .countdown-label { font-size:0.42rem; }
+  .hero-cta { flex-direction:column; align-items:center; margin-top:1.2rem; gap:0.7rem; }
+  .btn-primary, .btn-outline { padding:0.85rem 1.8rem; font-size:0.65rem; width:100%; max-width:280px; text-align:center; }
+  .scroll-indicator { display:none; }
+}
+@media (max-width: 768px) {
+  .info-content { padding:2rem 1rem; }
+  .section-title { margin-bottom:1.5rem; }
+  .divider { margin:1.5rem 0; }
+  .karting-block, .sorteo-block { padding:1.5rem 1rem; }
+  .karting-page { padding:2rem 1rem; }
+  .video-block { margin-left:0; width:100%; }
+  .imagen {
+    height: 220px;
+  }
+  .location-block { grid-template-columns:1fr; }
+  .karting-inner { grid-template-columns:1fr; }
+  .sorteo-grid { grid-template-columns:1fr; gap:1.5rem; }
+  .news-section-wrap { padding: 2.5rem 1rem 0; }
+  .news-card { width: 240px; }
+  .news-card-img-wrap { height: 145px; }
+  .news-fade-l, .news-fade-r { width: 40px; }
+}
+@media (max-width: 500px) {
+  .products-grid { grid-template-columns:1fr 1fr; gap:0.8rem; }
+  .product-card { padding:1rem; }
+  .counter-sold { font-size:1.8rem; }
+  .counter-total { font-size:1rem; }
+}
+@media (max-width: 600px) {
+  .karting-subtabs { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  .subtab { font-size:0.55rem; padding:0.8rem 0.9rem; white-space:nowrap; }
+  .steps-grid { grid-template-columns:1fr; }
+  .cta-compra { flex-direction:column; }
+  .stock-widget { flex-direction:column; gap:1rem; }
+}
+@media (max-width: 600px) {
+  #sub-info-karting > div { grid-template-columns:1fr !important; }
+  .premios-list li { font-size:0.85rem; }
+}
+
+
+.ev-card-img-wrap--zoomout .ev-card-img {
+  object-fit: contain;
+  transform: scale(0.78);
+  background: transparent;
+}
+
+.ev-card:hover .ev-card-img-wrap--zoomout .ev-card-img {
+  transform: scale(0.82);
+}
+</style>
+
+<nav id="main-nav">
+  <button class="nav-tab active"  id="tab-info"    onclick="switchTab('info')"><i class="fa-solid fa-table"></i>     INICIO</button>
+  <button class="nav-tab"         id="tab-karting" onclick="switchTab('karting')"><i class="fa-solid fa-car-side"></i> PREVENTA KARTING EV</button>
+</nav>
+
+
+<section id="info" class="section active">
+
+  <div id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-particles" id="particles"></div>
+
+    <div class="hero-content">
+      <div class="hero-year"> APROVECHA NUESTRAS OFERTAS EN LA FEXCO.</div>
+
+      <div style="position:relative; display:inline-block; margin-bottom:1.2rem;">
+        <div style="display:flex; align-items:center; gap:0.8rem; justify-content:center; margin-bottom:0.9rem;">
+          <div style="height:1px; width:60px; background:linear-gradient(to right, transparent, var(--green));"></div>
+          <span style="font-family:'Share Tech Mono',monospace; font-size:0.55rem; letter-spacing:0.35em; color:var(--green); opacity:0.7;">STAND B-14</span>
+          <div style="height:1px; width:60px; background:linear-gradient(to left, transparent, var(--green));"></div>
+        </div>
+
+        <div style="position:relative; padding:1.2rem 2rem;">
+          <span style="position:absolute;top:0;left:0;width:18px;height:18px;border-top:2px solid var(--green);border-left:2px solid var(--green);opacity:0.8;"></span>
+          <span style="position:absolute;top:0;right:0;width:18px;height:18px;border-top:2px solid var(--green);border-right:2px solid var(--green);opacity:0.8;"></span>
+          <span style="position:absolute;bottom:0;left:0;width:18px;height:18px;border-bottom:2px solid var(--green);border-left:2px solid var(--green);opacity:0.8;"></span>
+          <span style="position:absolute;bottom:0;right:0;width:18px;height:18px;border-bottom:2px solid var(--green);border-right:2px solid var(--green);opacity:0.8;"></span>
+          <div style="position:absolute; inset:0; background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(47,182,118,0.08) 0%, transparent 70%); pointer-events:none;"></div>
+          <div style="width:min(380px,65vw);overflow:hidden;position:relative;z-index:2;border:12px solid white;border-radius:6px;box-shadow:0 0 30px rgba(47,182,118,0.4), 0 0 70px rgba(47,182,118,0.15);">
+            <img src="http://tuquantum.com/wp-content/uploads/2026/03/logofexco2.jpg" alt="FEXCO" style="width:100%; height:clamp(70px,10vw,100px); display:block; object-fit:cover; object-position:center 50%; filter:drop-shadow(0 0 20px rgba(47,182,118,0.4)); animation:logoBreath 4s ease-in-out infinite alternate;">
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:0.8rem; justify-content:center; margin-top:0.9rem;">
+          <div style="height:1px; width:40px; background:linear-gradient(to right, transparent, rgba(47,182,118,0.4));"></div>
+          <span style="font-family:'Share Tech Mono',monospace; font-size:0.5rem; letter-spacing:0.4em; color:var(--text-dim);">QUANTUM EV · 2026</span>
+          <div style="height:1px; width:40px; background:linear-gradient(to left, transparent, rgba(47,182,118,0.4));"></div>
+        </div>
+      </div>
+
+      <style>
+        @keyframes logoBreath {
+          from { filter: drop-shadow(0 0 18px rgba(47,182,118,0.4)) drop-shadow(0 0 40px rgba(47,182,118,0.15)); }
+          to   { filter: drop-shadow(0 0 36px rgba(47,182,118,0.75)) drop-shadow(0 0 90px rgba(47,182,118,0.3)); }
+        }
+      </style>
+
+      <h1 class="hero-title" style="color:var(--green); font-size:clamp(2rem,7vw,5rem); margin-top:0.3rem;">2026</h1>
+      <p class="hero-sub">QUANTUM EV · STAND B-14 · MOVILIDAD DEL FUTURO</p>
+      <div class="countdown-wrap">
+        <div class="countdown-unit"><span class="countdown-num" id="cd-d">--</span><span class="countdown-label">DÍAS</span></div>
+        <div class="countdown-unit"><span class="countdown-num" id="cd-h">--</span><span class="countdown-label">HORAS</span></div>
+        <div class="countdown-unit"><span class="countdown-num" id="cd-m">--</span><span class="countdown-label">MIN</span></div>
+        <div class="countdown-unit"><span class="countdown-num" id="cd-s">--</span><span class="countdown-label">SEG</span></div>
+      </div>
+
+      <div class="hero-cta">
+        <button class="btn-primary" onclick="switchTab('karting')"><i class="fa-solid fa-ticket"></i> PREVENTA KARTING EV</button>
+        <a href="#productos" class="btn-outline"><i class="fa-solid fa-tags"></i> VER OFERTAS EV</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-content">
+
+    <div class="video-block">
+      <div class="section-title">QUANTUM EV<br><span style="color:var(--green)">EN ACCIÓN</span></div>
+      <div class="video-wrapper">
+        <div class="video-placeholder-inner">
+          <div class="play-btn" onclick="alert('📹')"><span>▶</span></div>
+          <div class="video-placeholder-text">[ VIDEO QUANTUM EV — EQUIPO MARKETING ]<br></div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <div class="section-title">UBICACIÓN<br><span style="color:var(--green)">DEL STAND</span></div>
+
+    <div class="location-block">
+      <div class="map-placeholder">
+        <div class="map-pin">
+          <span class="map-pin-icon">📍</span>
+          <div class="map-pin-text">STAND B-14<br>QUANTUM EV</div>
+          <div style="font-family:'Share Tech Mono',monospace; font-size:0.6rem; color:var(--text-dim); margin-top:0.5rem;">RECINTO FERIAL COCHABAMBA</div>
+        </div>
+      </div>
+      <div class="location-info">
+        <div class="info-card">
+          <div class="info-card-label"><i class="fa-solid fa-location-dot"></i> STAND</div>
+          <div class="info-card-value">B-14 — QUANTUM EV</div>
+          <div class="info-card-sub">Pabellón B · Zona Movilidad Eléctrica</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label"><i class="fa-solid fa-calendar-days"></i> FECHAS</div>
+          <div class="info-card-value">Del 15 al 25 de Mayo, 2026</div>
+          <div class="info-card-sub">Abierto todos los días</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label"><i class="fa-solid fa-clock"></i> HORARIO</div>
+          <div class="info-card-value">10:00 — 21:00 hrs</div>
+          <div class="info-card-sub">Fin de semana hasta las 22:00</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label"><i class="fa-solid fa-phone"></i> CONTACTO DIRECTO</div>
+          <div class="info-card-value">+591 4 XXX-XXXX</div>
+          <div class="info-card-sub">WhatsApp disponible durante la feria</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- REEMPLAZA DESDE <div id="productos"> HASTA EL CIERRE </div> -->
+
+<div id="productos">
+  <div class="section-title">PRODUCTOS EV &<br><span style="color:var(--green)">OFERTAS ESPECIALES</span></div>
+
+  <div class="ev-catalog-grid">
+
+    <!-- CARD 1 -->
+    <div class="ev-card">
+      <div class="ev-card-img-wrap">
+        <img src="http://tuquantum.com/wp-content/uploads/2026/03/CPX-PRO.png" alt="CPX PRO" class="ev-card-img" onerror="this.style.display='none'">
+        <div class="ev-card-img-fallback"><span>🛵</span></div>
+        
+      </div>
+      <div class="ev-card-body">
+        <div class="ev-card-name">CPX PRO</div>
+        <div class="ev-card-desc">Moto eléctrica urbana · Autonomía 120km · Carga rápida</div>
+        <div class="ev-card-price">Bs. 12.500 <s>Bs. 15.000</s></div>
+      </div>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="ev-card">
+      <div class="ev-card-img-wrap">
+        <img src="http://tuquantum.com/wp-content/uploads/2026/03/Flashride.png" alt="Flahride" class="ev-card-img" onerror="this.style.display='none'">
+        <div class="ev-card-img-fallback"><span>🚗</span></div>
+        
+      </div>
+      <div class="ev-card-body">
+        <div class="ev-card-name">Flashride</div>
+        <div class="ev-card-desc">Microauto eléctrico · 4 pasajeros · Motor 30kW</div>
+        <div class="ev-card-price">Bs. 45.000 <s>Bs. 52.000</s></div>
+      </div>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="ev-card">
+      <div class="ev-card-img-wrap">
+        <img src="http://tuquantum.com/wp-content/uploads/2026/03/luna-pro.png" alt="Luna pro" class="ev-card-img" onerror="this.style.display='none'">
+        <div class="ev-card-img-fallback"><span>🏍️</span></div>
+      </div>
+      <div class="ev-card-body">
+        <div class="ev-card-name">Luna pro</div>
+        <div class="ev-card-desc">Moto eléctrica · 0–60 en 4s · 150km autonomía</div>
+        <div class="ev-card-price">Bs. 18.900 <s>Bs. 22.000</s></div>
+      </div>
+    </div>
+
+    
+    <div class="ev-card">
+  <div class="ev-card-img-wrap ev-card-img-wrap--zoomout">
+    <img src="http://tuquantum.com/wp-content/uploads/2026/03/STARTO.png" alt="Starto" class="ev-card-img" onerror="this.style.display='none'">
+  </div>
+  <div class="ev-card-body">
+    <div class="ev-card-name">Starto</div>
+    <div class="ev-card-desc">SUV eléctrico familiar · 300km autonomía · AWD</div>
+    <div class="ev-card-price">Bs. 89.000 <s>Bs. 98.000</s></div>
+  </div>
+</div>
+
+    <!-- CARD 5 -->
+    <div class="ev-card">
+      <div class="ev-card-img-wrap">
+        <img src="http://tuquantum.com/wp-content/uploads/2026/03/TC-super-soco.png" alt="TC Super Soco" class="ev-card-img" onerror="this.style.display='none'">
+        <div class="ev-card-img-fallback"><span>🛵</span></div>
+      </div>
+      <div class="ev-card-body">
+        <div class="ev-card-name">TC Super Soco</div>
+        <div class="ev-card-desc">Scooter silencioso · Ideal reparto · Batería extraíble</div>
+        <div class="ev-card-price">Bs. 8.200 <s>Bs. 9.500</s></div>
+      </div>
+    </div>
+
+    <!-- CARD 6 -->
+    <div class="ev-card">
+      <div class="ev-card-img-wrap">
+        <img src="http://tuquantum.com/wp-content/uploads/2026/03/TC-WANDERER-PRO.png" alt="TC Wanderer Pro" class="ev-card-img" onerror="this.style.display='none'">
+        <div class="ev-card-img-fallback"><span>🚗</span></div>
+        
+      </div>
+      <div class="ev-card-body">
+        <div class="ev-card-name">TC Wanderer Pro</div>
+        <div class="ev-card-desc">Sedán ejecutivo · Carga tipo 2 · Interior premium</div>
+        <div class="ev-card-price">Bs. 67.000 <s>Bs. 75.000</s></div>
+      </div>
+    </div>
+
+    <!-- CARD 7 -->
+    <div class="ev-card">
+      <div class="ev-card-img-wrap">
+        <img src="http://tuquantum.com/wp-content/uploads/2026/03/TC-WANDERER.png" alt="TC Wanderer" class="ev-card-img" onerror="this.style.display='none'">
+        <div class="ev-card-img-fallback"><span>🏍️</span></div>
+      </div>
+      <div class="ev-card-body">
+        <div class="ev-card-name">TC Wanderer</div>
+        <div class="ev-card-desc">Sedán familiar · Carga tipo 2 · Interior premium</div>
+        <div class="ev-card-price">Bs. 14.500 <s>Bs. 17.000</s></div>
+      </div>
+    </div>
+
+    <!-- CARD 8 -->
+    <div class="ev-card">
+      <div class="ev-card-img-wrap">
+        <img src="http://tuquantum.com/wp-content/uploads/2026/03/Trooper.png" alt="Trooper" class="ev-card-img" onerror="this.style.display='none'">
+        <div class="ev-card-img-fallback"><span>🚙</span></div>
+        
+      </div>
+      <div class="ev-card-body">
+        <div class="ev-card-name">Trooper</div>
+        <div class="ev-card-desc">Pickup eléctrica · Doble cabina · 350km autonomía</div>
+        <div class="ev-card-price">Bs. 110.000 <s>Bs. 125.000</s></div>
+      </div>
+    </div>
+
+    <!-- CARD 9 -->
+    <div class="ev-card">
+      <div class="ev-card-img-wrap">
+        <img src="http://tuquantum.com/wp-content/uploads/2026/03/ts-street-hunter-pro-doble-bateria.png" alt="Ts Street Hunter pro (doble bateria)" class="ev-card-img" onerror="this.style.display='none'">
+        <div class="ev-card-img-fallback"><span>🛵</span></div>
+      </div>
+      <div class="ev-card-body">
+        <div class="ev-card-name">Ts Street Hunter pro (doble bateria)</div>
+        <div class="ev-card-desc">Modelo mini · Ideal ciudad · Peso 60kg · Plegable</div>
+        <div class="ev-card-price">Bs. 5.800 <s>Bs. 7.000</s></div>
+      </div>
+    </div>
+
+    <!-- CARD 10 -->
+    <div class="ev-card">
+      <div class="ev-card-img-wrap ev-card-img-wrap--zoomout">
+        <img src="http://tuquantum.com/wp-content/uploads/2026/03/ts-street-hunter-pro.png" alt="Ts Street Hunter Pro" class="ev-card-img" onerror="this.style.display='none'">
+        <div class="ev-card-img-fallback"><span>🚗</span></div>
+        
+      </div>
+      <div class="ev-card-body">
+        <div class="ev-card-name">Ts Street Hunter Pro</div>
+        <div class="ev-card-desc">Citycar eléctrico · 2 plazas · Carga 4h · App control</div>
+        <div class="ev-card-price">Bs. 32.000 <s>Bs. 38.000</s></div>
+      </div>
+    </div>
+
+    <!-- CARD 11 -->
+    <div class="ev-card">
+      <div class="ev-card-img-wrap">
+        <img src="http://tuquantum.com/wp-content/uploads/2026/03/TS-Street-Hunter.png" alt="Ts Street Hunter" class="ev-card-img" onerror="this.style.display='none'">
+        <div class="ev-card-img-fallback"><span>🏍️</span></div>
+      </div>
+      <div class="ev-card-body">
+        <div class="ev-card-name">Ts Street Hunter</div>
+        <div class="ev-card-desc">Trail eléctrica · Todo terreno · Suspensión larga</div>
+        <div class="ev-card-price">Bs. 21.000 <s>Bs. 25.000</s></div>
+      </div>
+    </div>
+
+    <!-- CARD 12 -->
+    <div class="ev-card">
+      <div class="ev-card-img-wrap">
+        <img src="http://tuquantum.com/wp-content/uploads/2026/03/E4-blanca.png" alt="E4 Blanca" class="ev-card-img" onerror="this.style.display='none'">
+        <div class="ev-card-img-fallback"><span>🚙</span></div>
+        
+      </div>
+      <div class="ev-card-body">
+        <div class="ev-card-name">E4 Blanca</div>
+        <div class="ev-card-desc">Van eléctrica · 7 pasajeros · Ideal familia · Roof solar</div>
+        <div class="ev-card-price">Bs. 95.000 <s>Bs. 108.000</s></div>
+      </div>
+    </div>
+
+    <!-- CARD 13 -->
+    <div class="ev-card">
+      <div class="ev-card-img-wrap">
+        <img src="http://tuquantum.com/wp-content/uploads/2026/03/E4-Gris-claro.png" alt="E4 Gris Claro" class="ev-card-img" onerror="this.style.display='none'">
+        <div class="ev-card-img-fallback"><span>🛵</span></div>
+      </div>
+      <div class="ev-card-body">
+        <div class="ev-card-name">E4 Gris Claro</div>
+        <div class="ev-card-desc">Naked eléctrica · Estilo agresivo · 180km autonomía</div>
+        <div class="ev-card-price">Bs. 16.500 <s>Bs. 19.000</s></div>
+      </div>
+    </div>
+
+    <!-- CARD 14 -->
+    <div class="ev-card">
+      <div class="ev-card-img-wrap">
+        <img src="http://tuquantum.com/wp-content/uploads/2026/03/Equte-blanco.png" alt="Equte blanco" class="ev-card-img" onerror="this.style.display='none'">
+        <div class="ev-card-img-fallback"><span>🚗</span></div>
+        
+      </div>
+      <div class="ev-card-body">
+        <div class="ev-card-name">Equte blanco</div>
+        <div class="ev-card-desc">Coupé deportivo · 280kW · 0–100 en 3.2s · Techo solar</div>
+        <div class="ev-card-price">Bs. 135.000 <s>Bs. 150.000</s></div>
+      </div>
+    </div>
+
+    <!-- CARD 15 -->
+    <div class="ev-card">
+      <div class="ev-card-img-wrap">
+        <img src="http://tuquantum.com/wp-content/uploads/2026/03/Equte-gris.png" alt="Equte gris" class="ev-card-img" onerror="this.style.display='none'">
+        <div class="ev-card-img-fallback"><span>🏍️</span></div>
+      </div>
+      <div class="ev-card-body">
+        <div class="ev-card-name">Equte gris</div>
+        <div class="ev-card-desc">Estilo retro eléctrico · Cuero vegano · Tacómetro digital</div>
+        <div class="ev-card-price">Bs. 19.200 <s>Bs. 22.500</s></div>
+      </div>
+    </div>
+
+    <!-- CARD 16 -->
+    <div class="ev-card">
+      <div class="ev-card-img-wrap">
+        <img src="http://tuquantum.com/wp-content/uploads/2026/03/Equte-plateado.png" alt="Equte plateado" class="ev-card-img" onerror="this.style.display='none'">
+        <div class="ev-card-img-fallback"><span>🚙</span></div>
+        
+      </div>
+      <div class="ev-card-body">
+        <div class="ev-card-name">Equte plateado</div>
+        <div class="ev-card-desc">Off-road 4x4 · 500Nm torque · Protección IP67</div>
+        <div class="ev-card-price">Bs. 118.000 <s>Bs. 132.000</s></div>
+      </div>
+    </div>
+
+    <!-- CARD 17 -->
+    <div class="ev-card">
+      <div class="ev-card-img-wrap">
+        <img src="http://tuquantum.com/wp-content/uploads/2026/03/FARIZON-H8E.png" alt="Farizon H8E" class="ev-card-img" onerror="this.style.display='none'">
+        <div class="ev-card-img-fallback"><span>🛵</span></div>
+      </div>
+      <div class="ev-card-body">
+        <div class="ev-card-name">Farizon H8E</div>
+        <div class="ev-card-desc">Custom chopper eléctrica · Edición limitada · 200km</div>
+        <div class="ev-card-price">Bs. 27.000 <s>Bs. 31.000</s></div>
+      </div>
+    </div>
+
+    <!-- CARD 18 -->
+    <div class="ev-card">
+      <div class="ev-card-img-wrap ev-card-img-wrap--zoomout">
+        <img src="http://tuquantum.com/wp-content/uploads/2026/03/ION.png" alt="ION" class="ev-card-img" onerror="this.style.display='none'">
+        <div class="ev-card-img-fallback"><span>🚗</span></div>
+        
+      </div>
+      <div class="ev-card-body">
+        <div class="ev-card-name">ION</div>
+        <div class="ev-card-desc">Modelo insignia Quantum · Full equip · 400km autonomía</div>
+        <div class="ev-card-price">Bs. 160.000 <s>Bs. 180.000</s></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+    <!-- ════════════════════════════════════
+         CARRUSEL RESERVAS 2026
+         (entre Productos y Preventa Karting)
+    ════════════════════════════════════ -->
+    <hr class="divider">
+
+    <div class="section-label"><i class="fa-solid fa-calendar-check"></i> RESERVAS EXCLUSIVAS</div>
+    <div class="section-title">RESERVAS<br><span style="color:var(--green)">2026</span></div>
+
+    <div class="reservas-section">
+      <div class="reservas-carousel-wrap">
+        <div class="reservas-track" id="reservasTrack">
+
+          <!-- SLIDE 1 -->
+          <div class="reservas-slide">
+            <div class="reservas-img-wrap">
+              <div class="reservas-img-placeholder">
+                <span class="r-icon">⚡</span>
+                <span class="r-img-label">IMAGEN · RESERVA 01</span>
+              </div>
+            </div>
+            <div class="reservas-content">
+              <div class="reservas-slide-tag"><i class="fa-solid fa-bolt"></i> PAQUETE PREMIUM</div>
+              <div class="reservas-slide-title">Test Drive<br><span>EV Exclusivo</span></div>
+              <div class="reservas-slide-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</div>
+              <div class="reservas-slide-meta">
+                <span class="reservas-meta-pill green"><i class="fa-solid fa-calendar"></i> MAYO 2026</span>
+                <span class="reservas-meta-pill yellow"><i class="fa-solid fa-tag"></i> PRECIO ESPECIAL</span>
+              </div>
+              <button class="reservas-slide-cta" onclick="switchTab('karting')"><i class="fa-solid fa-ticket"></i> RESERVAR AHORA</button>
+            </div>
+          </div>
+
+          <!-- SLIDE 2 -->
+          <div class="reservas-slide">
+            <div class="reservas-img-wrap">
+              <div class="reservas-img-placeholder">
+                <span class="r-icon">🏁</span>
+                <span class="r-img-label">IMAGEN · RESERVA 02</span>
+              </div>
+            </div>
+            <div class="reservas-content">
+              <div class="reservas-slide-tag"><i class="fa-solid fa-flag-checkered"></i> KARTING EV</div>
+              <div class="reservas-slide-title">Sesión de<br><span>Karting Eléctrico</span></div>
+              <div class="reservas-slide-text">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</div>
+              <div class="reservas-slide-meta">
+                <span class="reservas-meta-pill green"><i class="fa-solid fa-users"></i> GRUPOS 4+</span>
+                <span class="reservas-meta-pill yellow"><i class="fa-solid fa-clock"></i> 8 MIN / SESIÓN</span>
+              </div>
+              <button class="reservas-slide-cta" onclick="switchTab('karting')"><i class="fa-solid fa-ticket"></i> RESERVAR AHORA</button>
+            </div>
+          </div>
+
+          <!-- SLIDE 3 -->
+          <div class="reservas-slide">
+            <div class="reservas-img-wrap">
+              <div class="reservas-img-placeholder">
+                <span class="r-icon">🔋</span>
+                <span class="r-img-label">IMAGEN · RESERVA 03</span>
+              </div>
+            </div>
+            <div class="reservas-content">
+              <div class="reservas-slide-tag"><i class="fa-solid fa-charging-station"></i> DIAGNÓSTICO</div>
+              <div class="reservas-slide-title">Diagnóstico<br><span>Batería EV</span></div>
+              <div class="reservas-slide-text">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus nulla vestibulum lorem.</div>
+              <div class="reservas-slide-meta">
+                <span class="reservas-meta-pill green"><i class="fa-solid fa-shield-check"></i> GARANTIZADO</span>
+                <span class="reservas-meta-pill yellow"><i class="fa-solid fa-percent"></i> -28% FERIA</span>
+              </div>
+              <button class="reservas-slide-cta" onclick="openQRModal()"><i class="fa-solid fa-qrcode"></i> VER PRECIO</button>
+            </div>
+          </div>
+
+          <!-- SLIDE 4 -->
+          <div class="reservas-slide">
+            <div class="reservas-img-wrap">
+              <div class="reservas-img-placeholder">
+                <span class="r-icon">🏆</span>
+                <span class="r-img-label">IMAGEN · RESERVA 04</span>
+              </div>
+            </div>
+            <div class="reservas-content">
+              <div class="reservas-slide-tag"><i class="fa-solid fa-trophy"></i> VIP PACK</div>
+              <div class="reservas-slide-title">Pack VIP<br><span>All-In EV</span></div>
+              <div class="reservas-slide-text">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.</div>
+              <div class="reservas-slide-meta">
+                <span class="reservas-meta-pill green"><i class="fa-solid fa-star"></i> EXCLUSIVO</span>
+                <span class="reservas-meta-pill yellow"><i class="fa-solid fa-bolt"></i> 2 CARRERAS</span>
+              </div>
+              <button class="reservas-slide-cta" onclick="switchTab('karting')"><i class="fa-solid fa-ticket"></i> RESERVAR VIP</button>
+            </div>
+          </div>
+
+        </div><!-- /reservasTrack -->
+
+        <!-- Controles -->
+        <div class="reservas-controls">
+          <div class="reservas-dots" id="reservasDots">
+            <button class="reservas-dot active" onclick="goToReservasSlide(0)"></button>
+            <button class="reservas-dot" onclick="goToReservasSlide(1)"></button>
+            <button class="reservas-dot" onclick="goToReservasSlide(2)"></button>
+            <button class="reservas-dot" onclick="goToReservasSlide(3)"></button>
+          </div>
+          <span class="reservas-counter-label" id="reservasCounter">01 / 04</span>
+          <div class="reservas-nav-btns">
+            <button class="reservas-nav-btn" onclick="prevReservasSlide()"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="reservas-nav-btn" onclick="nextReservasSlide()"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- FIN CARRUSEL RESERVAS 2026 -->
+
+    <hr class="divider">
+
+    <div class="section-title">PREVENTA<br><span style="color:var(--green)"><i class="fa-solid fa-ticket"></i> TICKETS KARTING EV</span></div>
+
+    <div class="karting-block">
+      <div class="corner-dec tl"></div><div class="corner-dec tr"></div>
+      <div class="corner-dec bl"></div><div class="corner-dec br"></div>
+      <div class="karting-inner">
+        <div class="imagen">
+          <img src="http://tuquantum.com/wp-content/uploads/2026/03/Preventa-habilitada-karting-web.jpg.jpeg">
+          
+        </div>
+        <div class="karting-info">
+          <div class="section-label"><i class="fa-solid fa-ticket"></i> KARTING EV — PREVENTA EXCLUSIVA</div>
+          <div class="ticket-price-display">Bs. 30 <small>/ ticket</small></div>
+          
+          <p style="font-size:0.9rem; line-height:1.7; color:var(--text); margin-bottom:1.5rem;">
+            Consigue tu ticket para el karting 100% eléctrico al precio más bajo antes de que se agoten.
+            La preventa cierra el <strong style="color:#fff">14 de Mayo</strong> o cuando se agoten los cupos.
+             <s style="color:var(--text-dim)"></s>
+          </p>
+          <button class="btn-primary" onclick="switchTab('karting')">VER CÓMO COMPRAR </button>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="section-label">05 — GRAN SORTEO</div>
+    <div class="section-title">SORTEO<br><span style="color:var(--green)">FEXXCO 2026</span></div>
+
+    <div class="sorteo-block">
+      <div class="corner-dec tl"></div><div class="corner-dec br"></div>
+      <div class="sorteo-grid">
+        <div>
+          <p style="font-size:0.9rem; line-height:1.7; margin-bottom:1rem;">
+            Participá en el <strong style="color:#fff">Gran Sorteo FEXXCO 2026</strong> de Quantum EV.
+            Cada compra en nuestro stand te da una oportunidad de ganar.
+          </p>
+          <ul class="premios-list">
+            <li>
+              <span class="premio-num"><i class="fa-solid fa-trophy"></i></span>
+              <div>
+                <div style="font-family:'Orbitron',monospace; font-size:0.8rem; color:#fff; font-weight:700;">PRIMER PREMIO</div>
+                <div style="font-size:0.85rem; color:var(--text); margin-top:0.2rem;">Kit completo de carga EV domiciliaria + 5 servicios gratis</div>
+              </div>
+            </li>
+            <li>
+              <span class="premio-num"><i class="fa-solid fa-medal"></i></span>
+              <div>
+                <div style="font-family:'Orbitron',monospace; font-size:0.8rem; color:#fff; font-weight:700;">SEGUNDO PREMIO</div>
+                <div style="font-size:0.85rem; color:var(--text); margin-top:0.2rem;">3 tickets karting EV + diagnóstico completo de batería</div>
+              </div>
+            </li>
+            <li>
+              <span class="premio-num"><i class="fa-solid fa-award"></i></span>
+              <div>
+                <div style="font-family:'Orbitron',monospace; font-size:0.8rem; color:#fff; font-weight:700;">TERCER PREMIO</div>
+                <div style="font-size:0.85rem; color:var(--text); margin-top:0.2rem;">Accesorios EV racing + 2 revisiones de carga gratis</div>
+              </div>
+            </li>
+            <li>
+              <span class="premio-num"><i class="fa-solid fa-star"></i></span>
+              <div>
+                <div style="font-family:'Orbitron',monospace; font-size:0.8rem; color:#fff; font-weight:700;">PREMIOS ADICIONALES</div>
+                <div style="font-size:0.85rem; color:var(--text); margin-top:0.2rem;">Kits de accesorios, descuentos y sorpresas especiales</div>
+              </div>
+            </li>
+          </ul>
+          <div style="font-family:'Share Tech Mono',monospace; font-size:0.65rem; color:var(--text-dim); margin-top:1rem; letter-spacing:0.1em;">
+            * Sorteo el último día de FEXXCO 2026. Bases en stand B-14.
+          </div>
+        </div>
+
+        <div>
+          <div style="font-family:'Orbitron',monospace; font-size:0.8rem; font-weight:700; color:var(--green); letter-spacing:0.1em; margin-bottom:1rem;">CÓMO PARTICIPAR</div>
+          <div class="sorteo-steps">
+            <div class="step">
+              <span class="step-num">1</span>
+              <div class="step-text"><strong>Realiza una compra</strong> en el stand B-14 de Quantum EV durante FEXXCO 2026.</div>
+            </div>
+            <div class="step">
+              <span class="step-num">2</span>
+              <div class="step-text"><strong>Guarda tu ticket</strong> de compra — cada Bs. 50 = 1 papeleta de sorteo.</div>
+            </div>
+            <div class="step">
+              <span class="step-num">3</span>
+              <div class="step-text"><strong>Registr tu papeleta</strong> escaneando el QR del stand o llenando el formulario.</div>
+            </div>
+            <div class="step">
+              <span class="step-num">4</span>
+              <div class="step-text"><strong>Espera el sorteo EN VIVO</strong> el último día de feria. ¡Puedes ganar desde casa!</div>
+            </div>
+          </div>
+          <div style="margin-top:1.5rem; background:rgba(47,182,118,0.05); border:1px solid rgba(47,182,118,0.2); padding:1rem; font-family:'Share Tech Mono',monospace; font-size:0.7rem; line-height:1.8;">
+            <div style="color:var(--green);"><i class="fa-solid fa-gift"></i> SORTEO FINAL</div>
+            <div>Último día FEXXCO 2026 · 19:00 hrs</div>
+            <div style="color:var(--text-dim); margin-top:0.3rem;">EN VIVO desde el stand B-14</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+  </div><!-- /info-content -->
+
+  <!-- CARRUSEL FULL-WIDTH fuera del contenedor max-width -->
+  <div style="padding: 0 0 0.5rem;">
+    <div class="news-section-wrap">
+      <div class="section-label"><i class="fa-solid fa-newspaper"></i> NOTICIAS RECIENTES</div>
+      <div class="section-title" style="margin-bottom:1.5rem;">QUANTUM EV<br><span style="color:var(--green)">EN LOS MEDIOS</span></div>
+    </div>
+
+    <div style="position:relative; overflow:hidden; border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:var(--card);">
+      <div class="news-fade-l"></div>
+      <div class="news-fade-r"></div>
+
+      <div class="news-track" id="newsTrack">
+
+        <!-- ══ GRUPO A ══ -->
+        <div class="news-inner">
+          <div class="news-card">
+            <div class="news-card-img-wrap">
+              <img class="news-card-img" src="http://tuquantum.com/wp-content/uploads/2025/09/Reconocimiento-a-la-𝐌𝐞𝐣𝐨𝐫-𝐏𝐫𝐞𝐬𝐞𝐧𝐭𝐚𝐜𝐢o𝐧-𝐝𝐞𝐥-𝐒𝐞𝐜𝐭𝐨𝐫-𝐈𝐧𝐝𝐮𝐬𝐭𝐫𝐢𝐚𝐥-en-la-FEXCO-2025.jpg" alt="Reconocimiento a la 𝐌𝐞𝐣𝐨𝐫-𝐏𝐫𝐞𝐬𝐞𝐧𝐭𝐚𝐜𝐢o𝐧 𝐝𝐞𝐥 𝐒𝐞𝐜𝐭𝐨𝐫 𝐈𝐧𝐝𝐮𝐬𝐭𝐫𝐢𝐚𝐥" onerror="this.parentElement.style.background='#0b1a12'">
+            </div>
+            <div class="news-card-body">
+              <div class="news-card-tag">Reconocimiento a la 𝐌𝐞𝐣𝐨𝐫 𝐏𝐫𝐞𝐬𝐞𝐧𝐭𝐚𝐜𝐢o𝐧 𝐝𝐞𝐥 𝐒𝐞𝐜𝐭𝐨𝐫 𝐈𝐧𝐝𝐮𝐬𝐭𝐫𝐢𝐚𝐥</div>
+              <div class="news-card-title">Quantum brilla con luz propia</div>
+            </div>
+          </div>
+
+          <div class="news-card">
+            <div class="news-card-img-wrap">
+              <img class="news-card-img" src="URL_IMAGEN_2" alt="Microauto" onerror="this.parentElement.style.background='#0b1a12'">
+            </div>
+            <div class="news-card-body">
+              <div class="news-card-tag">TECNOLOGÍA EV</div>
+              <div class="news-card-title">La start-up boliviana Quantum sorprende con un microauto eléctrico</div>
+            </div>
+          </div>
+
+          <div class="news-card">
+            <div class="news-card-img-wrap">
+              <img class="news-card-img" src="URL_IMAGEN_3" alt="Litio" onerror="this.parentElement.style.background='#0b1a12'">
+            </div>
+            <div class="news-card-body">
+              <div class="news-card-tag">INDUSTRIA DEL LITIO</div>
+              <div class="news-card-title">Creador de Quantum, el eléctrico boliviano, analiza industria del litio</div>
+            </div>
+          </div>
+
+          <div class="news-card">
+            <div class="news-card-img-wrap">
+              <img class="news-card-img" src="URL_IMAGEN_4" alt="Movilidad" onerror="this.parentElement.style.background='#0b1a12'">
+            </div>
+            <div class="news-card-body">
+              <div class="news-card-tag">MOVILIDAD URBANA</div>
+              <div class="news-card-title">Quantum EV redefine la movilidad urbana sostenible en Bolivia</div>
+            </div>
+          </div>
+
+          <div class="news-card">
+            <div class="news-card-img-wrap">
+              <img class="news-card-img" src="URL_IMAGEN_5" alt="FEXXCO" onerror="this.parentElement.style.background='#0b1a12'">
+            </div>
+            <div class="news-card-body">
+              <div class="news-card-tag">FEXXCO 2026</div>
+              <div class="news-card-title">Quantum EV presenta su karting 100% eléctrico en FEXXCO 2026</div>
+            </div>
+          </div>
+
+          <div class="news-card">
+            <div class="news-card-img-wrap">
+              <img class="news-card-img" src="URL_IMAGEN_6" alt="Innovacion" onerror="this.parentElement.style.background='#0b1a12'">
+            </div>
+            <div class="news-card-body">
+              <div class="news-card-tag">INNOVACIÓN</div>
+              <div class="news-card-title">Bolivia avanza hacia la electromovilidad de la mano de Quantum</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ GRUPO B — copia exacta para loop seamless ══ -->
+        <div class="news-inner" aria-hidden="true">
+          <div class="news-card">
+            <div class="news-card-img-wrap">
+              <img class="news-card-img" src="URL_IMAGEN_1" alt="" onerror="this.parentElement.style.background='#0b1a12'">
+            </div>
+            <div class="news-card-body">
+              <div class="news-card-tag">WALL STREET JOURNAL</div>
+              <div class="news-card-title">Quantum brilla con luz propia: El Wall Street Journal tuvo en portada a la automotriz boliviana</div>
+            </div>
+          </div>
+
+          <div class="news-card">
+            <div class="news-card-img-wrap">
+              <img class="news-card-img" src="URL_IMAGEN_2" alt="" onerror="this.parentElement.style.background='#0b1a12'">
+            </div>
+            <div class="news-card-body">
+              <div class="news-card-tag">TECNOLOGÍA EV</div>
+              <div class="news-card-title">La start-up boliviana Quantum sorprende con un microauto eléctrico</div>
+            </div>
+          </div>
+
+          <div class="news-card">
+            <div class="news-card-img-wrap">
+              <img class="news-card-img" src="URL_IMAGEN_3" alt="" onerror="this.parentElement.style.background='#0b1a12'">
+            </div>
+            <div class="news-card-body">
+              <div class="news-card-tag">INDUSTRIA DEL LITIO</div>
+              <div class="news-card-title">Creador de Quantum, el eléctrico boliviano, analiza industria del litio</div>
+            </div>
+          </div>
+
+          <div class="news-card">
+            <div class="news-card-img-wrap">
+              <img class="news-card-img" src="URL_IMAGEN_4" alt="" onerror="this.parentElement.style.background='#0b1a12'">
+            </div>
+            <div class="news-card-body">
+              <div class="news-card-tag">MOVILIDAD URBANA</div>
+              <div class="news-card-title">Quantum EV redefine la movilidad urbana sostenible en Bolivia</div>
+            </div>
+          </div>
+
+          <div class="news-card">
+            <div class="news-card-img-wrap">
+              <img class="news-card-img" src="URL_IMAGEN_5" alt="" onerror="this.parentElement.style.background='#0b1a12'">
+            </div>
+            <div class="news-card-body">
+              <div class="news-card-tag">FEXXCO 2026</div>
+              <div class="news-card-title">Quantum EV presenta su karting 100% eléctrico en FEXXCO 2026</div>
+            </div>
+          </div>
+
+          <div class="news-card">
+            <div class="news-card-img-wrap">
+              <img class="news-card-img" src="URL_IMAGEN_6" alt="" onerror="this.parentElement.style.background='#0b1a12'">
+            </div>
+            <div class="news-card-body">
+              <div class="news-card-tag">INNOVACIÓN</div>
+              <div class="news-card-title">Bolivia avanza hacia la electromovilidad de la mano de Quantum</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</section><!-- /section#info -->
+
+
+<!-- ════ SECTION: KARTING EV ════ -->
+<section id="karting" class="section">
+  <div class="karting-page">
+
+    <div class="karting-hero-banner">
+      <div class="corner-dec tl"></div><div class="corner-dec br"></div>
+      <div class="khb-label"><i class="fa-solid fa-bolt"></i> KARTING 100% ELÉCTRICO · FEXXCO 2026</div>
+      <div class="khb-title">PREVENTA<br><span>KARTING EV</span></div>
+      <div class="khb-meta">
+        <span class="khb-badge hot"><i class="fa-solid fa-fire"></i> ¡QUEDAN POCOS!</span>
+        <span class="khb-badge green"><i class="fa-solid fa-bolt"></i> 100% ELÉCTRICO</span>
+        <span class="khb-badge yellow"><i class="fa-solid fa-tag"></i> PRECIO ESPECIAL</span>
+      </div>
+    </div>
+
+    <div class="karting-subtabs">
+      <button class="subtab active" onclick="switchSubtab(this,'sub-comprar')"><i class="fa-solid fa-cart-shopping"></i> CÓMO COMPRAR</button>
+      <button class="subtab"        onclick="switchSubtab(this,'sub-galeria')"><i class="fa-solid fa-images"></i> GALERÍA 2025</button>
+      <button class="subtab"        onclick="switchSubtab(this,'sub-info-karting')"><i class="fa-solid fa-circle-info"></i> INFO & PRECIOS</button>
+    </div>
+
+    <div id="sub-comprar" class="subtab-content active">
+
+      <div class="stock-widget">
+        <div class="stock-num-block">
+          <span class="stock-big">TICKETS DISPONIBLES</span>
+          <span class="stock-slash"></span>
+          <span class="stock-total"></span>
+        </div>
+        
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <span class="step-card-icon"><i class="fa-solid fa-qrcode"></i></span>
+          <div class="step-card-num">01</div>
+          <div class="step-card-title">ESCANEA EL QR</div>
+          <div class="step-card-text">Escanea el código QR, seleccioná tu modalidad y realizá el pago de forma segura.</div>
+        </div>
+        <div class="step-card">
+          <span class="step-card-icon"><i class="fa-solid fa-circle-check"></i> <i class="fa-brands fa-whatsapp"></i></span>
+          <div class="step-card-num">02</div>
+          <div class="step-card-title">VERIFICA TU PAGO</div>
+          <div class="step-card-text">Contactanos al WhatsApp corporativo enviando el comprobante para verificar tu reserva.</div>
+        </div>
+        <div class="step-card">
+          <span class="step-card-icon"><i class="fa-solid fa-ticket"></i></span>
+          <div class="step-card-num">03</div>
+          <div class="step-card-title">RECIBE TU TICKET</div>
+          <div class="step-card-text">Una vez verificado el pago, recibís tu ticket de reserva de karting EV por WhatsApp.</div>
+        </div>
+      </div>
+
+      <div class="tiers-section">
+        <div class="tiers-title"><i class="fa-solid fa-tag"></i> MODALIDADES & PRECIOS — PREVENTA</div>
+        <div class="price-tiers">
+          <div class="price-tier">
+            <span class="tier-icon">🏆</span>
+            <div class="tier-info">
+              <div class="tier-name vip">VIP PACK EV</div>
+              <div class="tier-desc">2 carreras + pit lane tour + foto oficial</div>
+            </div>
+            <div class="tier-price-block">
+              <div class="tier-price">Bs. 220</div>
+              <div class="tier-old">Bs. 300</div>
+              <div class="tier-save">AHORRÁS Bs. 80</div>
+            </div>
+          </div>
+
+          <div class="price-tier featured">
+            <span class="tier-icon">⚡</span>
+            <div class="tier-info">
+              <div class="tier-name standard">ESTÁNDAR EV <span style="font-family:'Share Tech Mono',monospace; font-size:0.55rem; color:var(--yellow); background:rgba(255,204,0,0.1); padding:0.1rem 0.4rem; border:1px solid rgba(255,204,0,0.3); margin-left:0.4rem;">MÁS POPULAR</span></div>
+              <div class="tier-desc">1 carrera · 10 vueltas · 100% eléctrico</div>
+            </div>
+            <div class="tier-price-block">
+              <div class="tier-price">Bs. 120</div>
+              <div class="tier-old">Bs. 160</div>
+              <div class="tier-save">AHORRÁS Bs. 40</div>
+            </div>
+          </div>
+
+          <div class="price-tier">
+            <span class="tier-icon">👥</span>
+            <div class="tier-info">
+              <div class="tier-name group">GRUPO EV (4+)</div>
+              <div class="tier-desc">Precio por persona · mínimo 4 personas</div>
+            </div>
+            <div class="tier-price-block">
+              <div class="tier-price">Bs. 100</div>
+              <div class="tier-old">por persona</div>
+              <div class="tier-save">PRECIO GRUPAL</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-compra">
+        <div class="cta-compra-info">
+          <div class="cta-compra-price">Bs. 120 <small>· ticket estándar</small></div>
+          <div class="cta-compra-desc">Preventa exclusiva · En feria <s>Bs. 160</s></div>
+        </div>
+        <button class="btn-comprar-online" onclick="openQRModal()">
+          <i class="fa-solid fa-ticket"></i>
+          COMPRAR TICKET ONLINE
+        </button>
+      </div>
+
+      <label>REQUISITOS</label>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:1rem; margin-bottom:2rem;">
+        <div class="info-card">
+          <div class="info-card-label">REQUISITO 1</div>
+          <div class="info-card-value">Pista EV Principal · FEXXCO 2026</div>
+          <div class="info-card-sub">A 50m del stand Quantum B-14</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">REQUISITO 2</div>
+          <div class="info-card-value">10 vueltas / ~8 minutos</div>
+          <div class="info-card-sub">Briefing de seguridad EV previo incluido</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">REQUISITO 3</div>
+          <div class="info-card-value">12 años / 1.40m de altura</div>
+          <div class="info-card-sub">Menores de 16 con consentimiento adulto</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label"><i class="fa-solid fa-bolt"></i> REQUISITO 4</div>
+          <div class="info-card-value">Motor 100% eléctrico · 0 emisiones</div>
+          <div class="info-card-sub">Casco incluido · Ropa cómoda recomendada</div>
+        </div>
+      </div>
+
+    </div><!-- /sub-comprar -->
+
+    <div id="sub-galeria" class="subtab-content">
+      <div style="margin-bottom:2rem;">
+        <div class="section-label">📸 FOTOS & VIDEOS EV</div>
+        <div class="section-title" style="font-size:1.8rem;">FEXXCO 2025<br><span style="color:var(--green)">MOMENTOS ÉPICOS</span></div>
+        <p style="font-size:0.9rem; color:var(--text); max-width:600px; line-height:1.7;">
+          Revivé lo mejor de la edición anterior. El karting eléctrico de FEXXCO 2025 fue un éxito total —
+          Este año viene con el doble de voltaje.
+        </p>
+      </div>
+
+      <div class="photo-gallery">
+        <div class="gallery-item"><div class="gallery-label"><span>⚡</span>KARTING EV 2025</div></div>
+        <div class="gallery-item"><div class="gallery-label"><span>🏁</span>LARGADA SILENCIOSA</div></div>
+        <div class="gallery-item"><div class="gallery-label"><span>🔋</span>CARGA EN PISTA</div></div>
+        <div class="gallery-item"><div class="gallery-label"><span>🏆</span>PREMIACIÓN EV</div></div>
+        <div class="gallery-item"><div class="gallery-label"><span>👥</span>EQUIPO QUANTUM EV</div></div>
+        <div class="gallery-item"><div class="gallery-label"><span>🚗</span>STAND FEXXCO 2025</div></div>
+      </div>
+
+      <div style="text-align:center; padding:2rem; background:var(--card); border:1px dashed var(--border);">
+        <div style="font-family:'Orbitron',monospace; font-size:0.8rem; color:var(--green); margin-bottom:1rem;">📹 VIDEOS DEL EVENTO EV</div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:1rem;">
+          <div style="background:#000; aspect-ratio:16/9; display:flex; align-items:center; justify-content:center; border:1px solid var(--border); cursor:pointer;">
+            <div style="text-align:center;">
+              <div style="font-size:3rem;">▶️</div>
+              <div style="font-family:'Share Tech Mono',monospace; font-size:0.65rem; color:var(--text-dim); margin-top:0.5rem;">KARTING EV 2025 — VOL.1</div>
+            </div>
+          </div>
+          <div style="background:#000; aspect-ratio:16/9; display:flex; align-items:center; justify-content:center; border:1px solid var(--border); cursor:pointer;">
+            <div style="text-align:center;">
+              <div style="font-size:3rem;">▶️</div>
+              <div style="font-family:'Share Tech Mono',monospace; font-size:0.65rem; color:var(--text-dim); margin-top:0.5rem;">KARTING EV 2025 — VOL.2</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="sub-info-karting" class="subtab-content">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem;">
+        <div>
+          <div class="section-label">ℹ️ INFORMACIÓN GENERAL</div>
+          <div class="section-title" style="font-size:1.8rem;">DETALLES<br><span style="color:var(--green)">KARTING EV</span></div>
+          <div style="display:flex; flex-direction:column; gap:1rem; margin-top:1.5rem;">
+            <div class="info-card">
+              <div class="info-card-label">📍 UBICACIÓN</div>
+              <div class="info-card-value">Pista EV Principal · FEXXCO 2026</div>
+              <div class="info-card-sub">A 50m del stand Quantum B-14</div>
+            </div>
+            <div class="info-card">
+              <div class="info-card-label">📏 DURACIÓN</div>
+              <div class="info-card-value">10 vueltas / ~8 minutos</div>
+              <div class="info-card-sub">Briefing de seguridad EV previo incluido</div>
+            </div>
+            <div class="info-card">
+              <div class="info-card-label">👶 EDAD MÍNIMA</div>
+              <div class="info-card-value">12 años / 1.40m de altura</div>
+              <div class="info-card-sub">Menores de 16 con consentimiento adulto</div>
+            </div>
+            <div class="info-card">
+              <div class="info-card-label"><i class="fa-solid fa-bolt"></i> TECNOLOGÍA</div>
+              <div class="info-card-value">Motor 100% eléctrico · 0 emisiones</div>
+              <div class="info-card-sub">Casco incluido · Ropa cómoda recomendada</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="section-label">📋 TÉRMINOS</div>
+          <div style="font-family:'Orbitron',monospace; font-size:0.8rem; font-weight:700; color:#fff; margin:1rem 0 0.5rem; letter-spacing:0.05em;">POLÍTICAS DE CANCELACIÓN</div>
+          <div class="sorteo-steps">
+            <div class="step">
+              <span class="step-num" style="font-size:1rem; color:var(--green);">✓</span>
+              <div class="step-text"><strong>Cancelación gratuita</strong> hasta 48hs antes de la fecha elegida.</div>
+            </div>
+            <div class="step">
+              <span class="step-num" style="font-size:1rem; color:var(--yellow);">!</span>
+              <div class="step-text"><strong>Reprogramación</strong> posible hasta 24hs antes sin cargo adicional.</div>
+            </div>
+            <div class="step">
+              <span class="step-num" style="font-size:1rem; color:var(--red);">✕</span>
+              <div class="step-text"><strong>No show</strong> sin aviso previo pierde el ticket. Consultar excepciones en stand.</div>
+            </div>
+          </div>
+          <div style="background:rgba(47,182,118,0.05); border:1px solid rgba(47,182,118,0.2); padding:1.5rem; margin-top:1.5rem;">
+            <div style="font-family:'Orbitron',monospace; font-size:0.75rem; color:var(--green); margin-bottom:1rem;">📞 CONSULTAS DIRECTAS</div>
+            <div style="font-family:'Share Tech Mono',monospace; font-size:0.8rem; line-height:2;">
+              WhatsApp: +591 77926888<br>
+              Stand: B-14 · Pabellón B
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════ MODAL QR ════ -->
+<div class="modal-overlay" id="qrModal" onclick="closeQRModalOutside(event)">
+  <div class="modal-box" id="qrModalBox">
+    <div class="modal-top-bar"></div>
+    <div class="modal-header">
+      <div class="modal-title"><i class="fa-solid fa-ticket"></i> COMPRAR TICKET — KARTING EV</div>
+      <button class="modal-close" onclick="closeQRModal()">✕</button>
+    </div>
+    <div class="modal-body">
+
+      <div class="modal-qr-wrap">
+        <div class="modal-qr-frame">
+          <svg class="qr-svg" viewBox="0 0 41 41" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+            <rect width="41" height="41" fill="white"/>
+            <rect x="0" y="0" width="7" height="7" fill="black"/>
+            <rect x="1" y="1" width="5" height="5" fill="white"/>
+            <rect x="2" y="2" width="3" height="3" fill="black"/>
+            <rect x="34" y="0" width="7" height="7" fill="black"/>
+            <rect x="35" y="1" width="5" height="5" fill="white"/>
+            <rect x="36" y="2" width="3" height="3" fill="black"/>
+            <rect x="0" y="34" width="7" height="7" fill="black"/>
+            <rect x="1" y="35" width="5" height="5" fill="white"/>
+            <rect x="2" y="36" width="3" height="3" fill="black"/>
+            <rect x="8" y="6" width="1" height="1" fill="black"/>
+            <rect x="10" y="6" width="1" height="1" fill="black"/>
+            <rect x="12" y="6" width="1" height="1" fill="black"/>
+            <rect x="14" y="6" width="1" height="1" fill="black"/>
+            <rect x="16" y="6" width="1" height="1" fill="black"/>
+            <rect x="18" y="6" width="1" height="1" fill="black"/>
+            <rect x="20" y="6" width="1" height="1" fill="black"/>
+            <rect x="22" y="6" width="1" height="1" fill="black"/>
+            <rect x="24" y="6" width="1" height="1" fill="black"/>
+            <rect x="26" y="6" width="1" height="1" fill="black"/>
+            <rect x="6" y="8" width="1" height="1" fill="black"/>
+            <rect x="6" y="10" width="1" height="1" fill="black"/>
+            <rect x="6" y="12" width="1" height="1" fill="black"/>
+            <rect x="6" y="14" width="1" height="1" fill="black"/>
+            <rect x="6" y="16" width="1" height="1" fill="black"/>
+            <rect x="6" y="18" width="1" height="1" fill="black"/>
+            <rect x="6" y="20" width="1" height="1" fill="black"/>
+            <rect x="6" y="22" width="1" height="1" fill="black"/>
+            <rect x="6" y="24" width="1" height="1" fill="black"/>
+            <rect x="6" y="26" width="1" height="1" fill="black"/>
+            <rect x="8" y="8" width="2" height="2" fill="black"/>
+            <rect x="11" y="8" width="1" height="2" fill="black"/>
+            <rect x="13" y="8" width="2" height="1" fill="black"/>
+            <rect x="16" y="8" width="3" height="2" fill="black"/>
+            <rect x="20" y="8" width="1" height="1" fill="black"/>
+            <rect x="22" y="8" width="2" height="2" fill="black"/>
+            <rect x="25" y="8" width="1" height="1" fill="black"/>
+            <rect x="27" y="8" width="2" height="2" fill="black"/>
+            <rect x="30" y="8" width="3" height="1" fill="black"/>
+            <rect x="34" y="8" width="2" height="2" fill="black"/>
+            <rect x="37" y="8" width="1" height="1" fill="black"/>
+            <rect x="8" y="11" width="1" height="1" fill="black"/>
+            <rect x="10" y="11" width="3" height="2" fill="black"/>
+            <rect x="14" y="11" width="1" height="1" fill="black"/>
+            <rect x="16" y="11" width="1" height="2" fill="black"/>
+            <rect x="18" y="11" width="2" height="1" fill="black"/>
+            <rect x="21" y="11" width="1" height="2" fill="black"/>
+            <rect x="23" y="11" width="3" height="1" fill="black"/>
+            <rect x="27" y="11" width="1" height="2" fill="black"/>
+            <rect x="29" y="11" width="2" height="1" fill="black"/>
+            <rect x="32" y="11" width="1" height="2" fill="black"/>
+            <rect x="35" y="11" width="2" height="1" fill="black"/>
+            <rect x="38" y="11" width="1" height="2" fill="black"/>
+            <rect x="8" y="14" width="2" height="2" fill="black"/>
+            <rect x="11" y="14" width="1" height="1" fill="black"/>
+            <rect x="13" y="14" width="3" height="2" fill="black"/>
+            <rect x="17" y="14" width="2" height="1" fill="black"/>
+            <rect x="20" y="14" width="1" height="2" fill="black"/>
+            <rect x="22" y="14" width="2" height="1" fill="black"/>
+            <rect x="25" y="14" width="3" height="2" fill="black"/>
+            <rect x="29" y="14" width="1" height="1" fill="black"/>
+            <rect x="31" y="14" width="2" height="2" fill="black"/>
+            <rect x="34" y="14" width="1" height="1" fill="black"/>
+            <rect x="36" y="14" width="3" height="2" fill="black"/>
+            <rect x="8" y="17" width="1" height="2" fill="black"/>
+            <rect x="10" y="17" width="2" height="1" fill="black"/>
+            <rect x="13" y="17" width="1" height="2" fill="black"/>
+            <rect x="15" y="17" width="3" height="1" fill="black"/>
+            <rect x="19" y="17" width="2" height="2" fill="black"/>
+            <rect x="22" y="17" width="1" height="1" fill="black"/>
+            <rect x="24" y="17" width="2" height="2" fill="black"/>
+            <rect x="27" y="17" width="1" height="1" fill="black"/>
+            <rect x="29" y="17" width="3" height="2" fill="black"/>
+            <rect x="33" y="17" width="2" height="1" fill="black"/>
+            <rect x="36" y="17" width="1" height="2" fill="black"/>
+            <rect x="38" y="17" width="1" height="1" fill="black"/>
+            <rect x="8" y="20" width="3" height="2" fill="black"/>
+            <rect x="12" y="20" width="1" height="1" fill="black"/>
+            <rect x="14" y="20" width="2" height="2" fill="black"/>
+            <rect x="17" y="20" width="1" height="1" fill="black"/>
+            <rect x="19" y="20" width="2" height="2" fill="black"/>
+            <rect x="22" y="20" width="3" height="1" fill="black"/>
+            <rect x="26" y="20" width="1" height="2" fill="black"/>
+            <rect x="28" y="20" width="2" height="1" fill="black"/>
+            <rect x="31" y="20" width="1" height="2" fill="black"/>
+            <rect x="33" y="20" width="2" height="1" fill="black"/>
+            <rect x="36" y="20" width="1" height="2" fill="black"/>
+            <rect x="38" y="20" width="2" height="1" fill="black"/>
+            <rect x="8" y="23" width="1" height="2" fill="black"/>
+            <rect x="10" y="23" width="2" height="1" fill="black"/>
+            <rect x="13" y="23" width="3" height="2" fill="black"/>
+            <rect x="17" y="23" width="2" height="1" fill="black"/>
+            <rect x="20" y="23" width="1" height="2" fill="black"/>
+            <rect x="22" y="23" width="2" height="1" fill="black"/>
+            <rect x="25" y="23" width="1" height="2" fill="black"/>
+            <rect x="27" y="23" width="3" height="1" fill="black"/>
+            <rect x="31" y="23" width="2" height="2" fill="black"/>
+            <rect x="34" y="23" width="1" height="1" fill="black"/>
+            <rect x="36" y="23" width="2" height="2" fill="black"/>
+            <rect x="39" y="23" width="1" height="1" fill="black"/>
+            <rect x="8" y="26" width="2" height="2" fill="black"/>
+            <rect x="11" y="26" width="1" height="1" fill="black"/>
+            <rect x="13" y="26" width="2" height="2" fill="black"/>
+            <rect x="16" y="26" width="3" height="1" fill="black"/>
+            <rect x="20" y="26" width="2" height="2" fill="black"/>
+            <rect x="23" y="26" width="1" height="1" fill="black"/>
+            <rect x="25" y="26" width="2" height="2" fill="black"/>
+            <rect x="28" y="26" width="1" height="1" fill="black"/>
+            <rect x="30" y="26" width="3" height="2" fill="black"/>
+            <rect x="34" y="26" width="2" height="1" fill="black"/>
+            <rect x="37" y="26" width="2" height="2" fill="black"/>
+            <rect x="28" y="30" width="3" height="2" fill="black"/>
+            <rect x="32" y="30" width="2" height="1" fill="black"/>
+            <rect x="35" y="30" width="1" height="2" fill="black"/>
+            <rect x="37" y="30" width="3" height="1" fill="black"/>
+            <rect x="28" y="33" width="1" height="2" fill="black"/>
+            <rect x="30" y="33" width="2" height="1" fill="black"/>
+            <rect x="33" y="33" width="3" height="2" fill="black"/>
+            <rect x="37" y="33" width="2" height="1" fill="black"/>
+            <rect x="28" y="36" width="2" height="2" fill="black"/>
+            <rect x="31" y="36" width="1" height="1" fill="black"/>
+            <rect x="33" y="36" width="2" height="2" fill="black"/>
+            <rect x="36" y="36" width="1" height="1" fill="black"/>
+            <rect x="38" y="36" width="2" height="2" fill="black"/>
+          </svg>
+        </div>
+        <div class="modal-qr-label">⚡ ESCANEA PARA PAGAR · QUANTUM EV</div>
+      </div>
+
+      <div class="modal-price-row">
+        <div>
+          <div class="modal-price-label">TICKET ESTÁNDAR EV — PREVENTA</div>
+          <div style="font-size:0.72rem; color:var(--text-dim); margin-top:0.2rem;">1 carrera · 10 vueltas · 100% eléctrico</div>
+        </div>
+        <div class="modal-price-val">Bs. 120</div>
+      </div>
+
+      <div class="modal-steps">
+        <div class="modal-step">
+          <span class="modal-step-num">1</span>
+          Escanea el QR y completa el pago
+        </div>
+        <div class="modal-step">
+          <span class="modal-step-num">2</span>
+          Envia el comprobante por WhatsApp
+        </div>
+        <div class="modal-step">
+          <span class="modal-step-num">3</span>
+          Recibe tu ticket de confirmación
+        </div>
+      </div>
+
+      <a class="btn-whatsapp" href="https://wa.me/59177926888?text=Hola%20Quantum%20EV!%20compre%20un%20ticket%20de%20Karting%20EV%20para%20FEXCO%202026%20" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-whatsapp"></i>
+        CONTACTAR POR WHATSAPP
+      </a>
+
+      <div class="modal-note">
+        +591 77926888 · Quantum EV Stand B-14<br>
+        Respuesta en horario laboral · Lun–Sáb 9:00–20:00
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ════ SCRIPTS ════ -->
+<script>
+  function switchTab(tab) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById(tab).classList.add('active');
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    const map = { info: 'tab-info', tv: 'tab-tv', karting: 'tab-karting' };
+    document.getElementById(map[tab]).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  function switchSubtab(btn, targetId) {
+    document.querySelectorAll('.subtab-content').forEach(s => s.classList.remove('active'));
+    document.getElementById(targetId).classList.add('active');
+    document.querySelectorAll('.subtab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  function openQRModal() {
+    document.getElementById('qrModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeQRModal() {
+    document.getElementById('qrModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function closeQRModalOutside(e) {
+    if (e.target === document.getElementById('qrModal')) closeQRModal();
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeQRModal();
+  });
+
+  /* ══ CARRUSEL RESERVAS 2026 ══ */
+  let reservasCurrentSlide = 0;
+  const reservasTotalSlides = 4;
+  let reservasAutoTimer = null;
+
+  function goToReservasSlide(index) {
+    reservasCurrentSlide = (index + reservasTotalSlides) % reservasTotalSlides;
+    const track = document.getElementById('reservasTrack');
+    if (track) track.style.transform = 'translateX(-' + (reservasCurrentSlide * 100) + '%)';
+    // dots
+    document.querySelectorAll('.reservas-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === reservasCurrentSlide);
+    });
+    // counter
+    const counter = document.getElementById('reservasCounter');
+    if (counter) counter.textContent = String(reservasCurrentSlide + 1).padStart(2,'0') + ' / ' + String(reservasTotalSlides).padStart(2,'0');
+    // reiniciar autoplay
+    clearTimeout(reservasAutoTimer);
+    reservasAutoTimer = setTimeout(() => nextReservasSlide(), 5000);
+  }
+
+  function nextReservasSlide() { goToReservasSlide(reservasCurrentSlide + 1); }
+  function prevReservasSlide() { goToReservasSlide(reservasCurrentSlide - 1); }
+
+  /* Swipe touch para móvil */
+  (function() {
+    let startX = 0;
+    document.addEventListener('DOMContentLoaded', function() {
+      const track = document.getElementById('reservasTrack');
+      if (!track) return;
+      track.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
+      track.addEventListener('touchend', function(e) {
+        const diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) diff > 0 ? nextReservasSlide() : prevReservasSlide();
+      }, { passive: true });
+    });
+  })();
+
+  function createParticles() {
+    const container = document.getElementById('particles');
+    if (!container) return;
+    for (let i = 0; i < 25; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const size = Math.random() * 3 + 1;
+      p.style.cssText = `width:${size}px; height:${size}px; left:${Math.random()*100}%; animation-duration:${Math.random()*15+10}s; animation-delay:-${Math.random()*10}s;`;
+      container.appendChild(p);
+    }
+  }
+
+  function updateCountdown() {
+    const target = new Date('2026-04-23T10:00:00');
+    const now    = new Date();
+    const diff   = target - now;
+    const elD = document.getElementById('cd-d');
+    const elH = document.getElementById('cd-h');
+    const elM = document.getElementById('cd-m');
+    const elS = document.getElementById('cd-s');
+    if (!elD) return;
+    if (diff <= 0) { elD.textContent='00'; elH.textContent='00'; elM.textContent='00'; elS.textContent='00'; return; }
+    elD.textContent = String(Math.floor(diff/(1000*60*60*24))).padStart(2,'0');
+    elH.textContent = String(Math.floor((diff%(1000*60*60*24))/(1000*60*60))).padStart(2,'0');
+    elM.textContent = String(Math.floor((diff%(1000*60*60))/(1000*60))).padStart(2,'0');
+    elS.textContent = String(Math.floor((diff%(1000*60))/1000)).padStart(2,'0');
+  }
+
+  const stockData = [
+    { id:'p1-sold', pbId:'pb1', sold:5,  total:15 },
+    { id:'p2-sold', pbId:'pb2', sold:8,  total:20 },
+    { id:'p3-sold', pbId:'pb3', sold:3,  total:30 },
+    { id:'p4-sold', pbId:'pb4', sold:12, total:50 },
+    { id:'p5-sold', pbId:'pb5', sold:28, total:50 },
+    { id:'p6-sold', pbId:'pb6', sold:6,  total:40 },
+  ];
+
+  function animateCounters() {
+    stockData.forEach(item => {
+      const el=document.getElementById(item.id);
+      const pb=document.getElementById(item.pbId);
+      if(!el) return;
+      const extra=Math.floor(Math.random()*3);
+      item.sold=Math.min(item.sold+extra,item.total);
+      let current=0;
+      const target=item.sold;
+      const step=Math.max(1,Math.ceil(target/20));
+      const timer=setInterval(()=>{
+        current=Math.min(current+step,target);
+        el.textContent=current;
+        if(pb) pb.style.width=Math.round((current/item.total)*100)+'%';
+        if(current>=target) clearInterval(timer);
+      },50);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    createParticles();
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+    setTimeout(animateCounters, 400);
+    // arrancar autoplay del carrusel reservas
+    reservasAutoTimer = setTimeout(() => nextReservasSlide(), 5000);
+  });
+</script>
+</body>
+</html>
