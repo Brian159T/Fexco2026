@@ -1447,6 +1447,33 @@ body::before {
 /* ══════════════════════════════════════
    RESPONSIVE
 ══════════════════════════════════════ */
+
+@media (max-width: 600px) {
+  .ev-card-img-wrap {
+    height: 180px;
+  }
+
+  .ev-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .ev-card-name {
+    font-size: 1.2rem;
+  }
+
+  .ev-card-price {
+    font-size: 1rem;
+  }
+}
+@media (max-width: 480px) {
+  .ev-catalog-grid .ev-card:has(img[alt="Equte Blanco"]) .ev-card-img {
+    object-fit: contain;
+    transform: scale(1.2);
+    transform-origin: center center;
+  }
+}
 @media (max-width: 768px) {
   #main-nav { padding: 0 1rem; }
   .logo-nav { font-size: 0.85rem; padding-right: 1rem; margin-right: 0.7rem; }
@@ -1477,7 +1504,13 @@ body::before {
   .hero-cta { flex-direction: column; align-items: center; }
   .btn-ticket, .btn-ticket-outline { width: 100%; max-width: 280px; justify-content: center; }
 }
-
+@media (max-width: 480px) {
+  .ev-catalog-grid .ev-card:has(img[alt="TC Wanderer"]) .ev-card-img {
+    object-fit: contain;
+    transform: scale(1.1);
+    transform-origin: center center;
+  }
+}
 @media (max-width: 480px) {
   .section-nav-grid { grid-template-columns: 1fr; }
   .ev-catalog-grid { grid-template-columns: repeat(2, 1fr); gap: 0.7rem; }
@@ -1486,11 +1519,184 @@ body::before {
   .cd-unit { padding: 0.6rem 0.7rem; min-width: 58px; }
   .cd-num { font-size: 1.2rem; }
 }
+
+.footer-container {
+  background: #060a09;
+  border-top: 2px solid var(--red);
+  color: var(--text);
+  font-family: 'Exo 2', sans-serif;
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+.footer-left .logo {
+  width: 140px;
+  height: auto;
+  margin-bottom: 1.5rem;
+  display: block;
+  filter: brightness(1.1);
+}
+
+.social-icons {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+}
+
+.social-icons a {
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border);
+  transition: border-color 0.25s, background 0.25s;
+}
+
+.social-icons a:hover {
+  border-color: var(--red);
+  background: rgba(232,0,29,0.1);
+}
+
+.social-icons svg {
+  width: 18px; height: 18px;
+  fill: var(--text-dim);
+  transition: fill 0.25s;
+}
+
+.social-icons a:hover svg { fill: var(--red); }
+
+.sitemap {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.sitemap-col h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+
+.sitemap-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+
+.sitemap-col ul li a {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.sitemap-col ul li a:hover { color: var(--red); }
+
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1.2rem;
+}
+
+.footer-right h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  font-weight: 900;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1.1;
+}
+
+.contact-form-wrapper {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--red);
+  padding: 1.5rem;
+}
+
+.contact-form-wrapper h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+#whatsappForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+#whatsappForm input,
+#whatsappForm select {
+  background: rgba(0,0,0,0.4);
+  border: 1px solid var(--border);
+  color: #fff;
+  padding: 0.7rem 1rem;
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+
+#whatsappForm input::placeholder { color: var(--text-dim); }
+#whatsappForm select option { background: #0b1210; color: #fff; }
+
+#whatsappForm input:focus,
+#whatsappForm select:focus { border-color: var(--red); }
+
+#whatsappForm button {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--red);
+  border: none;
+  padding: 0.85rem;
+  cursor: pointer;
+  transition: all 0.25s;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+
+#whatsappForm button:hover {
+  background: #fff;
+  color: var(--red);
+  box-shadow: 0 0 30px rgba(232,0,29,0.4);
+}
+
+.footer-bottom-spacer {
+  text-align: center;
+  padding: 1rem 2rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 768px) {
+  .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .sitemap { gap: 1.2rem; }
+}
 </style>
 
 <!-- NAV -->
 <nav id="main-nav">
-  <div class="logo-nav">QUANTUM<span>EV</span></div>
+  
   <button class="nav-tab active" id="tab-info" onclick="switchTab('info')">
     <i class="fa-solid fa-bolt"></i> INICIO
   </button>
@@ -1562,7 +1768,7 @@ body::before {
     </div>
 
     <div class="scroll-indicator">
-      <span>SCROLL</span>
+      
       <div class="scroll-line"></div>
     </div>
   </div>
@@ -1658,7 +1864,7 @@ body::before {
     <div class="location-block">
       <div class="map-placeholder">
         <img
-          src="./assets/images/Mapa del Stand de Quantum 2026.svg"
+          src="http://tuquantum.com/wp-content/uploads/2026/04/Mapa-del-Stand-de-Quantum-2026.svg"
           alt="Stand B-14 Quantum EV"
           style="width:100%;height:100%;object-fit:contain;position:absolute;inset:0;"
           onerror="this.style.display='none'">
@@ -1695,39 +1901,7 @@ body::before {
       <div class="s-title">PRODUCTOS EV & <span class="red">OFERTAS</span></div>
 
       <div class="ev-catalog-grid">
-        <div class="ev-card">
-          <div class="ev-card-img-wrap">
-            <img src="http://tuquantum.com/wp-content/uploads/2026/03/CPX-PRO.png" alt="CPX PRO" class="ev-card-img" onerror="this.style.display='none'">
-            
-          </div>
-          <div class="ev-card-body">
-            <div class="ev-card-name">CPX PRO</div>
-            <div class="ev-card-desc">Moto eléctrica urbana · Autonomía 120km · Carga rápida</div>
-            <div class="ev-card-price">Bs. 12.500 <s>Bs. 15.000</s></div>
-          </div>
-        </div>
-        <div class="ev-card">
-          <div class="ev-card-img-wrap">
-            <img src="http://tuquantum.com/wp-content/uploads/2026/03/Flashride.png" alt="Flashride" class="ev-card-img" onerror="this.style.display='none'">
-            
-          </div>
-          <div class="ev-card-body">
-            <div class="ev-card-name">Flashride</div>
-            <div class="ev-card-desc">Microauto eléctrico · 4 pasajeros · Motor 30kW</div>
-            <div class="ev-card-price">Bs. 45.000 <s>Bs. 52.000</s></div>
-          </div>
-        </div>
-        <div class="ev-card">
-          <div class="ev-card-img-wrap">
-            <img src="http://tuquantum.com/wp-content/uploads/2026/03/luna-pro.png" alt="Luna Pro" class="ev-card-img" onerror="this.style.display='none'">
-            
-          </div>
-          <div class="ev-card-body">
-            <div class="ev-card-name">Luna Pro</div>
-            <div class="ev-card-desc">Moto eléctrica · 0–60 en 4s · 150km autonomía</div>
-            <div class="ev-card-price">Bs. 18.900 <s>Bs. 22.000</s></div>
-          </div>
-        </div>
+
         <div class="ev-card">
           <div class="ev-card-img-wrap ev-card-img-wrap--zoomout">
             <img src="http://tuquantum.com/wp-content/uploads/2026/03/STARTO.png" alt="Starto" class="ev-card-img" onerror="this.style.display='none'">
@@ -1740,7 +1914,40 @@ body::before {
         </div>
         <div class="ev-card">
           <div class="ev-card-img-wrap">
-            <img src="http://tuquantum.com/wp-content/uploads/2026/03/TC-super-soco.png" alt="TC Super Soco" class="ev-card-img" onerror="this.style.display='none'">
+            <img src="http://tuquantum.com/wp-content/uploads/2026/03/CPX-PRO.png" alt="CPX PRO" class="ev-card-img" onerror="this.style.display='none'">
+            
+          </div>
+          <div class="ev-card-body">
+            <div class="ev-card-name">CPX PRO</div>
+            <div class="ev-card-desc">Moto eléctrica urbana · Autonomía 120km · Carga rápida</div>
+            <div class="ev-card-price">Bs. 12.500 <s>Bs. 15.000</s></div>
+          </div>
+        </div>
+       <div class="ev-card">
+  <div class="ev-card-img-wrap" style="overflow: hidden;">
+    <img src="http://tuquantum.com/wp-content/uploads/2026/04/Flashride-giradog.png" alt="Flashride" class="ev-card-img" style="transform: scale(1.2); transform-origin: center center;" onerror="this.style.display='none'">
+  </div>
+  <div class="ev-card-body">
+    <div class="ev-card-name">Flashride</div>
+    <div class="ev-card-desc">Microauto eléctrico · 4 pasajeros · Motor 30kW</div>
+    <div class="ev-card-price">Bs. 45.000 <s>Bs. 52.000</s></div>
+  </div>
+</div>
+        <div class="ev-card">
+          <div class="ev-card-img-wrap">
+            <img src="http://tuquantum.com/wp-content/uploads/2026/03/luna-pro.png" alt="Luna Pro" class="ev-card-img" onerror="this.style.display='none'">
+            
+          </div>
+          <div class="ev-card-body">
+            <div class="ev-card-name">Luna Pro</div>
+            <div class="ev-card-desc">Moto eléctrica · 0–60 en 4s · 150km autonomía</div>
+            <div class="ev-card-price">Bs. 18.900 <s>Bs. 22.000</s></div>
+          </div>
+        </div>
+        
+        <div class="ev-card">
+          <div class="ev-card-img-wrap">
+            <img src="http://tuquantum.com/wp-content/uploads/2026/04/TC-super-socog.png" alt="TC Super Soco" class="ev-card-img" onerror="this.style.display='none'">
             
           </div>
           <div class="ev-card-body">
@@ -1751,18 +1958,18 @@ body::before {
         </div>
         
         <div class="ev-card">
-          <div class="ev-card-img-wrap">
-            <img src="http://tuquantum.com/wp-content/uploads/2026/03/TC-WANDERER.png" alt="TC Wanderer" class="ev-card-img" onerror="this.style.display='none'">
-          </div>
-          <div class="ev-card-body">
-            <div class="ev-card-name">TC Wanderer</div>
-            <div class="ev-card-desc">Sedán familiar · Carga tipo 2 · Interior premium</div>
-            <div class="ev-card-price">Bs. 14.500 <s>Bs. 17.000</s></div>
-          </div>
-        </div>
+  <div class="ev-card-img-wrap" style="overflow: hidden;">
+    <img src="http://tuquantum.com/wp-content/uploads/2026/03/TC-WANDERER.png" alt="TC Wanderer" class="ev-card-img" style="transform: scale(1.1); transform-origin: center center;" onerror="this.style.display='none'">
+  </div>
+  <div class="ev-card-body">
+    <div class="ev-card-name">TC Wanderer</div>
+    <div class="ev-card-desc">Sedán familiar · Carga tipo 2 · Interior premium</div>
+    <div class="ev-card-price">Bs. 14.500 <s>Bs. 17.000</s></div>
+  </div>
+</div>
         <div class="ev-card">
           <div class="ev-card-img-wrap">
-            <img src="http://tuquantum.com/wp-content/uploads/2026/03/Trooper.png" alt="Trooper" class="ev-card-img" onerror="this.style.display='none'">
+            <img src="http://tuquantum.com/wp-content/uploads/2026/04/Trooperg.png" alt="Trooper" class="ev-card-img" onerror="this.style.display='none'">
           </div>
           <div class="ev-card-body">
             <div class="ev-card-name">Trooper</div>
@@ -1818,16 +2025,15 @@ body::before {
           </div>
         </div>
         <div class="ev-card">
-          <div class="ev-card-img-wrap ev-card-img-wrap--zoomout">
-            <img src="http://tuquantum.com/wp-content/uploads/2026/03/ION.png" alt="ION" class="ev-card-img" onerror="this.style.display='none'">
-            
-          </div>
-          <div class="ev-card-body">
-            <div class="ev-card-name">ION</div>
-            <div class="ev-card-desc">Modelo insignia Quantum · Full equip · 400km autonomía</div>
-            <div class="ev-card-price">Bs. 160.000 <s>Bs. 180.000</s></div>
-          </div>
-        </div>
+  <div class="ev-card-img-wrap ev-card-img-wrap--zoomout" style="overflow: hidden;">
+    <img src="http://tuquantum.com/wp-content/uploads/2026/04/IONg.png" alt="ION" class="ev-card-img" style="transform: scale(1.1); transform-origin: center center;" onerror="this.style.display='none'">
+  </div>
+  <div class="ev-card-body">
+    <div class="ev-card-name">ION</div>
+    <div class="ev-card-desc">Modelo insignia Quantum · Full equip · 400km autonomía</div>
+    <div class="ev-card-price">Bs. 160.000 <s>Bs. 180.000</s></div>
+  </div>
+</div>
       </div>
     </div>
 
@@ -1835,7 +2041,7 @@ body::before {
 
     <!-- RESERVAS CAROUSEL -->
     <div class="s-label"><i class="fa-solid fa-calendar-check"></i> Reservas Exclusivas</div>
-    <div class="s-title">RESERVAS <span class="red">2026</span></div>
+    <div class="s-title">RESERVAS <span class="red">2025</span></div>
 
     <div class="reservas-section">
       <div class="reservas-carousel-wrap">
@@ -2293,7 +2499,7 @@ body::before {
     
     <div id="sub-galeria" class="subtab-content">
       <div style="margin-bottom:2rem;">
-        <div class="s-label">📸 Fotos & Videos EV</div>
+        <div class="s-label"><i class="fa-solid fa-camera" style="color:var(--red);"></i> Fotos & Videos EV</div>
         <div class="s-title" style="font-size:clamp(1.5rem,4vw,2.2rem);">FEXXCO 2025<br><span class="red">MOMENTOS ÉPICOS</span></div>
         <p style="font-size:0.88rem;color:var(--text);max-width:600px;line-height:1.75;">
           Revivé lo mejor de la edición anterior. El karting eléctrico de FEXXCO 2025 fue un éxito total —
@@ -2317,22 +2523,18 @@ body::before {
       </div>
 
       <div style="text-align:center;padding:2rem;background:var(--card);border:1px dashed var(--border);margin-bottom:2rem;">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:900;color:var(--red);margin-bottom:1rem;letter-spacing:0.08em;text-transform:uppercase;">📹 Videos del Evento EV</div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;">
-          <div style="background:#000;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);cursor:pointer;">
-            <div style="text-align:center;">
-              <div style="font-size:3rem;">▶️</div>
-              <div style="font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:var(--text-dim);margin-top:0.5rem;">KARTING EV 2025 — VOL.1</div>
-            </div>
-          </div>
-          <div style="background:#000;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);cursor:pointer;">
-            <div style="text-align:center;">
-              <div style="font-size:3rem;">▶️</div>
-              <div style="font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:var(--text-dim);margin-top:0.5rem;">KARTING EV 2025 — VOL.2</div>
-            </div>
-          </div>
-        </div>
-      </div>
+  <div style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:900;color:var(--red);margin-bottom:1rem;letter-spacing:0.08em;text-transform:uppercase;"><i class="fa-solid fa-video" style="color:var(--red);"></i> Videos del Evento EV</div>
+
+  <div style="background:#000;aspect-ratio:16/9;position:relative;border:1px solid var(--border);cursor:pointer;" onclick="
+    this.innerHTML='<video src=\'http://tuquantum.com/wp-content/uploads/2026/04/Video-Karting-portada-cortado.mp4\' style=\'width:100%;height:100%;position:absolute;top:0;left:0;\' controls autoplay></video>';
+  ">
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;">
+      <i class="fa-regular fa-circle-play" style="font-size:3rem;color:rgba(255,255,255,0.85);"></i>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:var(--text-dim);margin-top:0.5rem;">KARTING EV 2025</div>
+    </div>
+  </div>
+
+</div>
     </div>
 
     <!-- SUB: INFO -->
@@ -2457,6 +2659,7 @@ body::before {
       </div>
     </div>
   </div>
+  
 </div>
 
 <script>
@@ -2568,6 +2771,58 @@ document.addEventListener('DOMContentLoaded', () => {
     vid.play().catch(() => {});
   }
 });
+</script>
+<footer class="footer-container">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <img src="http://tuquantum.com/wp-content/uploads/2025/09/Logo-Quan-1.png" alt="Logo Quantum" class="logo" />
+      <div class="social-icons" aria-label="Redes sociales">
+        <a href="https://www.facebook.com/tuquantum" title="Facebook" aria-label="Facebook"><svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.32 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96C18.34 21.21 22 17.06 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/></svg></a>
+        <a href="https://www.instagram.com/quantum.motors/#" title="Instagram" aria-label="Instagram"><svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4A3.6,3.6 0 0,0 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6A3.6,3.6 0 0,0 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"/></svg></a>
+        <a href="https://www.linkedin.com/company/quantum-motors-s-a/" title="LinkedIn" aria-label="LinkedIn"><svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 13 11.1V10.13H10V18.5H13V13.09C13 11.76 13.35 10.69 14.56 10.69C15.81 10.69 16.5 11.69 16.5 13.38V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19C5.95 5.19 5.19 5.95 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/></svg></a>
+        <a href="https://www.youtube.com/channel/UCTQub76iopoIF0jvywlKKVA" title="YouTube" aria-label="YouTube"><svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 21.78,8.27 21.84,9.07C21.91,9.87 21.94,10.56 21.94,11.16L22,12C22,14.19 21.84,15.8 21.56,16.83C21.31,17.73 20.73,18.31 19.83,18.56C19.36,18.69 18.73,18.78 17.93,18.84C17.13,18.91 16.44,18.94 15.84,18.94L15,19C12.81,19 11.2,18.84 10.17,18.56C9.27,18.31 8.69,17.73 8.44,16.83C8.31,16.36 8.22,15.73 8.16,14.93C8.09,14.13 8.06,13.44 8.06,12.84L8,12C8,9.81 8.16,8.2 8.44,7.17C8.69,6.27 9.27,5.69 10.17,5.44C11.2,5.16 12.81,5 15,5L15.84,5.06C16.44,5.06 17.13,5.09 17.93,5.16C18.73,5.22 19.36,5.31 19.83,5.44C20.73,5.69 21.31,6.27 21.56,7.17Z"/></svg></a>
+        <a href="https://www.tiktok.com/@quantum_motors" title="TikTok" aria-label="TikTok"><svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M16.6 5.82h2.25v5.33c0 4.88-3.56 8.44-8.44 8.44-4.88 0-8.44-3.56-8.44-8.44s3.56-8.44 8.44-8.44v2.25c-3.61 0-6.19 2.58-6.19 6.19s2.58 6.19 6.19 6.19c3.61 0 6.19-2.58 6.19-6.19V5.82zM19.5 0h-2.25v5.33h2.25V0z"/></svg></a>
+      </div>
+      <div class="sitemap" aria-label="Mapa del sitio">
+        <div class="sitemap-col"><h3>NOSOTROS</h3><ul><li><a href="https://tuquantum.com/historia/">Historia</a></li><li><a href="https://tuquantum.com/acerca-de-nosotros/empresa/">Empresa</a></li><li><a href="https://tuquantum.com/blog-2-columns/">Blog</a></li></ul></div>
+        <div class="sitemap-col"><h3>PRODUCTOS</h3><ul><li><a href="https://tuquantum.com/categoria-producto/autos/">Autos</a></li><li><a href="https://tuquantum.com/categoria-producto/trimotos/">Trimotos</a></li><li><a href="https://tuquantum.com/categoria-producto/motocicletas/">Motocicletas</a></li><li><a href="https://tuquantum.com/categoria-producto/bicimotos-bicicletas/">Bicimotos</a></li></ul></div>
+        <div class="sitemap-col"><h3>CONTACTO</h3><ul><li><a href="https://tuquantum.com/contacto/">Sucursales</a></li></ul></div>
+        <div class="sitemap-col"><h3>BENEFICIOS</h3><ul><li><a href="https://tuquantum.com/tu-ahorro-en/">Tu Ahorro</a></li><li><a href="https://tuquantum.com/reduccion-c02-en/">Reduccion C02</a></li></ul></div>
+        <div class="sitemap-col"><h3>CLIENTES</h3><ul><li><a href="https://tuquantum.com/nuestros-socios-verdes/">Socios Verdes</a></li></ul></div>
+      </div>
+    </div>
+    <div class="footer-right">
+      <h2>Descubre la movilidad eléctrica hoy.</h2>
+      <div class="contact-form-wrapper">
+        <h3>Contáctanos</h3>
+        <form id="whatsappForm" onsubmit="enviarWhatsApp(event)">
+          <input type="text" id="nombre" placeholder="NOMBRE COMPLETO" aria-label="NOMBRE COMPLETO" required>
+          <select id="ciudad" aria-label="CIUDAD" required>
+            <option value="" disabled selected>Seleccione su ciudad</option>
+            <option value="La Paz">La Paz</option><option value="El Alto">El Alto</option>
+            <option value="Santa Cruz">Santa Cruz</option><option value="Cochabamba">Cochabamba</option>
+            <option value="Oruro">Oruro</option><option value="Potosí">Potosí</option>
+            <option value="Tarija">Tarija</option><option value="Sucre">Sucre</option>
+            <option value="Trinidad">Trinidad</option><option value="Cobija">Cobija</option>
+          </select>
+          <input type="tel" id="celular" placeholder="Número de celular" aria-label="Número de celular" required>
+          <button type="submit">COTIZA AHORA</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom-spacer">&copy; 2026 Quantum Motors. Todos los derechos reservados.</div>
+</footer>
+
+<script>
+function enviarWhatsApp(e) {
+  e.preventDefault();
+  const nombre  = document.getElementById('nombre').value.trim();
+  const ciudad  = document.getElementById('ciudad').value;
+  const celular = document.getElementById('celular').value.trim();
+  const msg = `Hola Quantum EV! Mi nombre es ${nombre}, soy de ${ciudad} y mi celular es ${celular}. Quisiera cotizar un vehículo eléctrico.`;
+  window.open('https://wa.me/59177926888?text=' + encodeURIComponent(msg), '_blank');
+}
 </script>
 </body>
 </html>
