@@ -14,9 +14,9 @@
   --green:      #2fb676;
   --green-dim:  #28a567;
   --green-glow: rgba(47, 182, 118, 0.3);
-  --red:        #e8001d;
-  --red-dark:   #b5001a;
-  --red-glow:   rgba(232, 0, 29, 0.4);
+  --red:        #2fb676;
+  --red-dark:   #28a567;
+  --red-glow:   rgba(47, 182, 118, 0.4);
   --white:      #ffffff;
   --off-white:  #f0f0f0;
   --dark:       #060a09;
@@ -24,13 +24,12 @@
   --dark3:      #0f1812;
   --card:       rgba(10, 20, 14, 0.92);
   --border:     rgba(47, 182, 118, 0.18);
-  --border-red: rgba(232, 0, 29, 0.3);
+  --border-red: rgba(47, 182, 118, 0.3);
   --text:       #c8e6d0;
   --text-dim:   #5a7a62;
   --yellow:     #ffcc00;
   --electric:   #00e5ff;
 }
-
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 
@@ -82,12 +81,12 @@ body::before {
   background: var(--red); transform: scaleX(0); transition: transform 0.25s;
 }
 
-.nav-tab.active { color: var(--white); }
-.nav-tab.active::after { transform: scaleX(1); }
+.nav-tab.qev-active { color: var(--white); }
+.nav-tab.qev-active::after { transform: scaleX(1); }
 .nav-tab:hover { color: var(--white); }
 
-.section { display: none; }
-.section.active { display: block; }
+/* .qev-section { display: none; }
+.qev-section.qev-active { display: block; } */
 
 /* ══ ALERT BAR ══ */
 .alert-bar {
@@ -1697,7 +1696,7 @@ body::before {
 <!-- NAV -->
 <nav id="main-nav">
   
-  <button class="nav-tab active" id="tab-info" onclick="switchTab('info')">
+  <button class="nav-tab qev-active" id="tab-info" onclick="switchTab('info')">
     <i class="fa-solid fa-bolt"></i> INICIO
   </button>
   <button class="nav-tab" id="tab-karting" onclick="switchTab('karting')">
@@ -1706,7 +1705,7 @@ body::before {
 </nav>
 
 <!-- SECCIÓN INICIO -->
-<section id="info" class="section active">
+<section id="info" class="qev-section qev-active">
 
   <!-- HERO -->
   <div id="hero">
@@ -1840,7 +1839,7 @@ body::before {
 
   </div>
 </div>
-</div>
+
 
   <div class="main-content">
 
@@ -2363,7 +2362,7 @@ body::before {
 </section>
 
 <!-- ════ SECTION KARTING ════ -->
-<section id="karting" class="section">
+<section id="karting" class="qev-section">
   <div style="height:56px;"></div>
 
   <div class="karting-page">
@@ -2663,114 +2662,149 @@ body::before {
 </div>
 
 <script>
-function switchTab(tab) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.getElementById(tab).classList.add('active');
-  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  const map = { info: 'tab-info', karting: 'tab-karting' };
-  if (map[tab]) document.getElementById(map[tab]).classList.add('active');
-  window.scrollTo(0, 0);
-}
-
-function switchSubtab(btn, targetId) {
-  document.querySelectorAll('.subtab-content').forEach(s => s.classList.remove('active'));
-  document.getElementById(targetId).classList.add('active');
-  document.querySelectorAll('.subtab').forEach(t => t.classList.remove('active'));
-  btn.classList.add('active');
-}
-
-function openQRModal() {
-  document.getElementById('qrModal').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeQRModal() {
-  document.getElementById('qrModal').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-function closeQRModalOutside(e) {
-  if (e.target === document.getElementById('qrModal')) closeQRModal();
-}
-
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeQRModal(); });
-
-/* ── CARRUSEL RESERVAS ── */
-let rCurrent = 0, rTotal = 4, rTimer = null;
-
-function goToReservasSlide(i) {
-  rCurrent = (i + rTotal) % rTotal;
-  const track = document.getElementById('reservasTrack');
-  if (track) track.style.transform = 'translateX(-' + (rCurrent * 100) + '%)';
-  document.querySelectorAll('.reservas-dot').forEach((d, idx) => {
-    d.classList.toggle('active', idx === rCurrent);
-  });
-  const counter = document.getElementById('reservasCounter');
-  if (counter) counter.textContent = String(rCurrent + 1).padStart(2,'0') + ' / ' + String(rTotal).padStart(2,'0');
-  clearTimeout(rTimer);
-  rTimer = setTimeout(() => nextReservasSlide(), 5500);
-}
-
-function nextReservasSlide() { goToReservasSlide(rCurrent + 1); }
-function prevReservasSlide() { goToReservasSlide(rCurrent - 1); }
-
 (function() {
-  let startX = 0;
-  document.addEventListener('DOMContentLoaded', () => {
-    const track = document.getElementById('reservasTrack');
-    if (!track) return;
-    track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
-    track.addEventListener('touchend', e => {
-      const diff = startX - e.changedTouches[0].clientX;
-      if (Math.abs(diff) > 40) diff > 0 ? nextReservasSlide() : prevReservasSlide();
-    }, { passive: true });
-  });
-})();
 
-/* ── COUNTDOWN ── */
-function updateCountdown() {
-  const target = new Date('2026-05-15T10:00:00');
-  const now = new Date(), diff = target - now;
-  const get = (id, val) => {
-    const el = document.getElementById(id);
-    if (el) el.textContent = String(Math.max(0, val)).padStart(2,'0');
+  function qevInit() {
+    // Ocultar secciones
+    var info = document.getElementById('info');
+    var karting = document.getElementById('karting');
+    if (!info || !karting) return; // DOM no listo aún
+    
+    karting.style.display = 'none';
+    info.style.display = 'block';
+
+    // Countdown
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // Carrusel touch
+    var track = document.getElementById('reservasTrack');
+    if (track) {
+      var startX = 0;
+      track.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
+      track.addEventListener('touchend', function(e) {
+        var diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) diff > 0 ? nextReservasSlide() : prevReservasSlide();
+      }, { passive: true });
+    }
+
+    // Video hero
+    var vid = document.getElementById('heroBgVideo');
+    if (vid) {
+      vid.addEventListener('ended', function() { vid.currentTime = 0; vid.play(); });
+      vid.play().catch(function() {});
+    }
+
+    // Arrancar carrusel
+    rTimer = setTimeout(function() { nextReservasSlide(); }, 5500);
+
+    createSpeedLines();
+  }
+
+  // Ejecutar apenas el DOM esté listo — funciona en WordPress
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', qevInit);
+  } else {
+    qevInit(); // Ya cargó
+  }
+
+  window.switchTab = function(tab) {
+    var info = document.getElementById('info');
+    var karting = document.getElementById('karting');
+    if (!info || !karting) return;
+
+    info.style.display = (tab === 'info') ? 'block' : 'none';
+    karting.style.display = (tab === 'karting') ? 'block' : 'none';
+
+    var tabInfo = document.getElementById('tab-info');
+    var tabKarting = document.getElementById('tab-karting');
+    if (tabInfo) tabInfo.style.color = (tab === 'info') ? '#ffffff' : 'rgba(255,255,255,0.5)';
+    if (tabKarting) tabKarting.style.color = (tab === 'karting') ? '#ffffff' : 'rgba(255,255,255,0.5)';
+
+    window.scrollTo(0, 0);
   };
-  if (diff <= 0) { ['cd-d','cd-h','cd-m','cd-s'].forEach(id => { const el=document.getElementById(id); if(el) el.textContent='00'; }); return; }
-  get('cd-d', Math.floor(diff/(1000*60*60*24)));
-  get('cd-h', Math.floor((diff%(1000*60*60*24))/(1000*60*60)));
-  get('cd-m', Math.floor((diff%(1000*60*60))/(1000*60)));
-  get('cd-s', Math.floor((diff%(1000*60))/1000));
-}
 
-/* ── SPEED LINES ── */
-function createSpeedLines() {
-  const container = document.getElementById('speedLines');
-  if (!container) return;
-  for (let i = 0; i < 14; i++) {
-    const line = document.createElement('div');
-    line.className = 'speed-line';
-    const top = Math.random() * 100;
-    const dur = 2 + Math.random() * 4;
-    const delay = Math.random() * 8;
-    const width = 100 + Math.random() * 250;
-    line.style.cssText = `top:${top}%;width:${width}px;animation-duration:${dur}s;animation-delay:-${delay}s;opacity:0;`;
-    container.appendChild(line);
+  window.switchSubtab = function(btn, targetId) {
+    document.querySelectorAll('.subtab-content').forEach(function(s) { s.classList.remove('active'); });
+    var target = document.getElementById(targetId);
+    if (target) target.classList.add('active');
+    document.querySelectorAll('.subtab').forEach(function(t) { t.classList.remove('active'); });
+    btn.classList.add('active');
+  };
+
+  window.openQRModal = function() {
+    var m = document.getElementById('qrModal');
+    if (m) { m.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  };
+
+  window.closeQRModal = function() {
+    var m = document.getElementById('qrModal');
+    if (m) { m.classList.remove('open'); document.body.style.overflow = ''; }
+  };
+
+  window.closeQRModalOutside = function(e) {
+    if (e.target === document.getElementById('qrModal')) window.closeQRModal();
+  };
+
+  window.enviarWhatsApp = function(e) {
+    e.preventDefault();
+    var nombre = document.getElementById('nombre').value.trim();
+    var ciudad = document.getElementById('ciudad').value;
+    var celular = document.getElementById('celular').value.trim();
+    var msg = 'Hola Quantum EV! Mi nombre es ' + nombre + ', soy de ' + ciudad + ' y mi celular es ' + celular + '. Quisiera cotizar un vehículo eléctrico.';
+    window.open('https://wa.me/59177926888?text=' + encodeURIComponent(msg), '_blank');
+  };
+
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') window.closeQRModal(); });
+
+  var rCurrent = 0, rTotal = 4, rTimer = null;
+
+  window.goToReservasSlide = function(i) {
+    rCurrent = (i + rTotal) % rTotal;
+    var track = document.getElementById('reservasTrack');
+    if (track) track.style.transform = 'translateX(-' + (rCurrent * 100) + '%)';
+    document.querySelectorAll('.reservas-dot').forEach(function(d, idx) {
+      d.classList.toggle('active', idx === rCurrent);
+    });
+    var counter = document.getElementById('reservasCounter');
+    if (counter) counter.textContent = String(rCurrent + 1).padStart(2, '0') + ' / ' + String(rTotal).padStart(2, '0');
+    clearTimeout(rTimer);
+    rTimer = setTimeout(function() { nextReservasSlide(); }, 5500);
+  };
+
+  window.nextReservasSlide = function() { window.goToReservasSlide(rCurrent + 1); };
+  window.prevReservasSlide = function() { window.goToReservasSlide(rCurrent - 1); };
+
+  function updateCountdown() {
+    var target = new Date('2026-05-15T10:00:00');
+    var now = new Date(), diff = target - now;
+    function set(id, val) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = String(Math.max(0, val)).padStart(2, '0');
+    }
+    if (diff <= 0) { ['cd-d','cd-h','cd-m','cd-s'].forEach(function(id) { set(id, 0); }); return; }
+    set('cd-d', Math.floor(diff / (1000*60*60*24)));
+    set('cd-h', Math.floor((diff % (1000*60*60*24)) / (1000*60*60)));
+    set('cd-m', Math.floor((diff % (1000*60*60)) / (1000*60)));
+    set('cd-s', Math.floor((diff % (1000*60)) / 1000));
   }
-}
 
-document.addEventListener('DOMContentLoaded', () => {
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-  rTimer = setTimeout(() => nextReservasSlide(), 5500);
-  createSpeedLines();
-
-  /* Asegurar que el video corre en loop incluso si el navegador lo detiene */
-  const vid = document.getElementById('heroBgVideo');
-  if (vid) {
-    vid.addEventListener('ended', () => { vid.currentTime = 0; vid.play(); });
-    vid.play().catch(() => {});
+  function createSpeedLines() {
+    var container = document.getElementById('speedLines');
+    if (!container) return;
+    for (var i = 0; i < 14; i++) {
+      var line = document.createElement('div');
+      line.className = 'speed-line';
+      var top = Math.random() * 100;
+      var dur = 2 + Math.random() * 4;
+      var delay = Math.random() * 8;
+      var width = 100 + Math.random() * 250;
+      line.style.cssText = 'top:' + top + '%;width:' + width + 'px;animation-duration:' + dur + 's;animation-delay:-' + delay + 's;opacity:0;';
+      container.appendChild(line);
+    }
   }
-});
+
+})();
 </script>
 <footer class="footer-container">
   <div class="footer-inner">
@@ -2814,15 +2848,6 @@ document.addEventListener('DOMContentLoaded', () => {
   <div class="footer-bottom-spacer">&copy; 2026 Quantum Motors. Todos los derechos reservados.</div>
 </footer>
 
-<script>
-function enviarWhatsApp(e) {
-  e.preventDefault();
-  const nombre  = document.getElementById('nombre').value.trim();
-  const ciudad  = document.getElementById('ciudad').value;
-  const celular = document.getElementById('celular').value.trim();
-  const msg = `Hola Quantum EV! Mi nombre es ${nombre}, soy de ${ciudad} y mi celular es ${celular}. Quisiera cotizar un vehículo eléctrico.`;
-  window.open('https://wa.me/59177926888?text=' + encodeURIComponent(msg), '_blank');
-}
-</script>
+
 </body>
 </html>
