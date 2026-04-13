@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FEXXCO 2026 — QUANTUM EV</title>
+<title>FEXCO 2026 — QUANTUM </title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&family=Share+Tech+Mono&family=Barlow+Condensed:wght@400;700;900&display=swap" rel="stylesheet">
@@ -38,6 +38,8 @@ body {
   color: var(--text);
   font-family: 'Exo 2', sans-serif;
   overflow-x: hidden;
+  /* ── TEXTOS BODY BASE +15% ── */
+  font-size: 1.15em;
 }
 
 body::before {
@@ -69,7 +71,8 @@ body::before {
 .logo-nav span { color: var(--red); }
 
 .nav-tab {
-  font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; font-weight: 700;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 0.98rem; font-weight: 700;
+  /* +15% desde 0.85rem */
   letter-spacing: 0.12em; color: rgba(255,255,255,0.5);
   padding: 0 1.2rem; height: 56px; border: none; background: none;
   cursor: pointer; position: relative; transition: color 0.25s; white-space: nowrap;
@@ -93,9 +96,6 @@ body::before {
 .nav-tab.qev-active::after { transform: scaleX(1); }
 .nav-tab:hover { color: var(--white); }
 
-/* .qev-section { display: none; }
-.qev-section.qev-active { display: block; } */
-
 /* ══ ALERT BAR ══ */
 .alert-bar {
   background: var(--red);
@@ -110,7 +110,7 @@ body::before {
 .alert-bar-inner {
   display: inline-block;
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.8rem;
+  font-size: 0.92rem; /* +15% desde 0.8rem */
   font-weight: 700;
   letter-spacing: 0.2em;
   animation: marquee 30s linear infinite;
@@ -132,7 +132,6 @@ body::before {
   margin-top: 56px;
 }
 
-/* Video real en bucle */
 .hero-video-bg {
   position: absolute; inset: 0;
   overflow: hidden;
@@ -150,7 +149,7 @@ body::before {
   z-index: 0;
   filter: brightness(0.95) saturate(1) contrast(1);
 }
-/* Fallback animado si no hay video */
+
 .hero-video-bg::before {
   content: '';
   position: absolute; inset: 0; z-index: 1;
@@ -163,7 +162,6 @@ body::before {
   to   { opacity: 1; }
 }
 
-/* Patrón de rombos */
 .hero-video-bg::after {
   content: '';
   position: absolute; inset: 0; z-index: 2;
@@ -178,7 +176,6 @@ body::before {
   to   { background-position: 60px 60px, -60px 60px; }
 }
 
-/* Líneas de velocidad */
 .hero-speed-lines {
   position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 3;
 }
@@ -197,7 +194,6 @@ body::before {
   to   { left: 100%; opacity: 0; }
 }
 
-/* Overlay degradado abajo — más agresivo en rojo */
 .hero-overlay {
   position: absolute; inset: 0; z-index: 4;
   background: 
@@ -206,7 +202,6 @@ body::before {
   pointer-events: none;
 }
 
-/* Franja diagonal roja izq */
 .hero-red-stripe {
   position: absolute; inset: 0; z-index: 5; pointer-events: none;
   overflow: hidden;
@@ -229,14 +224,13 @@ body::before {
 
 .hero-sitio-label {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(0.6rem, 2vw, 0.8rem);
+  font-size: clamp(0.69rem, 2vw, 0.92rem); /* +15% */
   letter-spacing: 0.5em;
   color: rgba(255,255,255,0.55);
   margin-bottom: 0.8rem;
   text-transform: uppercase;
 }
 
-/* ── LOGO FEXXCO COMPLETO ── */
 .hero-logo-wrap {
   margin-bottom: 1.4rem;
   position: relative;
@@ -264,7 +258,7 @@ body::before {
 
 .hero-brand {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(0.65rem, 2.5vw, 0.9rem);
+  font-size: clamp(0.75rem, 2.5vw, 1.04rem); /* +15% */
   font-weight: 700;
   letter-spacing: 0.35em;
   color: rgba(255,255,255,0.5);
@@ -272,6 +266,7 @@ body::before {
   margin-bottom: 0.2rem;
 }
 
+/* TÍTULOS — SIN CAMBIOS */
 .hero-title {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: clamp(3.5rem, 13vw, 9rem);
@@ -288,6 +283,7 @@ body::before {
 .hero-title .accent { color: var(--red); }
 .hero-title .white  { color: var(--white); }
 
+/* SUBTÍTULOS — SIN CAMBIOS */
 .hero-sub {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: clamp(1rem, 3.5vw, 1.5rem);
@@ -298,14 +294,12 @@ body::before {
   margin-bottom: 1.8rem;
 }
 
-/* Separador rojo */
 .hero-sep {
   width: 80px; height: 2px;
   background: linear-gradient(90deg, transparent, var(--red), transparent);
   margin: 0 auto 1.6rem;
 }
 
-/* Countdown */
 .hero-countdown {
   display: flex; gap: 0.6rem; margin-bottom: 2rem; flex-wrap: wrap; justify-content: center;
 }
@@ -331,7 +325,7 @@ body::before {
 
 .cd-label {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.45rem;
+  font-size: 0.52rem; /* +15% desde 0.45rem */
   letter-spacing: 0.2em;
   color: rgba(255,255,255,0.35);
   display: block;
@@ -339,14 +333,13 @@ body::before {
   text-transform: uppercase;
 }
 
-/* Hero CTAs */
 .hero-cta {
   display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
 }
 
 .btn-ticket {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 1rem; font-weight: 900;
+  font-size: 1.15rem; font-weight: 900; /* +15% desde 1rem */
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: #fff;
@@ -369,7 +362,7 @@ body::before {
 
 .btn-ticket-outline {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 1rem; font-weight: 900;
+  font-size: 1.15rem; font-weight: 900; /* +15% */
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.85);
@@ -390,7 +383,6 @@ body::before {
   transform: translateY(-2px);
 }
 
-/* Scroll indicator */
 .scroll-indicator {
   position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
   display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
@@ -400,7 +392,7 @@ body::before {
 @keyframes bounce { 50% { transform: translateX(-50%) translateY(7px); } }
 
 .scroll-indicator span {
-  font-family: 'Share Tech Mono', monospace; font-size: 0.55rem;
+  font-family: 'Share Tech Mono', monospace; font-size: 0.63rem; /* +15% desde 0.55rem */
   letter-spacing: 0.3em; color: rgba(255,255,255,0.25);
 }
 
@@ -425,6 +417,7 @@ body::before {
   pointer-events: none;
 }
 
+/* TÍTULO SECCIÓN — SIN CAMBIOS */
 .section-nav-title {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: clamp(1.5rem, 4vw, 2.2rem);
@@ -517,19 +510,9 @@ body::before {
   font-size: 2.5rem;
 }
 
-.ticket-nav-card:hover .tnc-img {
-  filter: brightness(0.9) saturate(1);
-}
-
-.tnc-img-placeholder {
-  width: 100%; height: 120px;
-  display: flex; align-items: center; justify-content: center;
-  background: rgba(0,0,0,0.4);
-  font-size: 2.5rem;
-}
-
 .tnc-body { padding: 1rem 1.2rem 1.2rem; flex: 1; }
 
+/* TÍTULO CARD — SIN CAMBIOS */
 .tnc-title {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 1.2rem; font-weight: 900;
@@ -540,13 +523,14 @@ body::before {
 
 .tnc-price {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.85rem; font-weight: 700;
+  font-size: 0.98rem; font-weight: 700; /* +15% desde 0.85rem */
   color: rgba(255,255,255,0.85); letter-spacing: 0.08em;
   text-transform: uppercase; margin-bottom: 0.5rem;
 }
 
 .tnc-desc {
-  font-size: 0.8rem; color: rgba(255,255,255,0.6);
+  font-size: 0.92rem; /* +15% desde 0.8rem */
+  color: rgba(255,255,255,0.6);
   line-height: 1.5;
 }
 
@@ -565,13 +549,15 @@ body::before {
 
 .s-label {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.65rem; letter-spacing: 0.4em;
+  font-size: 0.75rem; /* +15% desde 0.65rem */
+  letter-spacing: 0.4em;
   color: rgba(255,255,255,0.5); margin-bottom: 0.4rem;
   display: flex; align-items: center; gap: 0.8rem;
 }
 
 .s-label::before { content: ''; width: 24px; height: 1px; background: var(--red); flex-shrink: 0; }
 
+/* TÍTULO SECCIÓN — SIN CAMBIOS */
 .s-title {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: clamp(1.8rem, 5vw, 3rem);
@@ -605,6 +591,58 @@ body::before {
   width: 100%;
 }
 
+/* ── REPLAY BUTTON OVERLAY ── */
+.video-replay-overlay {
+  position: absolute; inset: 0; z-index: 10;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  gap: 1rem;
+}
+
+.video-replay-overlay.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Mostrar al hover también cuando el video está corriendo */
+.video-wrapper:hover .video-replay-overlay.hoverable {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.replay-btn {
+  width: 90px; height: 90px; border-radius: 50%;
+  background: rgba(47, 182, 118, 0.15);
+  border: 2px solid var(--red);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all 0.3s;
+  animation: replayPulse 2s ease-in-out infinite;
+  color: #fff; font-size: 2.2rem;
+}
+
+@keyframes replayPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(47, 182, 118, 0.4); }
+  50%      { box-shadow: 0 0 0 20px rgba(47, 182, 118, 0); }
+}
+
+.replay-btn:hover {
+  background: rgba(47, 182, 118, 0.35);
+  transform: scale(1.1);
+  box-shadow: 0 0 40px rgba(47, 182, 118, 0.5);
+}
+
+.replay-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1rem; /* +15% */
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: rgba(255,255,255,0.75);
+  text-transform: uppercase;
+}
+
 .video-overlay-content {
   position: relative; z-index: 2; text-align: center;
 }
@@ -624,7 +662,11 @@ body::before {
 
 .play-btn:hover { background: rgba(232,0,29,0.3); transform: scale(1.1); }
 .play-btn span { font-size: 2rem; margin-left: 5px; }
-.video-label { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; color: rgba(255,255,255,0.3); }
+.video-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.81rem; /* +15% desde 0.7rem */
+  letter-spacing: 0.2em; color: rgba(255,255,255,0.3);
+}
 
 /* ══ UBICACIÓN ══ */
 .location-block {
@@ -664,17 +706,21 @@ body::before {
 
 .info-card-label {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.6rem; letter-spacing: 0.3em;
+  font-size: 0.69rem; /* +15% desde 0.6rem */
+  letter-spacing: 0.3em;
   color: var(--red); margin-bottom: 0.3rem;
 }
 
 .info-card-value {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 1.15rem; font-weight: 700;
+  font-size: 1.32rem; font-weight: 700; /* +15% desde 1.15rem */
   letter-spacing: 0.03em; color: #fff;
 }
 
-.info-card-sub { font-size: 0.78rem; color: var(--text-dim); margin-top: 0.2rem; }
+.info-card-sub {
+  font-size: 0.90rem; /* +15% desde 0.78rem */
+  color: var(--text-dim); margin-top: 0.2rem;
+}
 
 /* ══ CATÁLOGO EV ══ */
 .ev-catalog-grid {
@@ -754,6 +800,7 @@ body::before {
   border-top: 1px solid var(--border);
 }
 
+/* NOMBRE PRODUCTO — SIN CAMBIOS (título de card) */
 .ev-card-name {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 1rem; font-weight: 900;
@@ -762,15 +809,21 @@ body::before {
 }
 
 .ev-card-desc {
-  font-size: 0.75rem; color: var(--text); line-height: 1.5; opacity: 0.8;
+  font-size: 0.86rem; /* +15% desde 0.75rem */
+  color: var(--text); line-height: 1.5; opacity: 0.8;
 }
 
 .ev-card-price {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.88rem; color: rgba(255,255,255,0.8); margin-top: 0.2rem;
+  font-size: 1.01rem; /* +15% desde 0.88rem */
+  color: rgba(255,255,255,0.8); margin-top: 0.2rem;
 }
 
-.ev-card-price s { color: var(--text-dim); font-size: 0.72rem; margin-left: 0.3rem; }
+.ev-card-price s {
+  color: var(--text-dim);
+  font-size: 0.83rem; /* +15% desde 0.72rem */
+  margin-left: 0.3rem;
+}
 
 .ev-card-img-wrap--zoomout .ev-card-img {
   object-fit: contain; transform: scale(0.78);
@@ -828,7 +881,8 @@ body::before {
 }
 
 .r-img-label {
-  font-family: 'Share Tech Mono', monospace; font-size: 0.55rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.63rem; /* +15% desde 0.55rem */
   letter-spacing: 0.3em; color: var(--text-dim); position: relative; z-index: 2;
 }
 
@@ -844,7 +898,8 @@ body::before {
 }
 
 .reservas-slide-tag {
-  font-family: 'Share Tech Mono', monospace; font-size: 0.58rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.67rem; /* +15% desde 0.58rem */
   letter-spacing: 0.35em; color: var(--red); margin-bottom: 0.5rem;
   display: flex; align-items: center; gap: 0.5rem;
 }
@@ -853,6 +908,7 @@ body::before {
   content: ''; display: inline-block; width: 16px; height: 1px; background: var(--red);
 }
 
+/* TÍTULO SLIDE — SIN CAMBIOS */
 .reservas-slide-title {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: clamp(1.2rem, 3.5vw, 1.8rem);
@@ -863,7 +919,8 @@ body::before {
 .reservas-slide-title span { color: rgba(255,255,255,0.75); }
 
 .reservas-slide-text {
-  font-size: 0.82rem; line-height: 1.7; color: var(--text); margin-bottom: 1rem;
+  font-size: 0.94rem; /* +15% desde 0.82rem */
+  line-height: 1.7; color: var(--text); margin-bottom: 1rem;
 }
 
 .reservas-slide-meta {
@@ -871,7 +928,8 @@ body::before {
 }
 
 .r-pill {
-  font-family: 'Share Tech Mono', monospace; font-size: 0.58rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.67rem; /* +15% desde 0.58rem */
   letter-spacing: 0.12em; padding: 0.25rem 0.7rem;
   border: 1px solid var(--border); color: var(--text-dim); background: rgba(0,0,0,0.4);
 }
@@ -881,7 +939,8 @@ body::before {
 .r-pill.yellow { border-color: var(--yellow); color: var(--yellow); }
 
 .reservas-slide-cta {
-  font-family: 'Barlow Condensed', sans-serif; font-size: 0.9rem; font-weight: 900;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.04rem; font-weight: 900; /* +15% desde 0.9rem */
   letter-spacing: 0.1em; color: #fff; background: var(--red);
   border: none; padding: 0.65rem 1.5rem; cursor: pointer;
   clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
@@ -924,7 +983,9 @@ body::before {
 .reservas-nav-btn:hover { border-color: var(--red); color: var(--red); }
 
 .reservas-counter-label {
-  font-family: 'Share Tech Mono', monospace; font-size: 0.6rem; color: var(--text-dim);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.69rem; /* +15% desde 0.6rem */
+  color: var(--text-dim);
 }
 
 /* ══ KARTING PREVENTA BLOCK ══ */
@@ -955,6 +1016,7 @@ body::before {
   width: 100%; height: auto; object-fit: unset; display: block;
 }
 
+/* PRECIO DESTACADO — SIN CAMBIOS */
 .ticket-price-display {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: clamp(2rem, 5vw, 3.5rem);
@@ -963,7 +1025,8 @@ body::before {
 }
 
 .ticket-price-display small {
-  font-size: 1rem; color: var(--text-dim); font-weight: 400;
+  font-size: 1.15rem; /* +15% desde 1rem */
+  color: var(--text-dim); font-weight: 400;
 }
 
 /* ══ SORTEO ══ */
@@ -987,7 +1050,8 @@ body::before {
 
 .premios-list li {
   display: flex; align-items: center; gap: 1rem;
-  padding: 0.9rem 0; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+  padding: 0.9rem 0; border-bottom: 1px solid var(--border);
+  font-size: 1.04rem; /* +15% desde 0.9rem */
 }
 
 .premio-num {
@@ -1009,8 +1073,185 @@ body::before {
   font-size: 1.6rem; font-weight: 900; color: var(--red); line-height: 1; min-width: 2rem;
 }
 
-.step-text { font-size: 0.85rem; line-height: 1.5; }
+.step-text {
+  font-size: 0.98rem; /* +15% desde 0.85rem */
+  line-height: 1.5;
+}
+
 .step-text strong { color: #fff; }
+
+/* ══ CRÉDITOS BANCARIOS ══ */
+.bank-logos-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.bank-logo-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.bank-logo-card:hover { transform: translateY(-5px); }
+
+.bank-logo-frame {
+  width: 180px;
+  height: 180px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+  overflow: hidden;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.bank-logo-card:hover .bank-logo-frame {
+  border-color: rgba(47,182,118,0.5);
+  box-shadow: 0 0 24px rgba(47,182,118,0.15);
+}
+
+.bank-logo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.bank-logo-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.04rem; /* +15% desde 0.9rem */
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  color: var(--text);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.bank-logo-hint {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.63rem; /* +15% desde 0.55rem */
+  letter-spacing: 0.2em;
+  color: var(--red);
+  text-align: center;
+}
+
+/* ══ VENTAS CORPORATIVAS ══ */
+.corporate-img-block {
+  margin-bottom: 3rem;
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--red);
+  overflow: hidden;
+  position: relative;
+}
+
+.corporate-img-block img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ══ LIGHTBOX BANCOS ══ */
+.bank-lightbox-overlay {
+  position: fixed; inset: 0; z-index: 9500;
+  background: rgba(0,0,0,0.93);
+  backdrop-filter: blur(10px);
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.bank-lightbox-overlay.open {
+  display: flex;
+}
+
+.bank-lightbox-box {
+  background: var(--dark2);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--red);
+  max-width: 860px;
+  width: 100%;
+  margin: auto;
+  position: relative;
+  animation: lbFadeIn 0.3s ease;
+}
+
+@keyframes lbFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.bank-lightbox-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1.4rem;
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0;
+  background: var(--dark2); z-index: 1;
+}
+
+.bank-lightbox-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.15rem; font-weight: 900; /* +15% desde 1rem */
+  letter-spacing: 0.08em; color: var(--white);
+  text-transform: uppercase;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+
+.bank-lightbox-close {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  cursor: pointer;
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  font-family: 'Orbitron', monospace;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.bank-lightbox-close:hover {
+  border-color: var(--red);
+  color: var(--red);
+  background: rgba(47,182,118,0.08);
+}
+
+.bank-lightbox-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.bank-lightbox-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--border);
+  border-top: 2px solid rgba(47,182,118,0.4);
+}
+
+.bank-lightbox-img-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.69rem; /* +15% desde 0.6rem */
+  letter-spacing: 0.25em;
+  color: var(--text-dim);
+  text-align: center;
+  margin-top: -0.8rem;
+}
 
 /* ══ NOTICIAS ══ */
 .news-strip {
@@ -1072,7 +1313,8 @@ body::before {
 .news-card-body { padding: 0.9rem 1rem 1.1rem; }
 
 .news-card-tag {
-  font-family: 'Share Tech Mono', monospace; font-size: 0.53rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.61rem; /* +15% desde 0.53rem */
   letter-spacing: 0.25em; color: var(--red); margin-bottom: 0.4rem;
   display: flex; align-items: center; gap: 0.4rem;
 }
@@ -1083,7 +1325,8 @@ body::before {
 }
 
 .news-card-title {
-  font-family: 'Exo 2', sans-serif; font-size: 0.83rem;
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.95rem; /* +15% desde 0.83rem */
   font-weight: 600; color: #fff; line-height: 1.4;
 }
 
@@ -1103,6 +1346,7 @@ body::before {
   pointer-events: none;
 }
 
+/* TÍTULO BANNER — SIN CAMBIOS */
 .subscribe-banner-title {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: clamp(1.4rem, 4vw, 2rem);
@@ -1113,7 +1357,7 @@ body::before {
 
 .btn-subscribe {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 1rem; font-weight: 900;
+  font-size: 1.15rem; font-weight: 900; /* +15% desde 1rem */
   letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--red); background: #fff;
   border: 2px solid #fff; padding: 0.8rem 2.5rem;
@@ -1142,10 +1386,12 @@ body::before {
 }
 
 .khb-label {
-  font-family: 'Share Tech Mono', monospace; font-size: 0.62rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.71rem; /* +15% desde 0.62rem */
   letter-spacing: 0.4em; color: var(--red); margin-bottom: 0.5rem;
 }
 
+/* TÍTULO HERO KARTING — SIN CAMBIOS */
 .khb-title {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: clamp(1.8rem, 5vw, 3rem);
@@ -1158,7 +1404,8 @@ body::before {
 .khb-meta { display: flex; gap: 1rem; flex-wrap: wrap; }
 
 .khb-badge {
-  font-family: 'Share Tech Mono', monospace; font-size: 0.65rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem; /* +15% desde 0.65rem */
   letter-spacing: 0.12em; padding: 0.35rem 0.9rem;
   border: 1px solid var(--border); color: var(--text-dim);
   background: rgba(0,0,0,0.4);
@@ -1174,7 +1421,8 @@ body::before {
 }
 
 .subtab {
-  font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; font-weight: 700;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.98rem; font-weight: 700; /* +15% desde 0.85rem */
   letter-spacing: 0.1em; color: rgba(255,255,255,0.4);
   padding: 0.9rem 1.4rem; border: none; background: none;
   cursor: pointer; position: relative; transition: color 0.25s;
@@ -1199,6 +1447,7 @@ body::before {
   flex-wrap: wrap;
 }
 
+/* STOCK BIG — SIN CAMBIOS (título grande) */
 .stock-big {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: clamp(1.6rem, 4vw, 2.8rem); font-weight: 900;
@@ -1228,18 +1477,23 @@ body::before {
   line-height: 1; margin-bottom: 0.8rem;
 }
 
+/* TÍTULOS STEP — SIN CAMBIOS */
 .step-card-title {
   font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 900;
   color: var(--white); letter-spacing: 0.08em; margin-bottom: 0.6rem; text-transform: uppercase;
 }
 
-.step-card-text { font-size: 0.85rem; line-height: 1.6; color: var(--text); }
+.step-card-text {
+  font-size: 0.98rem; /* +15% desde 0.85rem */
+  line-height: 1.6; color: var(--text);
+}
+
 .step-card-icon { font-size: 1.8rem; margin-bottom: 0.8rem; display: block; }
 
 .tiers-section { margin-bottom: 2.5rem; }
 
 .tiers-title {
-  font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 900;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 1.15rem; font-weight: 900; /* +15% desde 1rem */
   letter-spacing: 0.15em; color: rgba(255,255,255,0.5); margin-bottom: 1rem;
   padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); text-transform: uppercase;
 }
@@ -1258,6 +1512,7 @@ body::before {
 .tier-icon { font-size: 1.4rem; flex-shrink: 0; }
 .tier-info { flex: 1; }
 
+/* TIER NAME — SIN CAMBIOS (título de categoría) */
 .tier-name {
   font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 900;
   letter-spacing: 0.08em; text-transform: uppercase;
@@ -1266,14 +1521,26 @@ body::before {
 .tier-name.vip { color: var(--yellow); }
 .tier-name.standard { color: #fff; }
 .tier-name.group { color: rgba(255,255,255,0.8); }
-.tier-desc { font-size: 0.76rem; color: var(--text-dim); margin-top: 0.2rem; }
+.tier-desc {
+  font-size: 0.87rem; /* +15% desde 0.76rem */
+  color: var(--text-dim); margin-top: 0.2rem;
+}
 
 .tier-price-block { text-align: right; flex-shrink: 0; }
+
+/* TIER PRICE — SIN CAMBIOS (precio destacado) */
 .tier-price {
   font-family: 'Barlow Condensed', sans-serif; font-size: 1.5rem; font-weight: 900; color: #fff;
 }
-.tier-old { font-size: 0.68rem; color: var(--text-dim); text-decoration: line-through; }
-.tier-save { font-family: 'Share Tech Mono', monospace; font-size: 0.58rem; color: var(--yellow); }
+.tier-old {
+  font-size: 0.78rem; /* +15% desde 0.68rem */
+  color: var(--text-dim); text-decoration: line-through;
+}
+.tier-save {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.67rem; /* +15% desde 0.58rem */
+  color: var(--yellow);
+}
 
 .cta-compra {
   background: linear-gradient(135deg, rgba(232,0,29,0.1) 0%, rgba(0,0,0,0.6) 100%);
@@ -1283,18 +1550,26 @@ body::before {
   flex-wrap: wrap; margin-bottom: 2.5rem; position: relative;
 }
 
+/* CTA PRICE — SIN CAMBIOS */
 .cta-compra-price {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900;
   color: #fff; display: flex; align-items: baseline; gap: 0.5rem;
 }
 
-.cta-compra-price small { font-size: 1rem; color: var(--text-dim); font-weight: 400; }
-.cta-compra-desc { font-size: 0.82rem; color: var(--text); margin-top: 0.2rem; }
+.cta-compra-price small {
+  font-size: 1.15rem; /* +15% desde 1rem */
+  color: var(--text-dim); font-weight: 400;
+}
+.cta-compra-desc {
+  font-size: 0.94rem; /* +15% desde 0.82rem */
+  color: var(--text); margin-top: 0.2rem;
+}
 .cta-compra-desc s { color: var(--text-dim); }
 
 .btn-comprar-online {
-  font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 900;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.15rem; font-weight: 900; /* +15% desde 1rem */
   letter-spacing: 0.12em; color: #fff; background: var(--red);
   border: none; padding: 1rem 2.5rem; cursor: pointer;
   clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
@@ -1363,6 +1638,7 @@ body::before {
   position: sticky; top: 0; background: var(--dark2); z-index: 1;
 }
 
+/* MODAL TITLE — SIN CAMBIOS */
 .modal-title {
   font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 900;
   letter-spacing: 0.08em; color: var(--white); text-transform: uppercase;
@@ -1394,7 +1670,8 @@ body::before {
 .modal-qr-frame svg { display: block; width: 140px; height: 140px; }
 
 .modal-qr-label {
-  font-family: 'Share Tech Mono', monospace; font-size: 0.58rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.67rem; /* +15% desde 0.58rem */
   letter-spacing: 0.25em; color: var(--red); text-align: center;
   animation: blinkAnim 2s step-end infinite;
 }
@@ -1408,10 +1685,12 @@ body::before {
 }
 
 .modal-price-label {
-  font-family: 'Share Tech Mono', monospace; font-size: 0.58rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.67rem; /* +15% desde 0.58rem */
   letter-spacing: 0.12em; color: var(--text-dim);
 }
 
+/* MODAL PRICE VAL — SIN CAMBIOS */
 .modal-price-val {
   font-family: 'Barlow Condensed', sans-serif; font-size: 1.5rem; font-weight: 900;
   color: #fff;
@@ -1421,7 +1700,8 @@ body::before {
 
 .modal-step {
   display: flex; align-items: center; gap: 0.7rem;
-  font-size: 0.78rem; color: var(--text);
+  font-size: 0.90rem; /* +15% desde 0.78rem */
+  color: var(--text);
 }
 
 .modal-step-num {
@@ -1435,7 +1715,8 @@ body::before {
   display: flex; align-items: center; justify-content: center; gap: 0.8rem;
   width: 100%; padding: 1.1rem;
   background: #25D366; border: none; cursor: pointer;
-  font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 900;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.15rem; font-weight: 900; /* +15% desde 1rem */
   letter-spacing: 0.1em; color: #fff; transition: all 0.3s;
   clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
   text-decoration: none; text-transform: uppercase;
@@ -1446,7 +1727,8 @@ body::before {
 }
 
 .modal-note {
-  font-family: 'Share Tech Mono', monospace; font-size: 0.56rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.64rem; /* +15% desde 0.56rem */
   color: var(--text-dim); text-align: center; margin-top: 1rem;
   letter-spacing: 0.08em; line-height: 1.8;
 }
@@ -1491,8 +1773,17 @@ body::before {
   }
 
   .step-text {
-    font-size: 0.82rem;
+    font-size: 0.90rem; /* +15% responsive */
     line-height: 1.5;
+  }
+
+  .bank-logos-grid {
+    gap: 1.5rem;
+  }
+
+  .bank-logo-frame {
+    width: 140px;
+    height: 140px;
   }
 
 }
@@ -1513,7 +1804,7 @@ body::before {
   }
 
   .ev-card-price {
-    font-size: 1rem;
+    font-size: 1.01rem; /* +15% */
   }
 }
 @media (max-width: 480px) {
@@ -1526,7 +1817,7 @@ body::before {
 @media (max-width: 768px) {
   #main-nav { padding: 0 1rem; }
   .logo-nav { font-size: 0.85rem; padding-right: 1rem; margin-right: 0.7rem; }
-  .nav-tab { font-size: 0.72rem; padding: 0 0.8rem; }
+  .nav-tab { font-size: 0.83rem; padding: 0 0.8rem; } /* +15% */
   .main-content { padding: 2.5rem 1rem; }
   .karting-page { padding: 2.5rem 1rem; }
   .location-block { grid-template-columns: 1fr; }
@@ -1542,7 +1833,7 @@ body::before {
   .cta-compra { flex-direction: column; }
   .stock-widget { flex-direction: column; gap: 0.8rem; align-items: flex-start; }
   .karting-subtabs { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .subtab { font-size: 0.75rem; padding: 0.8rem 1rem; white-space: nowrap; }
+  .subtab { font-size: 0.86rem; padding: 0.8rem 1rem; white-space: nowrap; } /* +15% */
   #sub-info-karting > div { grid-template-columns: 1fr !important; }
   .news-card { width: 230px; }
   .news-card-img-wrap { height: 140px; }
@@ -1562,7 +1853,7 @@ body::before {
 }
 @media (max-width: 480px) {
   .section-nav-grid { grid-template-columns: 1fr; }
-  .ev-catalog-grid { grid-template-columns: repeat(2, 1fr); gap: 0.7rem; }
+  .ev-catalog-grid { grid-template-columns: 1fr; gap: 0.7rem; }
   .photo-gallery { grid-template-columns: 1fr !important; }
   .hero-countdown { gap: 0.4rem; }
   .cd-unit { padding: 0.6rem 0.7rem; min-width: 58px; }
@@ -1627,7 +1918,7 @@ body::before {
 
 .sitemap-col h3 {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.81rem; /* +15% desde 0.7rem */
   font-weight: 900;
   letter-spacing: 0.2em;
   color: rgba(255,255,255,0.4);
@@ -1638,7 +1929,7 @@ body::before {
 .sitemap-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
 
 .sitemap-col ul li a {
-  font-size: 0.82rem;
+  font-size: 0.94rem; /* +15% desde 0.82rem */
   color: var(--text-dim);
   text-decoration: none;
   transition: color 0.2s;
@@ -1653,6 +1944,7 @@ body::before {
   gap: 1.2rem;
 }
 
+/* FOOTER TITLE — SIN CAMBIOS */
 .footer-right h2 {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: clamp(1.3rem, 3vw, 1.8rem);
@@ -1672,7 +1964,7 @@ body::before {
 
 .contact-form-wrapper h3 {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.98rem; /* +15% desde 0.85rem */
   font-weight: 900;
   letter-spacing: 0.2em;
   color: rgba(255,255,255,0.4);
@@ -1693,7 +1985,7 @@ body::before {
   color: #fff;
   padding: 0.7rem 1rem;
   font-family: 'Exo 2', sans-serif;
-  font-size: 0.82rem;
+  font-size: 0.94rem; /* +15% desde 0.82rem */
   letter-spacing: 0.05em;
   outline: none;
   transition: border-color 0.2s;
@@ -1708,7 +2000,7 @@ body::before {
 
 #whatsappForm button {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 1rem;
+  font-size: 1.15rem; /* +15% desde 1rem */
   font-weight: 900;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -1731,7 +2023,7 @@ body::before {
   text-align: center;
   padding: 1rem 2rem;
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.6rem;
+  font-size: 0.69rem; /* +15% desde 0.6rem */
   letter-spacing: 0.2em;
   color: var(--text-dim);
   border-top: 1px solid var(--border);
@@ -1760,18 +2052,11 @@ body::before {
   <!-- HERO -->
   <div id="hero">
     <div class="hero-video-bg">
-      <!--
-        INSTRUCCIONES PARA EL VIDEO:
-        Reemplazá el src con la URL de tu video .mp4 o .webm.
-        El video debe estar alojado en tu servidor o CDN.
-        Recomendado: video de coches eléctricos, pista de karting, o ciudad nocturna.
-        Ejemplo: src="https://tuquantum.com/wp-content/uploads/video-hero.mp4"
-      -->
+      <!-- ✅ Sin loop: reproduce una sola vez -->
       <video
         id="heroBgVideo"
         autoplay
         muted
-        loop
         playsinline
         preload="auto"
         src="http://tuquantum.com/wp-content/uploads/2026/04/Video-Karting-portada-cortado.mp4"
@@ -1779,23 +2064,20 @@ body::before {
       </video>
     </div>
 
-  
-
     <div class="hero-content">
-      <!-- LOGO FEXXCO COMPLETO — sin recorte -->
       <div class="hero-logo-wrap">
         <img
           src="http://tuquantum.com/wp-content/uploads/2026/03/logofexco.png"
-          alt="FEXXCO 2026"
+          alt="FEXCO 2026"
           class="hero-logo-img"
           onerror="this.style.display='none'">
       </div>
 
-      <div class="hero-brand">Quantum EV · FEXXCO</div>
+      <div class="hero-brand">Quantum  · FEXCO</div>
       <h1 class="hero-title">
         <span class="white">2026</span>
       </h1>
-      <p class="hero-sub">Stand B-14 · Movilidad Eléctrica</p>
+      <p class="hero-sub">Stand 1 · Sector A</p>
 
       <div class="hero-sep"></div>
 
@@ -1808,16 +2090,15 @@ body::before {
 
       <div class="hero-cta">
         <button class="btn-ticket" onclick="switchTab('karting')">
-          <i class="fa-solid fa-ticket"></i> Preventa Karting EV
+          <i class="fa-solid fa-ticket"></i> Preventa Karting 
         </button>
         <a href="#productos" class="btn-ticket-outline">
-          <i class="fa-solid fa-tags"></i> Ver Ofertas EV
+          <i class="fa-solid fa-tags"></i> Ver Ofertas 
         </a>
       </div>
     </div>
 
     <div class="scroll-indicator">
-      
       <div class="scroll-line"></div>
     </div>
   </div>
@@ -1837,12 +2118,10 @@ body::before {
   </div>
   <div class="tnc-body">
     <div class="tnc-title">Karting </div>
-    
     <div class="tnc-divider"></div>
     <div class="tnc-desc">
        Pon a prueba tu destreza y vive la adrenalina al máximo en nuestro circuito de karting. 
       Visítanos en nuestro stand en la FEXCO y disfruta de una experiencia única llena de velocidad, emoción y diversión.<br>
-      
     </div>
   </div>
 </div>
@@ -1862,7 +2141,6 @@ body::before {
         <div class="tnc-desc">
            Descubre nuestros increíbles precios de feria, diseñados especialmente para ti. 
           Es una oportunidad única que no puedes dejar pasar: calidad, emoción y ahorro en un solo lugar.<br>
-          
         </div>
       </div>
     </div>
@@ -1877,12 +2155,10 @@ body::before {
       </div>
       <div class="tnc-body">
         <div class="tnc-title">Gran Sorteo</div>
-        
         <div class="tnc-divider"></div>
         <div class="tnc-desc">
            No te pierdas la oportunidad de participar en nuestro gran sorteo y ganar premios increíbles. 
           Vive la emoción, sé parte de la experiencia y llévate sorpresas que harán aún más especial tu visita.<br>
-          
         </div>
       </div>
     </div>
@@ -1893,20 +2169,29 @@ body::before {
 
   <div class="main-content">
 
-    <!-- VIDEO -->
-   <div class="video-block">
-  <div class="s-title">PRUEBA TU DESTREZA CON <span class="red">QUANTUM </span></div>
-  <div class="video-wrapper">
-    <video
-      src="http://tuquantum.com/wp-content/uploads/2026/04/Piloto-aparece.mp4"
-      loop
-      autoplay
-      muted
-      playsinline
-      style="width:100%; height:100%; object-fit:cover; display:block; border-radius:inherit;"
-    ></video>
-  </div>
-</div>
+    <!-- VIDEO "PRUEBA TU DESTREZA" — con overlay de replay -->
+    <div class="video-block">
+      <div class="s-title">PRUEBA TU DESTREZA CON <span class="red">QUANTUM </span></div>
+      <div class="video-wrapper" id="destrezaWrapper">
+        <!-- ✅ Sin loop: reproduce una sola vez -->
+        <video
+          id="destrezaVideo"
+          src="http://tuquantum.com/wp-content/uploads/2026/04/Con-piloto.mp4"
+          autoplay
+          muted
+          playsinline
+          style="width:100%; height:100%; object-fit:cover; display:block; border-radius:inherit;"
+        ></video>
+
+        <!-- ✅ Overlay de Replay: aparece al terminar el video Y en hover mientras corre -->
+        <div class="video-replay-overlay hoverable" id="destrezaOverlay">
+          <button class="replay-btn" onclick="replayDestrezaVideo()" title="Reproducir de nuevo">
+            <i class="fa-solid fa-rotate-right"></i>
+          </button>
+          <span class="replay-label">Reproducir de nuevo</span>
+        </div>
+      </div>
+    </div>
 
     <hr class="divider">
 
@@ -1918,25 +2203,25 @@ body::before {
       <div class="map-placeholder">
         <img
           src="http://tuquantum.com/wp-content/uploads/2026/04/Mapa-del-Stand-de-Quantum-2026.svg"
-          alt="Stand B-14 Quantum EV"
+          alt="Stand 1 Sector A Quantum EV"
           style="width:100%;height:100%;object-fit:contain;position:absolute;inset:0;"
           onerror="this.style.display='none'">
       </div>
       <div class="location-info">
         <div class="info-card">
           <div class="info-card-label"><i class="fa-solid fa-location-dot"></i> Stand</div>
-          <div class="info-card-value">B-14 — QUANTUM EV</div>
-          <div class="info-card-sub">Pabellón B · Zona Movilidad Eléctrica</div>
+          <div class="info-card-value">1 Sector A— QUANTUM </div>
+          <div class="info-card-sub">Área externa · Zona Vehículos</div>
         </div>
         <div class="info-card">
           <div class="info-card-label"><i class="fa-solid fa-calendar-days"></i> Fechas</div>
-          <div class="info-card-value">Del 15 al 25 de Mayo, 2026</div>
+          <div class="info-card-value">Del 23 de Abril al 3 de Mayo, 2026</div>
           <div class="info-card-sub">Abierto todos los días</div>
         </div>
         <div class="info-card">
           <div class="info-card-label"><i class="fa-solid fa-clock"></i> Horario</div>
-          <div class="info-card-value">10:00 — 21:00 hrs</div>
-          <div class="info-card-sub">Fin de semana hasta las 22:00</div>
+          <div class="info-card-value">17:00 — 23:00 hrs</div>
+          <div class="info-card-sub">Fin de semana hasta las 01:00</div>
         </div>
         <div class="info-card">
           <div class="info-card-label"><i class="fa-solid fa-phone"></i> Contacto</div>
@@ -1951,142 +2236,126 @@ body::before {
     <!-- PRODUCTOS -->
     <div id="productos">
       <div class="s-label"><i class="fa-solid fa-bolt"></i> Catálogo Exclusivo</div>
-      <div class="s-title">PRODUCTOS EV & <span class="red">OFERTAS</span></div>
+      <div class="s-title">PRODUCTOS  & <span class="red">OFERTAS</span></div>
 
       <div class="ev-catalog-grid">
 
         <div class="ev-card">
-          <div class="ev-card-img-wrap ev-card-img-wrap--zoomout">
-            <img src="http://tuquantum.com/wp-content/uploads/2026/03/STARTO.png" alt="Starto" class="ev-card-img" onerror="this.style.display='none'">
+          <div class="ev-card-img-wrap ">
+            <img src="http://tuquantum.com/wp-content/uploads/2026/04/Carrusel-FEXCO-Starto.jpg.webp" alt="Starto" class="ev-card-img" onerror="this.style.display='none'">
           </div>
           <div class="ev-card-body">
             <div class="ev-card-name">Starto</div>
-            <div class="ev-card-desc">SUV eléctrico familiar · 300km autonomía · AWD</div>
-            <div class="ev-card-price">Bs. 89.000 <s>Bs. 98.000</s></div>
-          </div>
-        </div>
-        <div class="ev-card">
-          <div class="ev-card-img-wrap">
-            <img src="http://tuquantum.com/wp-content/uploads/2026/03/CPX-PRO.png" alt="CPX PRO" class="ev-card-img" onerror="this.style.display='none'">
-            
-          </div>
-          <div class="ev-card-body">
-            <div class="ev-card-name">CPX PRO</div>
-            <div class="ev-card-desc">Moto eléctrica urbana · Autonomía 120km · Carga rápida</div>
-            <div class="ev-card-price">Bs. 12.500 <s>Bs. 15.000</s></div>
+            <div class="ev-card-desc">Patineta eléctrica · 30km autonomía · AWD</div>
+            <div class="ev-card-price">Bs. 6.800 <s>Bs. 6.800</s></div>
           </div>
         </div>
        <div class="ev-card">
   <div class="ev-card-img-wrap" style="overflow: hidden;">
-    <img src="http://tuquantum.com/wp-content/uploads/2026/04/Flashride-giradog.png" alt="Flashride" class="ev-card-img" style="transform: scale(1.2); transform-origin: center center;" onerror="this.style.display='none'">
+    <img src="http://tuquantum.com/wp-content/uploads/2026/04/Carrusel-FEXCO-motos-2.jpg-1.webp" alt="Flashride" class="ev-card-img" style="transform: scale(1.2); transform-origin: center center;" onerror="this.style.display='none'">
   </div>
   <div class="ev-card-body">
     <div class="ev-card-name">Flashride</div>
-    <div class="ev-card-desc">Microauto eléctrico · 4 pasajeros · Motor 30kW</div>
-    <div class="ev-card-price">Bs. 45.000 <s>Bs. 52.000</s></div>
+    <div class="ev-card-desc">Motocicleta eléctrica · 2 pasajeros · Motor 2.000 W</div>
+    <div class="ev-card-price">Bs. 21.900 <s>Bs. 21.900</s></div>
   </div>
 </div>
         <div class="ev-card">
           <div class="ev-card-img-wrap">
-            <img src="http://tuquantum.com/wp-content/uploads/2026/03/luna-pro.png" alt="Luna Pro" class="ev-card-img" onerror="this.style.display='none'">
-            
+            <img src="http://tuquantum.com/wp-content/uploads/2026/04/Carrusel-FEXCO-motos-1.jpg-1.webp" alt="Luna Pro" class="ev-card-img" onerror="this.style.display='none'">
           </div>
           <div class="ev-card-body">
             <div class="ev-card-name">Luna Pro</div>
-            <div class="ev-card-desc">Moto eléctrica · 0–60 en 4s · 150km autonomía</div>
-            <div class="ev-card-price">Bs. 18.900 <s>Bs. 22.000</s></div>
+            <div class="ev-card-desc">Motocicleta eléctrica · 60km autonomía</div>
+            <div class="ev-card-price">Bs. 12.500 <s>Bs. 12.500</s></div>
           </div>
         </div>
-        
+
         <div class="ev-card">
           <div class="ev-card-img-wrap">
-            <img src="http://tuquantum.com/wp-content/uploads/2026/04/TC-super-socog.png" alt="TC Super Soco" class="ev-card-img" onerror="this.style.display='none'">
-            
-          </div>
-          <div class="ev-card-body">
-            <div class="ev-card-name">TC Super Soco</div>
-            <div class="ev-card-desc">Scooter silencioso · Ideal reparto · Batería extraíble</div>
-            <div class="ev-card-price">Bs. 8.200 <s>Bs. 9.500</s></div>
-          </div>
-        </div>
-        
-        <div class="ev-card">
-  <div class="ev-card-img-wrap" style="overflow: hidden;">
-    <img src="http://tuquantum.com/wp-content/uploads/2026/03/TC-WANDERER.png" alt="TC Wanderer" class="ev-card-img" style="transform: scale(1.1); transform-origin: center center;" onerror="this.style.display='none'">
-  </div>
-  <div class="ev-card-body">
-    <div class="ev-card-name">TC Wanderer</div>
-    <div class="ev-card-desc">Sedán familiar · Carga tipo 2 · Interior premium</div>
-    <div class="ev-card-price">Bs. 14.500 <s>Bs. 17.000</s></div>
-  </div>
-</div>
-        <div class="ev-card">
-          <div class="ev-card-img-wrap">
-            <img src="http://tuquantum.com/wp-content/uploads/2026/04/Trooperg.png" alt="Trooper" class="ev-card-img" onerror="this.style.display='none'">
+            <img src="http://tuquantum.com/wp-content/uploads/2026/04/Carrusel-FEXCO-motos-3.jpg-1.webp" alt="Trooper" class="ev-card-img" onerror="this.style.display='none'">
           </div>
           <div class="ev-card-body">
             <div class="ev-card-name">Trooper</div>
-            <div class="ev-card-desc">Pickup eléctrica · Doble cabina · 350km autonomía</div>
-            <div class="ev-card-price">Bs. 110.000 <s>Bs. 125.000</s></div>
+            <div class="ev-card-desc">Motocicleta eléctrica · 70km autonomía</div>
+            <div class="ev-card-price">Bs. 27.000 <s>Bs. 27.000</s></div>
           </div>
         </div>
         
-       
         <div class="ev-card">
           <div class="ev-card-img-wrap">
-            <img src="http://tuquantum.com/wp-content/uploads/2026/03/TS-Street-Hunter.png" alt="TS Street Hunter" class="ev-card-img" onerror="this.style.display='none'">
+            <img src="http://tuquantum.com/wp-content/uploads/2026/04/Carrusel-FEXCO-motos-4.jpg-1.webp" alt="TS Street Hunter" class="ev-card-img" onerror="this.style.display='none'">
           </div>
           <div class="ev-card-body">
             <div class="ev-card-name">TS Street Hunter</div>
-            <div class="ev-card-desc">Trail eléctrica · Todo terreno · Suspensión larga</div>
-            <div class="ev-card-price">Bs. 21.000 <s>Bs. 25.000</s></div>
+            <div class="ev-card-desc">Motocicleta eléctrica · 75km autonomía</div>
+            <div class="ev-card-price">Bs. 41.300 <s>Bs. 41.300</s></div>
           </div>
         </div>
         <div class="ev-card">
           <div class="ev-card-img-wrap">
-            <img src="http://tuquantum.com/wp-content/uploads/2026/03/E4-blanca.png" alt="E4 Blanca" class="ev-card-img" onerror="this.style.display='none'">
-            
+            <img src="http://tuquantum.com/wp-content/uploads/2026/04/Carrusel-FEXCO-autos-3.jpg-1.webp" alt="E4 Blanca" class="ev-card-img" onerror="this.style.display='none'">
           </div>
           <div class="ev-card-body">
             <div class="ev-card-name">E4 </div>
-            <div class="ev-card-desc">Van eléctrica · 7 pasajeros · Ideal familia · Roof solar</div>
-            <div class="ev-card-price">Bs. 95.000 <s>Bs. 108.000</s></div>
+            <div class="ev-card-desc">Vehículo eléctrico · 80 - 100 Km</div>
+            <div class="ev-card-price">Bs. 75.500 <s>Bs. 75.500</s></div>
           </div>
         </div>
         
         <div class="ev-card">
           <div class="ev-card-img-wrap">
-            <img src="http://tuquantum.com/wp-content/uploads/2026/03/Equte-blanco.png" alt="Equte Blanco" class="ev-card-img" onerror="this.style.display='none'">
+            <img src="http://tuquantum.com/wp-content/uploads/2026/04/Carrusel-FEXCO-autos-1.jpg-1.webp" alt="Equte Blanco" class="ev-card-img" onerror="this.style.display='none'">
           </div>
           <div class="ev-card-body">
             <div class="ev-card-name">Equte </div>
-            <div class="ev-card-desc">Coupé deportivo · 280kW · 0–100 en 3.2s · Techo solar</div>
-            <div class="ev-card-price">Bs. 135.000 <s>Bs. 150.000</s></div>
+            <div class="ev-card-desc">Vehículo eléctrico · 300 Km</div>
+            <div class="ev-card-price">Bs. 205.800 <s>Bs. 205.800</s></div>
           </div>
         </div>
         
-        
-        <div class="ev-card">
+        <!-- <div class="ev-card">
           <div class="ev-card-img-wrap">
-            <img src="http://tuquantum.com/wp-content/uploads/2026/03/FARIZON-H8E.png" alt="Farizon H8E" class="ev-card-img" onerror="this.style.display='none'">
-            
+            <img src="http://tuquantum.com/wp-content/uploads/2026/04/Carrusel-FEXCO-camiones-3.jpg-1.webp" alt="Farizon H8E" class="ev-card-img" onerror="this.style.display='none'">
           </div>
           <div class="ev-card-body">
             <div class="ev-card-name">Farizon H8E</div>
-            <div class="ev-card-desc">Custom chopper eléctrica · Edición limitada · 200km</div>
-            <div class="ev-card-price">Bs. 27.000 <s>Bs. 31.000</s></div>
+            <div class="ev-card-desc">Camión Eléctrico</div>
+            <div class="ev-card-price"> <s></s></div>
           </div>
-        </div>
+        </div> -->
         <div class="ev-card">
-  <div class="ev-card-img-wrap ev-card-img-wrap--zoomout" style="overflow: hidden;">
-    <img src="http://tuquantum.com/wp-content/uploads/2026/04/IONg.png" alt="ION" class="ev-card-img" style="transform: scale(1.1); transform-origin: center center;" onerror="this.style.display='none'">
+  <div class="ev-card-img-wrap ev-card-img-wrap" style="overflow: hidden;">
+    <img src="http://tuquantum.com/wp-content/uploads/2026/04/Carrusel-FEXCO-camiones-1.jpg-1.webp" alt="ION" class="ev-card-img" style="transform: scale(1.1); transform-origin: center center;" onerror="this.style.display='none'">
   </div>
   <div class="ev-card-body">
     <div class="ev-card-name">ION</div>
-    <div class="ev-card-desc">Modelo insignia Quantum · Full equip · 400km autonomía</div>
-    <div class="ev-card-price">Bs. 160.000 <s>Bs. 180.000</s></div>
+    <div class="ev-card-desc">Camión Eléctrico con caja seca</div>
+    <div class="ev-card-price">Bs. 196.000 <s>Bs. 196.000</s></div>
   </div>
 </div>
+
+        <div class="ev-card">
+          <div class="ev-card-img-wrap">
+            <img src="http://tuquantum.com/wp-content/uploads/2026/04/Carrusel-FEXCO-camiones-2.jpg-1.webp" alt="ION PRO" class="ev-card-img" onerror="this.style.display='none'">
+          </div>
+          <div class="ev-card-body">
+            <div class="ev-card-name">ION PRO</div>
+            <div class="ev-card-desc">Camión Eléctrico con caja seca</div>
+            <div class="ev-card-price">Bs. 268.500 <s>Bs. 268.500</s></div>
+          </div>
+        </div>
+        <!-- <div class="ev-card">
+  <div class="ev-card-img-wrap " style="overflow: hidden;">
+    <img src="http://tuquantum.com/wp-content/uploads/2026/04/Carrusel-FEXCO-camiones-4.jpg-1.webp" alt="ACE" class="ev-card-img" style="transform: scale(1.1); transform-origin: center center;" onerror="this.style.display='none'">
+  </div>
+  <div class="ev-card-body">
+    <div class="ev-card-name">ACE</div>
+    <div class="ev-card-desc">VAN Eléctrico</div>
+    <div class="ev-card-price"><s></s></div>
+  </div>
+</div> -->
+
       </div>
     </div>
 
@@ -2102,7 +2371,7 @@ body::before {
 
           <div class="reservas-slide">
             <div class="reservas-img-wrap">
-              <img src="http://tuquantum.com/wp-content/uploads/2026/04/Reserva1-2025.jpeg" alt="Test Drive EV"
+              <img src="http://tuquantum.com/wp-content/uploads/2026/04/Reserva1-2025.jpeg" alt="Test Drive "
                 style="width:100%;height:100%;object-fit:cover;display:block;"
                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
               <div class="reservas-img-placeholder" style="display:none;">
@@ -2111,11 +2380,8 @@ body::before {
               </div>
             </div>
             <div class="reservas-content">
-              
               <div class="reservas-slide-title">FUTURO <br><span>ELÉCTRICO</span></div>
               <div class="reservas-slide-text">Descubre una nueva forma de conducir con nuestros autos eléctricos: eficientes, silenciosos y amigables con el medio ambiente. Da el salto hacia la innovación y sé parte del cambio hacia una movilidad más inteligente.</div>
-              
-              
             </div>
           </div>
 
@@ -2130,36 +2396,25 @@ body::before {
               </div>
             </div>
             <div class="reservas-content">
-              
               <div class="reservas-slide-title">CONDUCE <br><span>EL CAMBIO</span></div>
               <div class="reservas-slide-text">Vive la potencia y tecnología de los autos eléctricos con beneficios que van más allá del ahorro. Menos emisiones, mayor eficiencia y una experiencia de manejo moderna que redefine cada trayecto.</div>
-              <div class="reservas-slide-meta">
-                
-                
-              </div>
-              
+              <div class="reservas-slide-meta"></div>
             </div>
           </div>
 
           <div class="reservas-slide">
             <div class="reservas-img-wrap">
-              <img src="http://tuquantum.com/wp-content/uploads/2026/04/Reserva3-2025.jpeg" alt="Diagnóstico EV"
+              <img src="http://tuquantum.com/wp-content/uploads/2026/04/Reserva3-2025.jpeg" alt="Diagnóstico "
                 style="width:100%;height:100%;object-fit:cover;display:block;"
                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
               <div class="reservas-img-placeholder" style="display:none;">
-                
                 <span class="r-img-label">RESERVA 03</span>
               </div>
             </div>
             <div class="reservas-content">
-              
               <div class="reservas-slide-title">LLEVA TU <br><span>MOTO ELECTRICA HOY</span></div>
               <div class="reservas-slide-text">Adquiere nuestras motocicletas a un precio verdaderamente imperdible. Aprovecha esta oportunidad única para dar el siguiente paso hacia una movilidad más eficiente, moderna y llena de estilo.</div>
-              <div class="reservas-slide-meta">
-                
-                
-              </div>
-              
+              <div class="reservas-slide-meta"></div>
             </div>
           </div>
 
@@ -2169,16 +2424,12 @@ body::before {
                 style="width:100%;height:100%;object-fit:cover;display:block;"
                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
               <div class="reservas-img-placeholder" style="display:none;">
-                
                 <span class="r-img-label">RESERVA 04</span>
               </div>
             </div>
             <div class="reservas-content">
-              
               <div class="reservas-slide-title">MOVILIDAD <br><span>DEL FUTURO</span></div>
               <div class="reservas-slide-text">Experimenta lo último en innovación al conducir un vehículo eléctrico. Tecnología avanzada, diseño moderno y una experiencia de manejo silenciosa que redefine cada trayecto.</div>
-              
-              
             </div>
           </div>
 
@@ -2204,21 +2455,21 @@ body::before {
 
     <!-- KARTING PREVENTA -->
     <div class="s-label"><i class="fa-solid fa-ticket"></i> Preventa Exclusiva</div>
-    <div class="s-title">TICKETS <span class="red">KARTING EV</span></div>
+    <div class="s-title">TICKETS <span class="red">KARTING</span></div>
 
     <div class="karting-block">
       <div class="corner-dec tl"></div><div class="corner-dec tr"></div>
       <div class="corner-dec bl"></div><div class="corner-dec br"></div>
       <div class="karting-inner">
         <div class="karting-img-wrap">
-          <img src="http://tuquantum.com/wp-content/uploads/2026/04/Preventa-habilitada-karting-web.jpg.jpeg" alt="Karting EV Preventa">
+          <img src="http://tuquantum.com/wp-content/uploads/2026/04/Preventa-habilitada-karting-web.jpg.jpeg" alt="Karting  Preventa">
         </div>
         <div>
-          <div class="s-label"><i class="fa-solid fa-ticket"></i> Karting EV — Preventa</div>
-          <div class="ticket-price-display">Bs. 30 <small>/ ticket</small></div>
-          <p style="font-size:0.88rem;line-height:1.75;color:var(--text);margin-bottom:1.5rem;">
+          <div class="s-label"><i class="fa-solid fa-ticket"></i> Karting  — Preventa</div>
+          <div class="ticket-price-display">Bs. 50 <small>/ ticket por 2 carreras</small></div>
+          <p style="font-size:1.01rem;line-height:1.75;color:var(--text);margin-bottom:1.5rem;">
             Conseguí tu ticket para el karting 100% eléctrico al precio más bajo antes de que se agoten.
-            La preventa cierra el <strong style="color:#fff">14 de Mayo</strong> o cuando se agoten los cupos.
+            La preventa cierra el <strong style="color:#fff">22 de Abril</strong> o cuando se agoten los cupos.
           </p>
           <button class="btn-ticket" onclick="switchTab('karting')">
             <i class="fa-solid fa-ticket"></i> Ver cómo comprar
@@ -2231,11 +2482,11 @@ body::before {
 
   <!-- SORTEO -->
 <div class="s-label">Gran Sorteo</div>
-<div class="s-title">SORTEO <span class="red">FEXXCO 2026</span></div>
+<div class="s-title">SORTEO <span class="red">FEXCO 2026</span></div>
 
 <img 
   id="sorteo-banner"
-  src="http://tuquantum.com/wp-content/uploads/2026/04/Banner-FEXCO-sorteo-2026-web.jpg.jpeg" 
+  src="http://tuquantum.com/wp-content/uploads/2026/04/Banner-FEXCO-sorteo-2026-web.jpg-1.jpeg" 
   alt="Banner Gran Sorteo FEXCO 2026" 
   style="
     width: 100vw;
@@ -2251,78 +2502,101 @@ body::before {
   <div class="corner-dec tl"></div><div class="corner-dec br"></div>
   <div class="sorteo-grid">
     <div>
-      <p style="font-size:0.88rem;line-height:1.75;margin-bottom:1rem;">
-        Participá en el <strong style="color:#fff">Gran Sorteo FEXCO 2026</strong> de Quantum EV.
-        Cada compra en nuestro stand te da una oportunidad de ganar.
+      <p style="font-size:1.01rem;line-height:1.75;margin-bottom:1rem;">
+        Participa en el <strong style="color:#fff">Gran Sorteo FEXCO 2026</strong> de Quantum .
       </p>
       <ul class="premios-list">
         <li>
           <span class="premio-num"><i class="fa-solid fa-trophy"></i></span>
           <div>
             <div style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;color:#fff;font-weight:900;letter-spacing:0.05em;text-transform:uppercase;">Primer Premio</div>
-            <div style="font-size:0.82rem;color:var(--text);margin-top:0.2rem;">Kit completo de carga EV domiciliaria + 5 servicios gratis</div>
+            <div style="font-size:0.94rem;color:var(--text);margin-top:0.2rem;">Auto eléctrico Quantum E4.</div>
           </div>
         </li>
         <li>
           <span class="premio-num"><i class="fa-solid fa-medal"></i></span>
           <div>
             <div style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;color:#fff;font-weight:900;letter-spacing:0.05em;text-transform:uppercase;">Segundo Premio</div>
-            <div style="font-size:0.82rem;color:var(--text);margin-top:0.2rem;">3 tickets karting EV + diagnóstico completo de batería</div>
+            <div style="font-size:0.94rem;color:var(--text);margin-top:0.2rem;">Scooter Yadea Starto</div>
           </div>
         </li>
         <li>
           <span class="premio-num"><i class="fa-solid fa-award"></i></span>
           <div>
             <div style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;color:#fff;font-weight:900;letter-spacing:0.05em;text-transform:uppercase;">Tercer Premio</div>
-            <div style="font-size:0.82rem;color:var(--text);margin-top:0.2rem;">Accesorios EV racing + 2 revisiones de carga gratis</div>
-          </div>
-        </li>
-        <li>
-          <span class="premio-num"><i class="fa-solid fa-star"></i></span>
-          <div>
-            <div style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;color:#fff;font-weight:900;letter-spacing:0.05em;text-transform:uppercase;">Premios adicionales</div>
-            <div style="font-size:0.82rem;color:var(--text);margin-top:0.2rem;">Kits de accesorios, descuentos y sorpresas especiales</div>
+            <div style="font-size:0.94rem;color:var(--text);margin-top:0.2rem;">Bicicleta eléctrica Quantum A5</div>
           </div>
         </li>
       </ul>
-      <div style="font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:var(--text-dim);margin-top:1rem;letter-spacing:0.1em;">
-        * Sorteo el último día de FEXXCO 2026. Bases en stand B-14.
-      </div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:0.71rem;color:var(--text-dim);margin-top:1rem;letter-spacing:0.1em;"></div>
     </div>
     <div>
       <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:900;color:var(--red);letter-spacing:0.08em;margin-bottom:1rem;text-transform:uppercase;">Cómo participar</div>
       <div class="sorteo-steps">
         <div class="step">
-          <span class="step-num">1</span>
-          <div class="step-text"><strong>Realiza una compra</strong> en el stand B-14 de Quantum EV durante FEXXCO 2026.</div>
-        </div>
-        <div class="step">
-          <span class="step-num">2</span>
-          <div class="step-text"><strong>Guarda tu ticket</strong> de compra — cada Bs. 50 = 1 papeleta de sorteo.</div>
-        </div>
-        <div class="step">
-          <span class="step-num">3</span>
-          <div class="step-text"><strong>Registrá tu papeleta</strong> escaneando el QR del stand o llenando el formulario.</div>
-        </div>
-        <div class="step">
-          <span class="step-num">4</span>
-          <div class="step-text"><strong>Esperá el sorteo EN VIVO</strong> el último día de feria.</div>
+          <span class="step-num"></span>
+          <div class="step-text"> Los interesados deben ingresar al Recinto Ferial de la Fexco y acercarse al stand de Quantum Motors (A1 – Área Externa Sector A). Una vez allí deben escanear el QR Oficial del Sorteo y llenar el formulario con sus datos personales para participar de la promocion "Tombola Digital"</div>
         </div>
       </div>
-      <div style="margin-top:1.5rem;background:rgba(232,0,29,0.06);border:1px solid rgba(232,0,29,0.2);padding:1.1rem;font-family:'Share Tech Mono',monospace;font-size:0.68rem;line-height:1.9;">
+      <div style="margin-top:1.5rem;background:rgba(232,0,29,0.06);border:1px solid rgba(232,0,29,0.2);padding:1.1rem;font-family:'Share Tech Mono',monospace;font-size:0.78rem;line-height:1.9;">
         <div style="color:var(--red);margin-bottom:0.3rem;"><i class="fa-solid fa-gift"></i> SORTEO FINAL</div>
-        <div>Último día FEXXCO 2026 · 19:00 hrs</div>
-        <div style="color:var(--text-dim);">EN VIVO desde el stand B-14</div>
+        <div>Sorteo: 3 de mayo de 2026, a las 21:00, en el Recinto Ferial Alalay (con notario público).
+
+        <div style="color:var(--text-dim);">EN VIVO desde el stand 1 -Sector A</div>
       </div>
     </div>
   </div>
 </div>
 
-  </div>
+    <!-- CRÉDITOS BANCARIOS -->
+    <hr class="divider">
+
+    <div class="s-label"><i class="fa-solid fa-building-columns"></i> Financiamiento</div>
+    <div class="s-title">CRÉDITOS BANCARIOS <span class="red">DISPONIBLES</span></div>
+
+    <div class="bank-logos-grid">
+
+      <div class="bank-logo-card" onclick="openBankLightbox('union')" title="Ver fichas de crédito Banco Unión">
+        <div class="bank-logo-frame">
+          <img
+            src="http://tuquantum.com/wp-content/uploads/2026/04/Banco-Union.jpg"
+            alt="Banco Unión"
+            onerror="this.style.display='none'">
+        </div>
+        <div class="bank-logo-name">Banco Unión</div>
+        <div class="bank-logo-hint"><i class="fa-solid fa-eye"></i> &nbsp;Ver fichas de crédito</div>
+      </div>
+
+      <div class="bank-logo-card" onclick="openBankLightbox('comunidad')" title="Ver ficha de crédito Bancomunidad">
+        <div class="bank-logo-frame">
+          <img
+            src="http://tuquantum.com/wp-content/uploads/2026/04/Bancomunidad.jpg"
+            alt="Bancomunidad"
+            onerror="this.style.display='none'">
+        </div>
+        <div class="bank-logo-name">Bancomunidad</div>
+        <div class="bank-logo-hint"><i class="fa-solid fa-eye"></i> &nbsp;Ver ficha de crédito</div>
+      </div>
+
+    </div>
+
+    <!-- VENTAS CORPORATIVAS -->
+    <hr class="divider">
+
+    <div class="s-label"><i class="fa-solid fa-briefcase"></i> B2B · Empresas & Flotas</div>
+    <div class="s-title">VENTAS CORPORATIVAS <span class="red">& B2B</span></div>
+
+    <div class="corporate-img-block">
+      <img
+        src="http://tuquantum.com/wp-content/uploads/2026/04/Imagen-Ventas-Corporativas.png"
+        alt="Ventas Corporativas Quantum Motors"
+        onerror="this.style.display='none'">
+    </div>
+
+  </div><!-- /main-content -->
 
   <!-- NOTICIAS -->
   <div style="padding:3rem 2rem 1rem;max-width:1400px;margin:0 auto;">
-    
     <div class="s-title" style="margin-bottom:1.5rem;">QUANTUM  <span class="red">DESTACANDO</span></div>
   </div>
 
@@ -2408,10 +2682,7 @@ body::before {
     </div>
   </div>
 
-
-  <div class="subscribe-banner">
-    
-  </div>
+  <div class="subscribe-banner"></div>
 
 </section>
 
@@ -2423,12 +2694,11 @@ body::before {
 
     <div class="karting-hero-banner">
       <div class="corner-dec tl"></div><div class="corner-dec br"></div>
-      <div class="khb-label"><i class="fa-solid fa-bolt"></i> Karting 100% Eléctrico · FEXXCO 2026</div>
+      <div class="khb-label"><i class="fa-solid fa-bolt"></i> Karting 100% Eléctrico · FEXCO 2026</div>
       <div class="khb-title">PREVENTA<br><span>KARTING EV</span></div>
       <div class="khb-meta">
-        <span class="khb-badge hot"><i class="fa-solid fa-fire"></i> ¡Quedan pocos!</span>
-        <span class="khb-badge green"><i class="fa-solid fa-bolt"></i> 100% Eléctrico</span>
         
+        <span class="khb-badge green"><i class="fa-solid fa-bolt"></i> 100% Eléctrico</span>
       </div>
     </div>
 
@@ -2457,7 +2727,7 @@ body::before {
         <div class="step-card">
           <span class="step-card-icon"><i class="fa-solid fa-circle-check"></i> <i class="fa-brands fa-whatsapp"></i></span>
           <div class="step-card-num">02</div>
-          <div class="step-card-title">Verificá tu pago</div>
+          <div class="step-card-title">Verifica tu pago</div>
           <div class="step-card-text">Contactanos al WhatsApp corporativo enviando el comprobante para verificar tu reserva.</div>
         </div>
         <div class="step-card">
@@ -2475,38 +2745,26 @@ body::before {
             <span class="tier-icon">🏆</span>
             <div class="tier-info">
               <div class="tier-name vip">VIP Pack EV</div>
-              <div class="tier-desc">2 carreras + pit lane tour + foto oficial</div>
+              <div class="tier-desc">2 carreras o 20 minutos de uso</div>
             </div>
             <div class="tier-price-block">
-              <div class="tier-price">Bs. 220</div>
-              <div class="tier-old">Bs. 300</div>
-              <div class="tier-save">AHORRÁS Bs. 80</div>
+              <div class="tier-price">Bs. 50</div>
+              <div class="tier-old">Bs. 60</div>
+              <div class="tier-save">AHORRÁS Bs. 10</div>
             </div>
           </div>
           <div class="price-tier featured">
             <span class="tier-icon">⚡</span>
             <div class="tier-info">
               <div class="tier-name standard">Estándar EV
-                <span style="font-family:'Share Tech Mono',monospace;font-size:0.52rem;color:var(--yellow);background:rgba(255,204,0,0.1);padding:0.1rem 0.4rem;border:1px solid rgba(255,204,0,0.3);margin-left:0.4rem;">MÁS POPULAR</span>
+                <span style="font-family:'Share Tech Mono',monospace;font-size:0.60rem;color:var(--yellow);background:rgba(255,204,0,0.1);padding:0.1rem 0.4rem;border:1px solid rgba(255,204,0,0.3);margin-left:0.4rem;">MÁS POPULAR</span>
               </div>
               <div class="tier-desc">1 carrera · 10 vueltas · 100% eléctrico</div>
             </div>
             <div class="tier-price-block">
               <div class="tier-price">Bs. 30</div>
-              <div class="tier-old">Bs. 40</div>
-              <div class="tier-save">AHORRÁS Bs. 10</div>
-            </div>
-          </div>
-          <div class="price-tier">
-            <span class="tier-icon">👥</span>
-            <div class="tier-info">
-              <div class="tier-name group">Grupo EV (4+)</div>
-              <div class="tier-desc">Precio por persona · mínimo 4 personas</div>
-            </div>
-            <div class="tier-price-block">
-              <div class="tier-price">Bs. 100</div>
-              <div class="tier-old">por persona</div>
-              <div class="tier-save">PRECIO GRUPAL</div>
+              <div class="tier-old">Bs. 30</div>
+              <div class="tier-save">AHORRÁS Bs. 0</div>
             </div>
           </div>
         </div>
@@ -2514,31 +2772,31 @@ body::before {
 
       <div class="cta-compra">
         <div>
-          <div class="cta-compra-price">Bs. 30 <small>· ticket estándar</small></div>
-          <div class="cta-compra-desc">Preventa exclusiva · En feria <s>40</s></div>
+          <div class="cta-compra-price">Bs. 50 <small>· ticket estándar por 2 carreras</small></div>
+          <div class="cta-compra-desc">Preventa exclusiva · En feria <s>60</s></div>
         </div>
         <button class="btn-comprar-online" onclick="openQRModal()">
           <i class="fa-solid fa-ticket"></i> Comprar ticket online
         </button>
       </div>
 
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:900;letter-spacing:0.12em;color:rgba(255,255,255,0.45);margin-bottom:1rem;text-transform:uppercase;border-bottom:1px solid var(--border);padding-bottom:0.5rem;">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:900;letter-spacing:0.12em;color:rgba(255,255,255,0.45);margin-bottom:1rem;text-transform:uppercase;border-bottom:1px solid var(--border);padding-bottom:0.5rem;">
         Requisitos
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:2rem;">
         <div class="info-card">
-          <div class="info-card-label">Ubicación</div>
-          <div class="info-card-value">Pista EV Principal · FEXXCO 2026</div>
-          <div class="info-card-sub">A 50m del stand Quantum B-14</div>
+          <div class="info-card-label"><i class="fa-solid fa-location-dot"></i>Ubicación</div>
+          <div class="info-card-value">Pista EV Principal · FEXCO 2026</div>
+          <div class="info-card-sub">A 50m del stand Quantum 1</div>
         </div>
         <div class="info-card">
-          <div class="info-card-label">Duración</div>
-          <div class="info-card-value">10 vueltas / ~8 minutos</div>
+          <div class="info-card-label"><i class="fa-solid fa-clock"></i>Duración</div>
+          <div class="info-card-value">1 carrera o 10 minutos</div>
           <div class="info-card-sub">Briefing de seguridad EV previo incluido</div>
         </div>
         <div class="info-card">
-          <div class="info-card-label">Edad Mínima</div>
-          <div class="info-card-value">12 años / 1.40m de altura</div>
+          <div class="info-card-label"><i class="fa-solid fa-users"></i>  Edad Mínima</div>
+          <div class="info-card-value">16 años / 1.40m de altura</div>
           <div class="info-card-sub">Menores de 16 con consentimiento adulto</div>
         </div>
         <div class="info-card">
@@ -2549,13 +2807,12 @@ body::before {
       </div>
     </div>
 
-    
     <div id="sub-galeria" class="subtab-content">
       <div style="margin-bottom:2rem;">
         <div class="s-label"><i class="fa-solid fa-camera" style="color:var(--red);"></i> Fotos & Videos EV</div>
-        <div class="s-title" style="font-size:clamp(1.5rem,4vw,2.2rem);">FEXXCO 2025<br><span class="red">MOMENTOS ÉPICOS</span></div>
-        <p style="font-size:0.88rem;color:var(--text);max-width:600px;line-height:1.75;">
-          Revivé lo mejor de la edición anterior. El karting eléctrico de FEXXCO 2025 fue un éxito total —
+        <div class="s-title" style="font-size:clamp(1.5rem,4vw,2.2rem);">FEXCO 2025<br><span class="red">MOMENTOS ÉPICOS</span></div>
+        <p style="font-size:1.01rem;color:var(--text);max-width:600px;line-height:1.75;">
+          Revivé lo mejor de la edición anterior. El karting eléctrico de FEXCO 2025 fue un éxito total —
           este año viene con el doble de voltaje.
         </p>
       </div>
@@ -2576,17 +2833,16 @@ body::before {
       </div>
 
       <div style="text-align:center;padding:2rem;background:var(--card);border:1px dashed var(--border);margin-bottom:2rem;">
-  <div style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:900;color:var(--red);margin-bottom:1rem;letter-spacing:0.08em;text-transform:uppercase;"><i class="fa-solid fa-video" style="color:var(--red);"></i> Videos del Evento EV</div>
+  <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:900;color:var(--red);margin-bottom:1rem;letter-spacing:0.08em;text-transform:uppercase;"><i class="fa-solid fa-video" style="color:var(--red);"></i> Videos del Evento EV</div>
 
   <div style="background:#000;aspect-ratio:16/9;position:relative;border:1px solid var(--border);cursor:pointer;" onclick="
-    this.innerHTML='<video src=\'http://tuquantum.com/wp-content/uploads/2026/04/Video-Karting-portada-cortado.mp4\' style=\'width:100%;height:100%;position:absolute;top:0;left:0;\' controls autoplay></video>';
+    this.innerHTML='<video src=\'http://tuquantum.com/wp-content/uploads/2026/04/Con-piloto.mp4\' style=\'width:100%;height:100%;position:absolute;top:0;left:0;\' controls autoplay></video>';
   ">
     <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;">
       <i class="fa-regular fa-circle-play" style="font-size:3rem;color:rgba(255,255,255,0.85);"></i>
-      <div style="font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:var(--text-dim);margin-top:0.5rem;">KARTING EV 2025</div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:0.71rem;color:var(--text-dim);margin-top:0.5rem;">KARTING EV 2025</div>
     </div>
   </div>
-
 </div>
     </div>
 
@@ -2598,18 +2854,18 @@ body::before {
           <div class="s-title" style="font-size:clamp(1.4rem,3.5vw,2rem);">DETALLES<br><span class="red">KARTING EV</span></div>
           <div style="display:flex;flex-direction:column;gap:0.8rem;margin-top:1.2rem;">
             <div class="info-card">
-              <div class="info-card-label">📍 Ubicación</div>
-              <div class="info-card-value">Pista EV Principal · FEXXCO 2026</div>
-              <div class="info-card-sub">A 50m del stand Quantum B-14</div>
+              <div class="info-card-label"><i class="fa-solid fa-location-dot"></i> Ubicación</div>
+              <div class="info-card-value">Pista EV Principal · FEXCO 2026</div>
+              <div class="info-card-sub">A 50m del stand Quantum 1</div>
             </div>
             <div class="info-card">
-              <div class="info-card-label">📏 Duración</div>
-              <div class="info-card-value">10 vueltas / ~8 minutos</div>
+              <div class="info-card-label"><i class="fa-solid fa-clock"></i> Duración</div>
+              <div class="info-card-value">1 carrera o 10 minutos</div>
               <div class="info-card-sub">Briefing de seguridad EV previo incluido</div>
             </div>
             <div class="info-card">
-              <div class="info-card-label">👶 Edad Mínima</div>
-              <div class="info-card-value">12 años / 1.40m de altura</div>
+              <div class="info-card-label"><i class="fa-solid fa-users"></i> Edad Mínima</div>
+              <div class="info-card-value">16 años / 1.40m de altura</div>
               <div class="info-card-sub">Menores de 16 con consentimiento adulto</div>
             </div>
             <div class="info-card">
@@ -2638,9 +2894,9 @@ body::before {
           </div>
           <div style="background:rgba(232,0,29,0.05);border:1px solid rgba(232,0,29,0.2);padding:1.3rem;margin-top:1.3rem;">
             <div style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:900;color:var(--red);margin-bottom:0.8rem;text-transform:uppercase;letter-spacing:0.06em;">📞 Consultas Directas</div>
-            <div style="font-family:'Share Tech Mono',monospace;font-size:0.76rem;line-height:2.2;">
+            <div style="font-family:'Share Tech Mono',monospace;font-size:0.87rem;line-height:2.2;">
               WhatsApp: +591 77926888<br>
-              Stand: B-14 · Pabellón B
+              Stand: 1 · Sector A
             </div>
           </div>
         </div>
@@ -2668,9 +2924,9 @@ body::before {
       <div class="modal-price-row">
         <div>
           <div class="modal-price-label">TICKET ESTÁNDAR EV — PREVENTA</div>
-          <div style="font-size:0.7rem;color:var(--text-dim);margin-top:0.2rem;">1 carrera · 10 vueltas · 100% eléctrico</div>
+          <div style="font-size:0.81rem;color:var(--text-dim);margin-top:0.2rem;">2 carreras · 20 minutos · 100% eléctrico</div>
         </div>
-        <div class="modal-price-val">Bs. 30</div>
+        <div class="modal-price-val">Bs. 50</div>
       </div>
 
       <div class="modal-steps">
@@ -2684,31 +2940,41 @@ body::before {
       </a>
 
       <div class="modal-note">
-        +591 77926888 · Quantum EV Stand B-14<br>
-        Respuesta en horario laboral · Lun–Sáb 9:00–20:00
+        +591 77926888 · Quantum EV Stand 1<br>
+        Respuesta en horario laboral · Lun–Sáb 9:00–17:00
       </div>
     </div>
   </div>
-  
+</div>
+
+<!-- ════ LIGHTBOX BANCOS ════ -->
+<div class="bank-lightbox-overlay" id="bankLightbox" onclick="closeBankLightboxOutside(event)">
+  <div class="bank-lightbox-box" id="bankLightboxBox">
+    <div class="bank-lightbox-header">
+      <div class="bank-lightbox-title" id="bankLightboxTitle">
+        <i class="fa-solid fa-building-columns"></i> <span id="bankLightboxTitleText"></span>
+      </div>
+      <button class="bank-lightbox-close" onclick="closeBankLightbox()">✕</button>
+    </div>
+    <div class="bank-lightbox-content" id="bankLightboxContent">
+    </div>
+  </div>
 </div>
 
 <script>
 (function() {
 
   function qevInit() {
-    // Ocultar secciones
     var info = document.getElementById('info');
     var karting = document.getElementById('karting');
-    if (!info || !karting) return; // DOM no listo aún
+    if (!info || !karting) return;
     
     karting.style.display = 'none';
     info.style.display = 'block';
 
-    // Countdown
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    // Carrusel touch
     var track = document.getElementById('reservasTrack');
     if (track) {
       var startX = 0;
@@ -2719,27 +2985,61 @@ body::before {
       }, { passive: true });
     }
 
-    // Video hero
-    var vid = document.getElementById('heroBgVideo');
-    if (vid) {
-      vid.addEventListener('ended', function() { vid.currentTime = 0; vid.play(); });
-      vid.play().catch(function() {});
+    /* ── Hero video: reproducir una sola vez ── */
+    var heroBgVid = document.getElementById('heroBgVideo');
+    if (heroBgVid) {
+      heroBgVid.play().catch(function() {});
+      /* sin loop: se detiene sola al terminar */
     }
 
-    // Arrancar carrusel
-    rTimer = setTimeout(function() { nextReservasSlide(); }, 5500);
+    /* ── Video "Prueba tu destreza": una vez + botón replay ── */
+    var destrezaVid = document.getElementById('destrezaVideo');
+    var destrezaOverlay = document.getElementById('destrezaOverlay');
 
+    if (destrezaVid && destrezaOverlay) {
+      destrezaVid.play().catch(function() {});
+
+      /* Cuando termina: mostrar overlay permanente (ya no es solo hover) */
+      destrezaVid.addEventListener('ended', function() {
+        destrezaOverlay.classList.remove('hoverable');
+        destrezaOverlay.classList.add('visible');
+      });
+
+      /* Mientras corre: mostrar/ocultar en hover (clase hoverable ya está en el HTML) */
+    }
+
+    rTimer = setTimeout(function() { nextReservasSlide(); }, 5500);
     createSpeedLines();
   }
 
-  // Ejecutar apenas el DOM esté listo — funciona en WordPress
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', qevInit);
   } else {
-    qevInit(); // Ya cargó
+    qevInit();
   }
 
-window.switchTab = function(tab) {
+  /* ── Replay del video destreza ── */
+  window.replayDestrezaVideo = function() {
+    var vid = document.getElementById('destrezaVideo');
+    var overlay = document.getElementById('destrezaOverlay');
+    if (!vid || !overlay) return;
+
+    /* Resetear overlay: vuelve a modo hover mientras corre */
+    overlay.classList.remove('visible');
+    overlay.classList.add('hoverable');
+
+    vid.currentTime = 0;
+    vid.play().catch(function() {});
+
+    /* Al terminar de nuevo, mostrar permanente otra vez */
+    vid.addEventListener('ended', function onEndedAgain() {
+      overlay.classList.remove('hoverable');
+      overlay.classList.add('visible');
+      vid.removeEventListener('ended', onEndedAgain);
+    });
+  };
+
+  window.switchTab = function(tab) {
     var info = document.getElementById('info');
     var karting = document.getElementById('karting');
     if (!info || !karting) return;
@@ -2764,7 +3064,8 @@ window.switchTab = function(tab) {
     }
 
     window.scrollTo(0, 0);
-};
+  };
+
   window.switchSubtab = function(btn, targetId) {
     document.querySelectorAll('.subtab-content').forEach(function(s) { s.classList.remove('active'); });
     var target = document.getElementById(targetId);
@@ -2773,6 +3074,7 @@ window.switchTab = function(tab) {
     btn.classList.add('active');
   };
 
+  /* ── MODAL QR ── */
   window.openQRModal = function() {
     var m = document.getElementById('qrModal');
     if (m) { m.classList.add('open'); document.body.style.overflow = 'hidden'; }
@@ -2787,6 +3089,74 @@ window.switchTab = function(tab) {
     if (e.target === document.getElementById('qrModal')) window.closeQRModal();
   };
 
+  /* ── LIGHTBOX BANCOS ── */
+  var bankData = {
+    union: {
+      title: 'Banco Unión — Fichas de Crédito',
+      images: [
+        {
+          src: 'http://tuquantum.com/wp-content/uploads/2026/04/Banco-Union-Independientes-Fichas-creditos-2026-1.png',
+          label: 'Independientes'
+        },
+        {
+          src: 'http://tuquantum.com/wp-content/uploads/2026/04/Banco-Union-Dependientes-ficha-creditos-1.png',
+          label: 'Dependientes'
+        }
+      ]
+    },
+    comunidad: {
+      title: 'Bancomunidad — Ficha de Crédito',
+      images: [
+        {
+          src: 'http://tuquantum.com/wp-content/uploads/2026/04/Bancomunidad-Ficha-creditos.png',
+          label: 'Ficha de Crédito'
+        }
+      ]
+    }
+  };
+
+  window.openBankLightbox = function(bank) {
+    var lb = document.getElementById('bankLightbox');
+    var content = document.getElementById('bankLightboxContent');
+    var titleEl = document.getElementById('bankLightboxTitleText');
+    var data = bankData[bank];
+    if (!lb || !data) return;
+
+    titleEl.textContent = data.title;
+    content.innerHTML = '';
+
+    data.images.forEach(function(imgData) {
+      var wrapper = document.createElement('div');
+      wrapper.style.cssText = 'width:100%;display:flex;flex-direction:column;align-items:center;gap:0.5rem;';
+
+      var img = document.createElement('img');
+      img.src = imgData.src;
+      img.alt = imgData.label;
+      img.style.cssText = 'max-width:100%;height:auto;display:block;';
+
+      var lbl = document.createElement('div');
+      lbl.className = 'bank-lightbox-img-label';
+      lbl.textContent = imgData.label.toUpperCase();
+
+      wrapper.appendChild(img);
+      wrapper.appendChild(lbl);
+      content.appendChild(wrapper);
+    });
+
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closeBankLightbox = function() {
+    var lb = document.getElementById('bankLightbox');
+    if (lb) { lb.classList.remove('open'); document.body.style.overflow = ''; }
+  };
+
+  window.closeBankLightboxOutside = function(e) {
+    if (e.target === document.getElementById('bankLightbox')) window.closeBankLightbox();
+  };
+
+  /* ── WhatsApp form ── */
   window.enviarWhatsApp = function(e) {
     e.preventDefault();
     var nombre = document.getElementById('nombre').value.trim();
@@ -2796,8 +3166,15 @@ window.switchTab = function(tab) {
     window.open('https://wa.me/59177926888?text=' + encodeURIComponent(msg), '_blank');
   };
 
-  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') window.closeQRModal(); });
+  /* ── Keyboard close ── */
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      window.closeQRModal();
+      window.closeBankLightbox();
+    }
+  });
 
+  /* ── Carrusel reservas ── */
   var rCurrent = 0, rTotal = 4, rTimer = null;
 
   window.goToReservasSlide = function(i) {
@@ -2816,8 +3193,9 @@ window.switchTab = function(tab) {
   window.nextReservasSlide = function() { window.goToReservasSlide(rCurrent + 1); };
   window.prevReservasSlide = function() { window.goToReservasSlide(rCurrent - 1); };
 
+  /* ── Countdown ── */
   function updateCountdown() {
-    var target = new Date('2026-05-15T10:00:00');
+    var target = new Date('2026-04-23T17:00:00');
     var now = new Date(), diff = target - now;
     function set(id, val) {
       var el = document.getElementById(id);
@@ -2830,6 +3208,7 @@ window.switchTab = function(tab) {
     set('cd-s', Math.floor((diff % (1000*60)) / 1000));
   }
 
+  /* ── Speed lines ── */
   function createSpeedLines() {
     var container = document.getElementById('speedLines');
     if (!container) return;
@@ -2844,17 +3223,10 @@ window.switchTab = function(tab) {
       container.appendChild(line);
     }
   }
-  function playVideo() {
-  var video = document.getElementById('quantumVideo');
-  var overlay = document.getElementById('videoOverlay');
-  if (video.src && video.src !== window.location.href) {
-    video.play();
-    overlay.style.display = 'none';
-  }
-}
 
 })();
 </script>
+
 <footer class="footer-container">
   <div class="footer-inner">
     <div class="footer-left">
@@ -2896,7 +3268,6 @@ window.switchTab = function(tab) {
   </div>
   <div class="footer-bottom-spacer">&copy; 2026 Quantum Motors. Todos los derechos reservados.</div>
 </footer>
-
 
 </body>
 </html>
